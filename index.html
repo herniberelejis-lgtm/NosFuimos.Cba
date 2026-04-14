@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Fuimos CBA | Agencia de Viajes en Córdoba</title>
+  <meta name="description" content="Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe. Cotizá fácil y rápido." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Variables ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1B3F7A;
+      --navy-dark:  #0f2547;
+      --navy-light: #2b5fa8;
+      --cream:      #F7F3ED;
+      --sand:       #EDE6DA;
+      --white:      #FFFFFF;
+      --text:       #1a1a2e;
+      --text-light: #5a6a7e;
+      --success:    #25D366;
+      --radius:     16px;
+      --shadow:     0 8px 40px rgba(27,63,122,0.12);
+      --shadow-hover: 0 16px 60px rgba(27,63,122,0.22);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ─── Navbar ────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(15, 37, 71, 0.96);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: 44px;
+      object-fit: contain;
+      border-radius: 50%;
+      background: white;
+      padding: 2px;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text span {
+      display: block;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: white; }
+
+    .nav-cta {
+      background: var(--success);
+      color: white !important;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.05);
+      transition: transform 8s ease;
+    }
+
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(15,37,71,0.75) 0%,
+        rgba(27,63,122,0.55) 60%,
+        rgba(15,37,71,0.70) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+      padding: 0 24px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(74,222,128,0.3);
+      animation: pulse 2s infinite;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: #93c5fd;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      font-weight: 300;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .btn-primary {
+      background: var(--navy);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover {
+      background: var(--navy-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(27,63,122,0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: border-color 0.25s, background 0.25s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-secondary:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeIn 1.2s 1s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+      animation: scrollDown 2s infinite;
+    }
+
+    /* ─── Stats Bar ─────────────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--navy);
+      padding: 28px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: white;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ─── Section base ──────────────────────────────────────────────── */
+    section { padding: 96px 5%; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--navy);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--navy);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ─── Form Section ──────────────────────────────────────────────── */
+    .form-section {
+      background: var(--cream);
+      padding: 96px 5%;
+    }
+
+    .form-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .form-info {}
+
+    .form-info .section-title { margin-bottom: 20px; }
+
+    .form-info p {
+      color: var(--text-light);
+      line-height: 1.75;
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .info-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .info-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(27,63,122,0.07);
+    }
+
+    .info-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .info-card-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .info-card-text span {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    /* ── The Form Card ── */
+    .form-card {
+      background: white;
+      border-radius: 24px;
+      padding: 48px 44px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .form-card .form-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-light);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .form-group label .required {
+      color: var(--navy);
+      margin-left: 2px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: #fafbfc;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      -webkit-appearance: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--navy);
+      box-shadow: 0 0 0 3px rgba(27,63,122,0.12);
+      background: white;
+    }
+
+    .form-control::placeholder { color: #b0bec5; }
+
+    select.form-control {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B3F7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Luggage radio buttons */
+    .radio-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .radio-option {
+      position: relative;
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+    }
+
+    .radio-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 14px 10px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-light);
+      text-align: center;
+      transition: all 0.2s;
+      background: #fafbfc;
+    }
+
+    .radio-label .icon { font-size: 1.4rem; }
+
+    .radio-option input:checked + .radio-label {
+      border-color: var(--navy);
+      background: rgba(27,63,122,0.06);
+      color: var(--navy);
+    }
+
+    .radio-label:hover {
+      border-color: var(--navy-light);
+      color: var(--navy);
+    }
+
+    /* Passengers */
+    .passenger-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      background: #fafbfc;
+    }
+
+    .passenger-info strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .passenger-info small {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .counter-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--navy);
+      background: none;
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      line-height: 1;
+    }
+
+    .counter-btn:hover {
+      background: var(--navy);
+      color: white;
+    }
+
+    .counter-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Destination custom input */
+    .dest-other {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .dest-other.visible { display: block; }
+
+    /* Submit */
+    .btn-whatsapp {
+      width: 100%;
+      background: var(--success);
+      color: white;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+      transition: transform 0.25s, box-shadow 0.25s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(37,211,102,0.4);
+    }
+
+    .btn-whatsapp svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .form-disclaimer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ─── Destinations ──────────────────────────────────────────────── */
+    .destinations { background: white; }
+
+    .destinations-header {
+      max-width: 1100px;
+      margin: 0 auto 48px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .destinations-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .dest-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 360px;
+      cursor: pointer;
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .dest-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+
+    .dest-card:hover .dest-img { transform: scale(1.07); }
+
+    .dest-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,25,50,0.85) 0%,
+        rgba(10,25,50,0.3) 50%,
+        transparent 100%
+      );
+    }
+
+    .dest-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 24px;
+    }
+
+    .dest-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      color: white;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+
+    .dest-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .dest-card.featured .dest-name { font-size: 2rem; }
+
+    .dest-info {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.75);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dest-cta {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: white;
+      color: var(--navy);
+      border: none;
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+
+    .dest-card:hover .dest-cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Features ──────────────────────────────────────────────────── */
+    .features { background: var(--cream); }
+
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .features-visual {
+      position: relative;
+    }
+
+    .features-img {
+      width: 100%;
+      border-radius: 24px;
+      object-fit: cover;
+      aspect-ratio: 4/5;
+      box-shadow: var(--shadow);
+    }
+
+    .features-float {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      background: var(--navy);
+      color: white;
+      padding: 24px 28px;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(27,63,122,0.3);
+    }
+
+    .features-float .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .features-float .label {
+      font-size: 0.8rem;
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    .features-content .section-title { margin-bottom: 20px; }
+
+    .features-content p {
+      color: var(--text-light);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .feature-text span {
+      font-size: 0.84rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    /* ─── Testimonials ──────────────────────────────────────────────── */
+    .testimonials { background: white; }
+
+    .testimonials-inner { max-width: 1100px; margin: 0 auto; }
+
+    .testimonials-header { margin-bottom: 48px; }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 28px;
+      position: relative;
+    }
+
+    .testi-stars {
+      color: #f59e0b;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+
+    .testi-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--text);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testi-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    .testi-info strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .testi-info span {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    /* ─── CTA Band ──────────────────────────────────────────────────── */
+    .cta-band {
+      background: var(--navy);
+      padding: 80px 5%;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .cta-band p {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--navy);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .btn-outline-white:hover {
+      border-color: white;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ─── Footer ────────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy-dark);
+      padding: 64px 5% 32px;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-bottom: 16px;
+    }
+
+    .footer-logo img {
+      height: 40px;
+      border-radius: 50%;
+      background: white;
+      padding: 2px;
+    }
+
+    .footer-logo span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-brand p {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .social-link:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-2px);
+    }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: white; }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ─── Floating WhatsApp ─────────────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      width: 58px;
+      height: 58px;
+      background: var(--success);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.4);
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: bounceIn 1s 2s ease both;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 40px rgba(37,211,102,0.55);
+    }
+
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    .wa-tooltip {
+      position: absolute;
+      right: 68px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--navy-dark);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    /* ─── Animations ────────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.3); }
+      50%       { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
+    }
+
+    @keyframes scrollDown {
+      0%   { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(20px); }
+    }
+
+    @keyframes bounceIn {
+      0%   { opacity: 0; transform: scale(0.5); }
+      70%  { transform: scale(1.1); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Mobile ────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-inner { grid-template-columns: 1fr; gap: 48px; }
+      .features-visual { order: -1; }
+      .features-float { bottom: -16px; right: -8px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .form-wrapper { grid-template-columns: 1fr; gap: 40px; }
+      .form-card { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .radio-group { grid-template-columns: repeat(3, 1fr); }
+
+      /* Evita zoom automático en iOS al enfocar inputs */
+      .form-control { font-size: 16px; }
+
+      .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+      .dest-card { height: 240px; }
+      .dest-cta { opacity: 1; transform: translateY(0); }
+      .dest-name { font-size: 1.2rem; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.1); }
+
+      /* Botón flotante WhatsApp más pequeño en mobile */
+      .wa-float { width: 52px; height: 52px; bottom: 20px; right: 20px; }
+      .wa-tooltip { display: none; }
+
+      /* Hero más compacto */
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
+
+      /* CTA band */
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn-white, .btn-outline-white { width: 100%; max-width: 300px; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 60px 5%; }
+      .form-section { padding: 60px 4%; }
+      .form-card { padding: 24px 18px; }
+      .radio-group { grid-template-columns: repeat(3, 1fr); }
+      .destinations-grid { grid-template-columns: 1fr; }
+      .dest-card { height: 260px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ──────────────────────────────────────────────────── -->
+  <nav class="nav" id="navbar">
+    <a href="#" class="nav-logo">
+      <!-- Logo SVG inline como fallback; reemplazar por la imagen real del logo si se tiene -->
+      <svg width="44" height="44" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
+        <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
+        <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
+        <path d="M 10 22 Q 22 14 34 22" stroke="white" stroke-width="1.5" fill="none"/>
+      </svg>
+      <div class="nav-logo-text">
+        Nos Fuimos
+        <span>Agencia de Viajes · CBA</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#cotiza">Cotizá tu viaje</a></li>
+      <li><a href="#destinos">Destinos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="nav-cta">💬 WhatsApp</a></li>
+    </ul>
+
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- Mobile menu (simple) -->
+  <div id="mobile-menu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy-dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;">
+    <a href="#cotiza" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Cotizá tu viaje</a>
+    <a href="#destinos" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Destinos</a>
+    <a href="#nosotros" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Nosotros</a>
+    <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" style="background:var(--success);color:white;text-decoration:none;font-size:1rem;font-weight:600;padding:14px 36px;border-radius:50px">💬 Escribirnos por WhatsApp</a>
+    <button onclick="toggleMenu()" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.9rem;margin-top:8px">Cerrar ✕</button>
+  </div>
+
+  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Córdoba · Argentina
+      </div>
+      <h1>¿A dónde querés <em>volar</em> hoy?</h1>
+      <p>
+        Somos tu agencia de viajes en Córdoba.<br/>
+        Vuelos a USA, Europa y Caribe con las mejores ofertas.
+      </p>
+      <div class="hero-buttons">
+        <a href="#cotiza" class="btn-primary">
+          ✈️ Cotizá tu viaje gratis
+        </a>
+        <a href="#destinos" class="btn-secondary">
+          Ver destinos
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ─── STATS ────────────────────────────────────────────────────── -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <span class="stat-number">+2000</span>
+      <span class="stat-label">Seguidores</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Continentes</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">24h</span>
+      <span class="stat-label">Respuesta</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">100%</span>
+      <span class="stat-label">Personalizado</span>
+    </div>
+  </div>
+
+  <!-- ─── FORM SECTION ─────────────────────────────────────────────── -->
+  <section class="form-section" id="cotiza">
+    <div class="form-wrapper">
+
+      <!-- Info lateral -->
+      <div class="form-info reveal">
+        <div class="section-tag">Cotización</div>
+        <h2 class="section-title">Armá el viaje de tus sueños</h2>
+        <p>
+          Completá el formulario y te enviamos una cotización personalizada por WhatsApp en menos de 24 horas.
+          Sin costo, sin compromiso.
+        </p>
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-card-icon">⚡</div>
+            <div class="info-card-text">
+              <strong>Respuesta rápida</strong>
+              <span>Te contactamos en menos de 24 horas</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">💎</div>
+            <div class="info-card-text">
+              <strong>Presupuesto personalizado</strong>
+              <span>Cotizamos según tus fechas y necesidades</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🛡️</div>
+            <div class="info-card-text">
+              <strong>Sin costo ni compromiso</strong>
+              <span>La consulta es completamente gratis</span>
+            </div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-icon">🌍</div>
+            <div class="info-card-text">
+              <strong>Múltiples destinos</strong>
+              <span>USA, Europa, Caribe y mucho más</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- El formulario -->
+      <div class="form-card reveal" style="transition-delay:0.15s">
+        <h3>Pre-consulta de viaje ✈️</h3>
+        <p class="form-subtitle">Completá los datos y te cotizamos por WhatsApp</p>
+
+        <form id="quoteForm" novalidate>
+
+          <!-- Destino -->
+          <div class="form-group">
+            <label for="destino">Destino <span class="required">*</span></label>
+            <select id="destino" class="form-control" required onchange="handleDestino(this)">
+              <option value="">— Seleccioná un destino —</option>
+              <optgroup label="⭐ Más solicitados">
+                <option value="Miami, USA">🌴 Miami, USA</option>
+                <option value="Cancún, México">🏖️ Cancún, México</option>
+                <option value="Punta Cana, Rep. Dominicana">🌺 Punta Cana, Rep. Dominicana</option>
+                <option value="Panamá">🌉 Panamá</option>
+                <option value="Nueva York, USA">🗽 Nueva York, USA</option>
+                <option value="España">💃 España</option>
+              </optgroup>
+              <optgroup label="Otros destinos">
+                <option value="Orlando, USA">🎡 Orlando, USA</option>
+                <option value="París, Francia">🗼 París, Francia</option>
+                <option value="Roma, Italia">🏛️ Roma, Italia</option>
+                <option value="Lisboa, Portugal">🎸 Lisboa, Portugal</option>
+                <option value="Jamaica">🌊 Jamaica</option>
+                <option value="Cuba">🎶 Cuba</option>
+                <option value="Aruba">🏝️ Aruba</option>
+              </optgroup>
+              <option value="otro">✏️ Otro destino...</option>
+            </select>
+            <div class="dest-other" id="otroDestino">
+              <input type="text" id="otroDestinoInput" class="form-control" placeholder="¿A dónde querés ir?" />
+            </div>
+          </div>
+
+          <!-- Fechas -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fechaSalida">Fecha de salida <span class="required">*</span></label>
+              <input type="date" id="fechaSalida" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="cantDias">Cantidad de días <span class="required">*</span></label>
+              <select id="cantDias" class="form-control" required>
+                <option value="">— días —</option>
+                <option value="3-5 días">3 a 5 días</option>
+                <option value="6-8 días">6 a 8 días</option>
+                <option value="9-12 días">9 a 12 días</option>
+                <option value="13-15 días">13 a 15 días</option>
+                <option value="más de 15 días">Más de 15 días</option>
+                <option value="flexible">Soy flexible</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Pasajeros -->
+          <div class="form-group">
+            <label>Pasajeros <span class="required">*</span></label>
+            <div class="passenger-row">
+              <div class="passenger-info">
+                <strong>Adultos</strong>
+                <small>Mayores de 12 años</small>
+              </div>
+              <div class="counter">
+                <button type="button" class="counter-btn" onclick="changeCount('adultos',-1)">−</button>
+                <span class="counter-value" id="adultos-val">1</span>
+                <button type="button" class="counter-btn" onclick="changeCount('adultos',1)">+</button>
+              </div>
+            </div>
+            <div class="passenger-row">
+              <div class="passenger-info">
+                <strong>Menores</strong>
+                <small>2 a 11 años</small>
+              </div>
+              <div class="counter">
+                <button type="button" class="counter-btn" onclick="changeCount('menores',-1)">−</button>
+                <span class="counter-value" id="menores-val">0</span>
+                <button type="button" class="counter-btn" onclick="changeCount('menores',1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Equipaje -->
+          <div class="form-group">
+            <label>Tipo de equipaje <span class="required">*</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" name="equipaje" id="eq-mano" value="Solo equipaje de mano" checked />
+                <label class="radio-label" for="eq-mano">
+                  <span class="icon">🎒</span>
+                  Solo de mano
+                </label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="equipaje" id="eq-bodega" value="Equipaje en bodega" />
+                <label class="radio-label" for="eq-bodega">
+                  <span class="icon">🧳</span>
+                  En bodega
+                </label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" name="equipaje" id="eq-ambos" value="Mano y bodega" />
+                <label class="radio-label" for="eq-ambos">
+                  <span class="icon">✈️</span>
+                  Los dos
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nombre y WhatsApp -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Tu nombre <span class="required">*</span></label>
+              <input type="text" id="nombre" class="form-control" placeholder="Nombre y apellido" required />
+            </div>
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp <span class="required">*</span></label>
+              <input type="tel" id="whatsapp" class="form-control" placeholder="Ej: 351 123 4567" required />
+            </div>
+          </div>
+
+          <!-- Comentarios -->
+          <div class="form-group">
+            <label for="comentarios">Comentarios adicionales</label>
+            <textarea id="comentarios" class="form-control" rows="3" placeholder="Hotel incluido, viaje de aniversario, fechas flexibles..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-whatsapp">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Enviar consulta por WhatsApp
+          </button>
+
+          <p class="form-disclaimer">
+            Al enviar, serás redirigido a WhatsApp con tu consulta lista.<br/>
+            Te respondemos en menos de 24 horas 🕐
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DESTINOS ─────────────────────────────────────────────────── -->
+  <section class="destinations" id="destinos">
+    <div class="destinations-header reveal">
+      <div>
+        <div class="section-tag">Destinos</div>
+        <h2 class="section-title">Los más elegidos</h2>
+      </div>
+      <p class="section-subtitle" style="max-width:360px;text-align:right">
+        Desde Córdoba volás directo al mundo. Estos son los favoritos de nuestros pasajeros.
+      </p>
+    </div>
+
+    <div class="destinations-grid">
+      <div class="dest-card reveal" onclick="goForm('Miami, USA')" style="transition-delay:0.1s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=800&q=80" alt="Miami" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">⭐ El favorito</span>
+          <div class="dest-name">Miami</div>
+          <div class="dest-info">✈️ USA · Sol y playa</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+
+      <div class="dest-card reveal" onclick="goForm('Cancún, México')" style="transition-delay:0.15s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Cancún" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">Caribe</span>
+          <div class="dest-name">Cancún</div>
+          <div class="dest-info">✈️ México · Todo incluido</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+
+      <div class="dest-card reveal" onclick="goForm('Punta Cana, Rep. Dominicana')" style="transition-delay:0.2s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Punta Cana" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">Caribe</span>
+          <div class="dest-name">Punta Cana</div>
+          <div class="dest-info">✈️ Rep. Dominicana · Paraíso</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+
+      <div class="dest-card reveal" onclick="goForm('Panamá')" style="transition-delay:0.25s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1512813195386-6cf811ad3542?auto=format&fit=crop&w=800&q=80" alt="Panamá" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">Américas</span>
+          <div class="dest-name">Panamá</div>
+          <div class="dest-info">✈️ Panamá · Ciudad y playa</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+
+      <div class="dest-card reveal" onclick="goForm('Nueva York, USA')" style="transition-delay:0.3s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80" alt="Nueva York" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">USA</span>
+          <div class="dest-name">Nueva York</div>
+          <div class="dest-info">✈️ USA · La gran manzana</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+
+      <div class="dest-card reveal" onclick="goForm('España')" style="transition-delay:0.35s">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80" alt="España" loading="lazy"/>
+        <div class="dest-gradient"></div>
+        <div class="dest-content">
+          <span class="dest-tag">Europa</span>
+          <div class="dest-name">España</div>
+          <div class="dest-info">✈️ Europa · Cultura y vida</div>
+        </div>
+        <button class="dest-cta">Cotizar ahora</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── NOSOTROS / FEATURES ──────────────────────────────────────── -->
+  <section class="features" id="nosotros">
+    <div class="features-inner">
+      <div class="features-visual reveal">
+        <img class="features-img"
+          src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=800&q=80"
+          alt="Viajeros felices" loading="lazy"/>
+        <div class="features-float">
+          <span class="number">✈️</span>
+          <span class="label">Detrás de cada vuelo,<br/>estamos nosotros</span>
+        </div>
+      </div>
+
+      <div class="features-content reveal" style="transition-delay:0.2s">
+        <div class="section-tag">Sobre nosotros</div>
+        <h2 class="section-title">Por qué elegirnos</h2>
+        <p>
+          Somos <strong>Nos Fuimos CBA</strong>, una agencia de viajes cordobesa que nació con un único objetivo:
+          hacerte viajar más y mejor. Cotizamos fácil, rápido y con ofertas imperdibles a los mejores destinos del mundo.
+        </p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">🎯</div>
+            <div class="feature-text">
+              <strong>Cotización personalizada</strong>
+              <span>Armamos el viaje según tus fechas, presupuesto y preferencias. Nada genérico.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💬</div>
+            <div class="feature-text">
+              <strong>Atención directa por WhatsApp</strong>
+              <span>Hablás con personas reales, no bots. Respondemos rápido y sin vueltas.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">💸</div>
+            <div class="feature-text">
+              <strong>Ofertas imperdibles</strong>
+              <span>Accedemos a las mejores tarifas para que viajes más por menos dinero.</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-text">
+              <strong>Acompañamiento total</strong>
+              <span>Desde la cotización hasta que volvés, estamos para lo que necesités.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─────────────────────────────────────────────── -->
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="testimonials-header reveal">
+        <div class="section-tag">Testimonios</div>
+        <h2 class="section-title">Lo que dicen los que ya se fueron</h2>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card reveal" style="transition-delay:0.1s">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">
+            "Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">SL</div>
+            <div class="testi-info">
+              <strong>Sofía L.</strong>
+              <span>Viajó a Nueva York</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:0.2s">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">
+            "La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡Y el viaje superó todas las expectativas!"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">MR</div>
+            <div class="testi-info">
+              <strong>Matías R.</strong>
+              <span>Viajó a Cancún</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal" style="transition-delay:0.3s">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">
+            "Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"
+          </p>
+          <div class="testi-author">
+            <div class="testi-avatar">VG</div>
+            <div class="testi-info">
+              <strong>Valentina G.</strong>
+              <span>Viajó por Europa</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BAND ─────────────────────────────────────────────────── -->
+  <div class="cta-band">
+    <h2>¿Listo para volar? ✈️</h2>
+    <p>
+      No esperes más. Cotizá tu viaje gratis y en minutos tenés nuestra propuesta en tu WhatsApp.
+    </p>
+    <div class="cta-buttons">
+      <a href="#cotiza" class="btn-white">
+        ✈️ Cotizar ahora
+      </a>
+      <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="btn-outline-white">
+        💬 Hablar por WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <svg width="36" height="36" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
+            <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
+            <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
+          </svg>
+          <span>Nos Fuimos CBA</span>
+        </a>
+        <p>
+          Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe con las mejores ofertas.
+          Cotizá fácil por WhatsApp.
+        </p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/nosfuimos.cba/" target="_blank" class="social-link" title="Instagram">📷</a>
+          <a href="https://wa.me/5493518060947" target="_blank" class="social-link" title="WhatsApp">💬</a>
+          <a href="https://www.facebook.com/nosfuimos.cba" target="_blank" class="social-link" title="Facebook">📘</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Destinos</h4>
+        <ul>
+          <li><a href="#destinos" onclick="goForm('Miami, USA')">Miami</a></li>
+          <li><a href="#destinos" onclick="goForm('Cancún, México')">Cancún</a></li>
+          <li><a href="#destinos" onclick="goForm('Punta Cana, Rep. Dominicana')">Punta Cana</a></li>
+          <li><a href="#destinos" onclick="goForm('Panamá')">Panamá</a></li>
+          <li><a href="#destinos" onclick="goForm('Nueva York, USA')">Nueva York</a></li>
+          <li><a href="#destinos" onclick="goForm('España')">España</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Agencia</h4>
+        <ul>
+          <li><a href="#nosotros">Sobre nosotros</a></li>
+          <li><a href="#cotiza">Cotizá tu viaje</a></li>
+          <li><a href="#destinos">Destinos</a></li>
+          <li><a href="https://www.instagram.com/nosfuimos.cba/" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/5493518060947" target="_blank">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/nosfuimos.cba/" target="_blank">Instagram DM</a></li>
+          <li><a href="#">Córdoba, Argentina</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Nos Fuimos CBA · Todos los derechos reservados</p>
+      <p>Hecho con ❤️ en Córdoba, Argentina</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="wa-float" title="Escribinos por WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-tooltip">¡Escribinos ahora!</span>
+  </a>
+
+  <!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
+  <script>
+    // ── IMPORTANTE: Reemplazá este número por el número de WhatsApp real de la agencia
+    // Formato: código de país (54) + código de área sin 0 (351) + número sin 15
+    const WA_NUMBER = '5493518060947';
+
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ── Hero image animation ──
+    const heroBg = document.getElementById('heroBg');
+    setTimeout(() => heroBg.classList.add('loaded'), 100);
+
+    // ── Mobile menu ──
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const isOpen = menu.style.display === 'flex';
+      menu.style.display = isOpen ? 'none' : 'flex';
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+
+    // ── Pasajeros counter ──
+    const counts = { adultos: 1, menores: 0 };
+
+    function changeCount(type, delta) {
+      const min = type === 'adultos' ? 1 : 0;
+      counts[type] = Math.max(min, Math.min(9, counts[type] + delta));
+      document.getElementById(type + '-val').textContent = counts[type];
+    }
+
+    // ── Destino "otro" ──
+    function handleDestino(sel) {
+      const other = document.getElementById('otroDestino');
+      other.classList.toggle('visible', sel.value === 'otro');
+    }
+
+    // ── Ir al form con destino preseleccionado ──
+    function goForm(destino) {
+      const sel = document.getElementById('destino');
+      for (let opt of sel.options) {
+        if (opt.value === destino) { sel.value = destino; break; }
+      }
+      document.getElementById('cotiza').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ── Form submit → WhatsApp ──
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const destino = document.getElementById('destino').value;
+      const otroDestino = document.getElementById('otroDestinoInput').value;
+      const destinoFinal = destino === 'otro' ? otroDestino : destino;
+      const fecha = document.getElementById('fechaSalida').value;
+      const dias = document.getElementById('cantDias').value;
+      const equipaje = document.querySelector('input[name="equipaje"]:checked')?.value || '';
+      const nombre = document.getElementById('nombre').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const comentarios = document.getElementById('comentarios').value.trim();
+
+      // Validación básica
+      if (!destinoFinal) { alert('Por favor seleccioná un destino.'); return; }
+      if (!fecha) { alert('Por favor ingresá una fecha de salida aproximada.'); return; }
+      if (!dias) { alert('Por favor seleccioná la cantidad de días.'); return; }
+      if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
+      if (!whatsapp) { alert('Por favor ingresá tu WhatsApp.'); return; }
+
+      const fechaFormateada = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+
+      const msg = [
+        `✈️ *CONSULTA DE VIAJE - NOS FUIMOS CBA*`,
+        ``,
+        `👤 *Nombre:* ${nombre}`,
+        `📱 *WhatsApp:* ${whatsapp}`,
+        ``,
+        `🌍 *Destino:* ${destinoFinal}`,
+        `📅 *Fecha de salida:* ${fechaFormateada}`,
+        `⏳ *Duración:* ${dias}`,
+        ``,
+        `👥 *Pasajeros:*`,
+        `   • Adultos: ${counts.adultos}`,
+        `   • Menores: ${counts.menores}`,
+        ``,
+        `🧳 *Equipaje:* ${equipaje}`,
+        comentarios ? `\n💬 *Comentarios:* ${comentarios}` : '',
+        ``,
+        `_Enviado desde nosfuimos.cba_`
+      ].filter(Boolean).join('\n');
+
+      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    });
+
+    // ── Intersection Observer (reveal animations) ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ── Set min date on fecha input ──
+    const fechaInput = document.getElementById('fechaSalida');
+    const today = new Date();
+    today.setDate(today.getDate() + 1);
+    fechaInput.min = today.toISOString().split('T')[0];
+  </script>
+</body>
+</html>
