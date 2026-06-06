@@ -1768,9 +1768,58 @@
 
   <!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
   <script>
+    // ── Configuración ──────────────────────────────────────────────────
     const WA_NUMBER = '5493518060947';
 
-    // Navbar scroll
+    // Pegá acá la URL del webhook de Make.com cuando lo tengas
+    const WEBHOOK_URL = 'PEGAR_URL_DE_MAKE_AQUI';
+
+    // ── Mapeo de aeropuertos a códigos IATA ───────────────────────────
+    const AIRPORT_IATA = {
+      'Córdoba · COR — Ambrosio Taravella':               'COR',
+      'Buenos Aires · EZE — Ministro Pistarini (Ezeiza)': 'EZE',
+      'Buenos Aires · AEP — Jorge Newbery (Aeroparque)':  'AEP',
+      'Mendoza · MDZ — El Plumerillo':                    'MDZ',
+      'Rosario · ROS — Islas Malvinas':                   'ROS',
+      'Bariloche · BRC':                                  'BRC',
+      'Salta · SLA — Martín M. de Güemes':                'SLA',
+      'Tucumán · TUC — Benjamín Matienzo':                'TUC',
+    };
+
+    // ── Mapeo de destinos a códigos IATA ─────────────────────────────
+    const DEST_IATA = {
+      'Miami, USA':                  'MIA',
+      'Cancún, México':              'CUN',
+      'Punta Cana, Rep. Dominicana': 'PUJ',
+      'Panamá':                      'PTY',
+      'Nueva York, USA':             'JFK',
+      'España':                      'MAD',
+      'Orlando, USA':                'MCO',
+      'París, Francia':              'CDG',
+      'Roma, Italia':                'FCO',
+      'Lisboa, Portugal':            'LIS',
+      'Jamaica':                     'KIN',
+      'Cuba':                        'HAV',
+      'Aruba':                       'AUA',
+    };
+
+    // ── Constructores de URL ──────────────────────────────────────────
+    function buildSkyscanner(fromIata, toIata, fecha, adults, children) {
+      if (!fromIata || !toIata) return '';
+      const d  = new Date(fecha + 'T00:00:00');
+      const yy = String(d.getFullYear()).slice(-2);
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `https://www.skyscanner.com.ar/transport/flights/${fromIata}/${toIata}/${yy}${mm}${dd}/?adults=${adults}&children=${children}&cabinclass=economy`;
+    }
+
+    function buildGoogleFlights(fromCity, toCity, fechaFmt, adults, children) {
+      const pax = `${adults} adulto${adults > 1 ? 's' : ''}${children > 0 ? ` ${children} niño${children > 1 ? 's' : ''}` : ''}`;
+      const q   = `vuelos de ${fromCity} a ${toCity} ${fechaFmt} ${pax}`;
+      return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}&hl=es-419&curr=ARS`;
+    }
+
+    // ── Navbar scroll ──────────────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
@@ -1779,15 +1828,15 @@
     // Hero image animation
     setTimeout(() => document.getElementById('heroBg').classList.add('loaded'), 100);
 
-    // Mobile menu
+    // ── Mobile menu ───────────────────────────────────────────────────
     function toggleMenu() {
-      const menu = document.getElementById('mobile-menu');
+      const menu   = document.getElementById('mobile-menu');
       const isOpen = menu.style.display === 'flex';
-      menu.style.display = isOpen ? 'none' : 'flex';
+      menu.style.display        = isOpen ? 'none' : 'flex';
       document.body.style.overflow = isOpen ? '' : 'hidden';
     }
 
-    // Passenger counter
+    // ── Passenger counter ─────────────────────────────────────────────
     const counts = { adultos: 1, menores: 0 };
 
     function changeCount(type, delta) {
@@ -1796,12 +1845,12 @@
       document.getElementById(type + '-val').textContent = counts[type];
     }
 
-    // Destino "otro"
+    // ── Destino "otro" ────────────────────────────────────────────────
     function handleDestino(sel) {
       document.getElementById('otroDestino').classList.toggle('visible', sel.value === 'otro');
     }
 
-    // Pre-seleccionar destino y hacer scroll al form
+    // ── Pre-seleccionar destino ───────────────────────────────────────
     function goForm(destino) {
       const sel = document.getElementById('destino');
       for (const opt of sel.options) {
@@ -1810,7 +1859,7 @@
       document.getElementById('cotiza').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Form submit → WhatsApp
+    // ── Form submit ───────────────────────────────────────────────────
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -1825,7 +1874,7 @@
       const whatsapp   = document.getElementById('whatsapp').value.trim();
       const notas      = document.getElementById('comentarios').value.trim();
 
-      if (!destinoFin)  { alert('Por favor seleccioná un destino.');             return; }
+      if (!destinoFin)  { alert('Por favor seleccioná un destino.');              return; }
       if (!aeropuerto)  { alert('Por favor seleccioná el aeropuerto de salida.'); return; }
       if (!fecha)       { alert('Por favor ingresá una fecha de salida.');         return; }
       if (!dias)        { alert('Por favor seleccioná la cantidad de días.');      return; }
@@ -1836,6 +1885,16 @@
         day: 'numeric', month: 'long', year: 'numeric'
       });
 
+      // Códigos IATA
+      const fromIata = AIRPORT_IATA[aeropuerto] || '';
+      const toIata   = DEST_IATA[destinoFin]    || '';
+      const fromCity = aeropuerto.split('·')[0].trim();
+
+      // URLs pre-armadas para el agente
+      const skyscannerUrl    = buildSkyscanner(fromIata, toIata, fecha, counts.adultos, counts.menores);
+      const googleFlightsUrl = buildGoogleFlights(fromCity, destinoFin, fechaFmt, counts.adultos, counts.menores);
+
+      // ── 1. WhatsApp del cliente a la agencia (flujo manual original) ──
       const msg = [
         `✈️ *CONSULTA DE VIAJE — NOS FUIMOS CBA*`,
         ``,
@@ -1858,9 +1917,38 @@
       ].filter(Boolean).join('\n');
 
       window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+
+      // ── 2. Webhook al agente Make.com (automático) ────────────────────
+      // El agente recibirá los datos estructurados + links de búsqueda pre-armados
+      // y te mandará por WhatsApp el resumen listo para validar.
+      if (WEBHOOK_URL && WEBHOOK_URL !== 'PEGAR_URL_DE_MAKE_AQUI') {
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nombre,
+            whatsapp_cliente:  whatsapp,
+            destino:           destinoFin,
+            destino_iata:      toIata,
+            aeropuerto,
+            aeropuerto_iata:   fromIata,
+            fecha,
+            fecha_legible:     fechaFmt,
+            duracion:          dias,
+            adultos:           counts.adultos,
+            menores:           counts.menores,
+            equipaje,
+            comentarios:       notas,
+            skyscanner_url:    skyscannerUrl,
+            google_flights_url: googleFlightsUrl,
+            timestamp:         new Date().toISOString(),
+            fuente:            'website',
+          }),
+        }).catch(() => {}); // fallo silencioso si el webhook no está configurado
+      }
     });
 
-    // Reveal on scroll
+    // ── Reveal on scroll ──────────────────────────────────────────────
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1873,7 +1961,7 @@
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     // Fecha mínima = mañana
-    const fi = document.getElementById('fechaSalida');
+    const fi  = document.getElementById('fechaSalida');
     const tom = new Date();
     tom.setDate(tom.getDate() + 1);
     fi.min = tom.toISOString().split('T')[0];
