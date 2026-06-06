@@ -3,89 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nos Fuimos CBA | Agencia de Viajes en Córdoba</title>
-  <meta name="description" content="Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe. Cotizá fácil y rápido." />
+  <title>Nos Fuimos CBA | Agencia de Viajes · Córdoba</title>
+  <meta name="description" content="Agencia de viajes en Córdoba. Cotizá vuelos a USA, Europa, Caribe y más. Respuesta por WhatsApp en menos de 24 horas." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ─── Reset & Variables ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:       #1B3F7A;
-      --navy-dark:  #0f2547;
-      --navy-light: #2b5fa8;
-      --cream:      #F7F3ED;
-      --sand:       #EDE6DA;
-      --white:      #FFFFFF;
-      --text:       #1a1a2e;
-      --text-light: #5a6a7e;
-      --success:    #25D366;
-      --radius:     16px;
-      --shadow:     0 8px 40px rgba(27,63,122,0.12);
-      --shadow-hover: 0 16px 60px rgba(27,63,122,0.22);
+      --bg:           #030e24;
+      --bg2:          #071a3e;
+      --navy:         #0c2d6b;
+      --blue:         #0563f5;
+      --blue-light:   #2979ff;
+      --cyan:         #00b4d8;
+      --neon:         #00d4ff;
+      --white:        #ffffff;
+      --text:         rgba(255,255,255,0.9);
+      --muted:        rgba(255,255,255,0.52);
+      --glass:        rgba(255,255,255,0.045);
+      --glass-border: rgba(255,255,255,0.09);
+      --glow-b:       rgba(5,99,245,0.45);
+      --glow-c:       rgba(0,180,216,0.35);
+      --success:      #25D366;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* ─── Navbar ────────────────────────────────────────────────────── */
+    /* ── Animated Aurora Background ───────────────────────────────── */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .aurora {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .aurora-1 {
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(5,99,245,0.14) 0%, transparent 70%);
+      top: -300px; left: -250px;
+      animation: a1 18s ease-in-out infinite alternate;
+    }
+
+    .aurora-2 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,180,216,0.11) 0%, transparent 70%);
+      top: 30%; right: -200px;
+      animation: a2 22s ease-in-out infinite alternate;
+    }
+
+    .aurora-3 {
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(41,121,255,0.09) 0%, transparent 70%);
+      bottom: 15%; left: 35%;
+      animation: a3 26s ease-in-out infinite alternate;
+    }
+
+    @keyframes a1 { to { transform: translate(120px, 80px) scale(1.15); } }
+    @keyframes a2 { to { transform: translate(-90px, 100px) scale(1.2); } }
+    @keyframes a3 { to { transform: translate(70px, -60px) scale(0.88); } }
+
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(5,99,245,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5,99,245,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+
+    /* ── Navbar ───────────────────────────────────────────────────── */
     .nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 18px 5%;
+      padding: 16px 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.4s, box-shadow 0.4s;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
     }
 
     .nav.scrolled {
-      background: rgba(15, 37, 71, 0.96);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+      background: rgba(3,14,36,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--glass-border);
     }
 
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
     }
 
-    .nav-logo img {
-      height: 44px;
-      width: 44px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: white;
-      padding: 2px;
+    .logo-mark {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      box-shadow: 0 0 22px var(--glow-b);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .nav-logo-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 50%; bottom: 50%;
+      background: rgba(255,255,255,0.18);
+      border-radius: 0 0 50% 0;
+    }
+
+    .logo-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.92rem;
       font-weight: 700;
-      color: white;
-      line-height: 1.1;
+      color: #fff;
+      letter-spacing: 0.06em;
+      line-height: 1;
     }
 
-    .nav-logo-text span {
-      display: block;
-      font-size: 0.7rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      letter-spacing: 0.1em;
+    .logo-sub {
+      font-size: 0.62rem;
+      color: var(--cyan);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.8;
+      margin-top: 3px;
+      font-weight: 500;
     }
 
     .nav-links {
@@ -96,29 +164,46 @@
     }
 
     .nav-links a {
-      color: rgba(255,255,255,0.85);
+      color: var(--muted);
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
-      letter-spacing: 0.03em;
       transition: color 0.2s;
+      position: relative;
     }
 
-    .nav-links a:hover { color: white; }
+    .nav-links a:not(.nav-cta):hover { color: #fff; }
+
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+    }
+
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
 
     .nav-cta {
-      background: var(--success);
-      color: white !important;
-      padding: 10px 22px;
+      background: linear-gradient(135deg, var(--success), #1db954) !important;
+      color: #fff !important;
+      padding: 9px 22px;
       border-radius: 50px;
       font-weight: 600 !important;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.3);
       transition: transform 0.2s, box-shadow 0.2s !important;
     }
 
     .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+      transform: translateY(-2px) !important;
+      box-shadow: 0 8px 28px rgba(37,211,102,0.45) !important;
     }
+
+    .nav-cta::after { display: none !important; }
 
     .hamburger {
       display: none;
@@ -130,106 +215,107 @@
 
     .hamburger span {
       display: block;
-      width: 24px;
-      height: 2px;
-      background: white;
+      width: 24px; height: 2px;
+      background: var(--text);
       border-radius: 2px;
       transition: 0.3s;
     }
 
-    /* ─── Hero ──────────────────────────────────────────────────────── */
+    /* ── Hero ─────────────────────────────────────────────────────── */
     .hero {
       position: relative;
-      height: 100svh;
-      min-height: 600px;
+      min-height: 100svh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      overflow: hidden;
+      padding: 130px 5% 90px;
+      z-index: 1;
     }
 
-    .hero-bg {
+    .hero-bg-img {
       position: absolute;
       inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80');
-      background-size: cover;
-      background-position: center;
-      transform: scale(1.05);
-      transition: transform 8s ease;
+      z-index: -1;
     }
 
-    .hero-bg.loaded { transform: scale(1); }
+    .hero-bg-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.12;
+    }
 
-    .hero-overlay {
+    .hero-bg-img::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        160deg,
-        rgba(15,37,71,0.75) 0%,
-        rgba(27,63,122,0.55) 60%,
-        rgba(15,37,71,0.70) 100%
-      );
+      background: linear-gradient(to bottom, rgba(3,14,36,0.55) 0%, rgba(3,14,36,0.15) 50%, rgba(3,14,36,0.75) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 780px;
-      padding: 0 24px;
+      max-width: 820px;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: white;
-      padding: 8px 20px;
+      gap: 10px;
+      background: rgba(5,99,245,0.1);
+      border: 1px solid rgba(5,99,245,0.32);
+      color: var(--cyan);
+      padding: 8px 22px;
       border-radius: 50px;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-weight: 500;
-      margin-bottom: 28px;
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 30px;
       animation: fadeUp 0.8s ease both;
     }
 
-    .hero-badge .dot {
-      width: 7px; height: 7px;
-      background: #4ade80;
+    .dot {
+      width: 8px; height: 8px;
+      background: var(--cyan);
       border-radius: 50%;
-      box-shadow: 0 0 0 3px rgba(74,222,128,0.3);
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px var(--cyan);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { box-shadow: 0 0 8px var(--cyan); }
+      50%       { box-shadow: 0 0 18px var(--cyan), 0 0 36px rgba(0,212,255,0.25); }
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-size: clamp(2.8rem, 6.5vw, 5.8rem);
       font-weight: 700;
-      color: white;
-      line-height: 1.1;
-      margin-bottom: 20px;
+      color: #fff;
+      line-height: 1.06;
+      margin-bottom: 24px;
+      letter-spacing: -0.025em;
       animation: fadeUp 0.8s 0.15s ease both;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: #93c5fd;
+    .grad {
+      background: linear-gradient(135deg, #60a5fa 0%, var(--cyan) 50%, var(--neon) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero p {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      color: rgba(255,255,255,0.85);
-      line-height: 1.7;
-      margin-bottom: 40px;
+      color: var(--muted);
+      line-height: 1.78;
+      margin-bottom: 46px;
       font-weight: 300;
       animation: fadeUp 0.8s 0.3s ease both;
     }
 
-    .hero-buttons {
+    .hero-btns {
       display: flex;
       gap: 16px;
       justify-content: center;
@@ -238,11 +324,11 @@
     }
 
     .btn-primary {
-      background: var(--navy);
-      color: white;
-      padding: 16px 36px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      color: #fff;
+      padding: 15px 36px;
       border-radius: 50px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
       display: inline-flex;
@@ -250,269 +336,294 @@
       gap: 8px;
       border: none;
       cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 8px 26px var(--glow-b);
       letter-spacing: 0.02em;
     }
 
     .btn-primary:hover {
-      background: var(--navy-dark);
       transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(27,63,122,0.45);
+      box-shadow: 0 16px 44px var(--glow-b);
     }
 
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      padding: 16px 36px;
+    .btn-ghost {
+      background: var(--glass);
+      color: #fff;
+      padding: 15px 36px;
       border-radius: 50px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      border: 2px solid rgba(255,255,255,0.5);
+      border: 1px solid var(--glass-border);
       cursor: pointer;
+      backdrop-filter: blur(8px);
       transition: border-color 0.25s, background 0.25s;
       letter-spacing: 0.02em;
     }
 
-    .btn-secondary:hover {
-      border-color: white;
-      background: rgba(255,255,255,0.1);
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
     }
 
     .hero-scroll {
       position: absolute;
-      bottom: 36px;
-      left: 50%;
+      bottom: 36px; left: 50%;
       transform: translateX(-50%);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
+      color: var(--muted);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      animation: fadeIn 1.2s 1s ease both;
+      animation: fadeIn 1.2s 1.5s ease both;
     }
 
     .scroll-line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
-      animation: scrollDown 2s infinite;
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      animation: scrollAnim 2s infinite;
     }
 
-    /* ─── Stats Bar ─────────────────────────────────────────────────── */
+    /* ── Stats Bar ────────────────────────────────────────────────── */
     .stats-bar {
-      background: var(--navy);
-      padding: 28px 5%;
+      position: relative;
+      z-index: 1;
+      background: rgba(7,26,62,0.75);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 26px 5%;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0;
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .stat-item {
       text-align: center;
-      padding: 16px;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      position: relative;
+      padding: 14px;
+      border-right: 1px solid var(--glass-border);
     }
 
     .stat-item:last-child { border-right: none; }
 
     .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
       font-weight: 700;
-      color: white;
+      background: linear-gradient(135deg, var(--blue-light), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       display: block;
     }
 
     .stat-label {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       margin-top: 4px;
     }
 
-    /* ─── Section base ──────────────────────────────────────────────── */
-    section { padding: 96px 5%; }
+    /* ── Sections ─────────────────────────────────────────────────── */
+    section {
+      padding: 96px 5%;
+      position: relative;
+      z-index: 1;
+    }
 
     .section-tag {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: var(--navy);
-      font-size: 0.75rem;
+      gap: 10px;
+      color: var(--cyan);
+      font-size: 0.68rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 16px;
     }
 
     .section-tag::before {
       content: '';
       display: block;
-      width: 28px;
-      height: 2px;
-      background: var(--navy);
+      width: 22px; height: 1px;
+      background: var(--cyan);
+      box-shadow: 0 0 6px var(--cyan);
     }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
+      font-size: clamp(1.9rem, 3.8vw, 3rem);
       font-weight: 700;
-      color: var(--text);
-      line-height: 1.2;
+      color: #fff;
+      line-height: 1.15;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
     }
 
-    .section-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-light);
-      line-height: 1.7;
-      max-width: 560px;
+    .section-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.72;
+      max-width: 540px;
     }
 
-    /* ─── Form Section ──────────────────────────────────────────────── */
+    /* ── Form Section ─────────────────────────────────────────────── */
     .form-section {
-      background: var(--cream);
-      padding: 96px 5%;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      padding: 100px 5%;
     }
 
     .form-wrapper {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 60px;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 64px;
       align-items: start;
     }
 
-    .form-info {}
-
-    .form-info .section-title { margin-bottom: 20px; }
-
-    .form-info p {
-      color: var(--text-light);
+    .form-info > p {
+      color: var(--muted);
       line-height: 1.75;
-      font-size: 1rem;
-      margin-bottom: 32px;
+      font-size: 0.95rem;
+      margin-bottom: 36px;
     }
 
     .info-cards {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .info-card {
       display: flex;
       align-items: flex-start;
       gap: 14px;
-      background: white;
-      padding: 16px 20px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      padding: 15px 18px;
       border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(27,63,122,0.07);
+      backdrop-filter: blur(10px);
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
 
-    .info-card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--navy);
+    .info-card:hover {
+      border-color: rgba(5,99,245,0.38);
+      box-shadow: 0 0 22px rgba(5,99,245,0.09);
+    }
+
+    .ic-icon {
+      width: 38px; height: 38px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1rem;
       flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--glow-b);
     }
 
-    .info-card-text strong {
+    .ic-text strong {
       display: block;
-      font-size: 0.9rem;
+      font-size: 0.87rem;
       font-weight: 600;
-      color: var(--text);
+      color: #fff;
       margin-bottom: 2px;
     }
 
-    .info-card-text span {
-      font-size: 0.82rem;
-      color: var(--text-light);
+    .ic-text span {
+      font-size: 0.76rem;
+      color: var(--muted);
     }
 
-    /* ── The Form Card ── */
+    /* ── Form Card ───────────────────────────────────────────────── */
     .form-card {
-      background: white;
+      background: rgba(7,26,62,0.58);
+      border: 1px solid rgba(5,99,245,0.18);
       border-radius: 24px;
       padding: 48px 44px;
-      box-shadow: var(--shadow);
+      backdrop-filter: blur(28px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue-light), var(--cyan), transparent);
     }
 
     .form-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--text);
-      margin-bottom: 8px;
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
     }
 
-    .form-card .form-subtitle {
-      font-size: 0.88rem;
-      color: var(--text-light);
-      margin-bottom: 32px;
+    .form-sub {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 30px;
     }
 
-    .form-group {
-      margin-bottom: 22px;
-    }
+    .form-group { margin-bottom: 20px; }
 
     .form-group label {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.68rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--cyan);
       margin-bottom: 8px;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .form-group label .required {
-      color: var(--navy);
-      margin-left: 2px;
-    }
+    .req { color: var(--neon); margin-left: 2px; }
 
-    .form-control {
+    .fc {
       width: 100%;
-      padding: 13px 16px;
-      border: 1.5px solid #e2e8f0;
+      padding: 12px 16px;
+      border: 1px solid rgba(5,99,245,0.22);
       border-radius: 10px;
       font-size: 0.9rem;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: #fafbfc;
+      font-family: 'Space Grotesk', sans-serif;
+      color: #fff;
+      background: rgba(255,255,255,0.038);
       outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
       -webkit-appearance: none;
     }
 
-    .form-control:focus {
-      border-color: var(--navy);
-      box-shadow: 0 0 0 3px rgba(27,63,122,0.12);
-      background: white;
+    .fc:focus {
+      border-color: var(--blue-light);
+      box-shadow: 0 0 0 3px rgba(41,121,255,0.14), 0 0 22px rgba(5,99,245,0.14);
+      background: rgba(255,255,255,0.055);
     }
 
-    .form-control::placeholder { color: #b0bec5; }
+    .fc::placeholder { color: rgba(255,255,255,0.22); }
 
-    select.form-control {
+    select.fc {
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231B3F7A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300b4d8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
       padding-right: 40px;
     }
+
+    select.fc option { background: #071a3e; color: #fff; }
 
     .form-row {
       display: grid;
@@ -520,130 +631,104 @@
       gap: 16px;
     }
 
-    /* Luggage radio buttons */
+    /* Radio equipaje */
     .radio-group {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
-    .radio-option {
-      position: relative;
-    }
+    .radio-option { position: relative; }
 
-    .radio-option input[type="radio"] {
-      position: absolute;
-      opacity: 0;
-      width: 0;
-    }
+    .radio-option input[type="radio"] { position: absolute; opacity: 0; width: 0; }
 
-    .radio-label {
+    .rl {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
-      padding: 14px 10px;
-      border: 1.5px solid #e2e8f0;
+      padding: 13px 8px;
+      border: 1px solid rgba(5,99,245,0.18);
       border-radius: 10px;
       cursor: pointer;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 500;
-      color: var(--text-light);
+      color: var(--muted);
       text-align: center;
+      background: rgba(255,255,255,0.025);
       transition: all 0.2s;
-      background: #fafbfc;
     }
 
-    .radio-label .icon { font-size: 1.4rem; }
+    .rl .ico { font-size: 1.4rem; }
 
-    .radio-option input:checked + .radio-label {
-      border-color: var(--navy);
-      background: rgba(27,63,122,0.06);
-      color: var(--navy);
+    .radio-option input:checked + .rl {
+      border-color: var(--cyan);
+      background: rgba(0,180,216,0.1);
+      color: var(--cyan);
+      box-shadow: 0 0 18px rgba(0,180,216,0.14);
     }
 
-    .radio-label:hover {
-      border-color: var(--navy-light);
-      color: var(--navy);
-    }
+    .rl:hover { border-color: rgba(41,121,255,0.5); color: #fff; }
 
     /* Passengers */
-    .passenger-row {
+    .pax-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 12px 16px;
-      border: 1.5px solid #e2e8f0;
+      border: 1px solid rgba(5,99,245,0.18);
       border-radius: 10px;
       margin-bottom: 10px;
-      background: #fafbfc;
+      background: rgba(255,255,255,0.025);
     }
 
-    .passenger-info strong {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
-    }
+    .pax-info strong { display: block; font-size: 0.87rem; font-weight: 600; color: #fff; }
+    .pax-info small  { font-size: 0.72rem; color: var(--muted); }
 
-    .passenger-info small {
-      font-size: 0.75rem;
-      color: var(--text-light);
-    }
+    .counter { display: flex; align-items: center; gap: 16px; }
 
-    .counter {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .counter-btn {
-      width: 32px;
-      height: 32px;
+    .ctr-btn {
+      width: 30px; height: 30px;
       border-radius: 50%;
-      border: 1.5px solid var(--navy);
+      border: 1px solid var(--blue-light);
       background: none;
-      color: var(--navy);
+      color: var(--blue-light);
       font-size: 1.1rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
       line-height: 1;
     }
 
-    .counter-btn:hover {
-      background: var(--navy);
-      color: white;
+    .ctr-btn:hover {
+      background: var(--blue-light);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(41,121,255,0.5);
     }
 
-    .counter-value {
+    .ctr-val {
       font-size: 1rem;
-      font-weight: 600;
-      color: var(--text);
-      min-width: 20px;
+      font-weight: 700;
+      color: #fff;
+      min-width: 22px;
       text-align: center;
     }
 
-    /* Destination custom input */
-    .dest-other {
-      display: none;
-      margin-top: 12px;
-    }
-
+    .dest-other { display: none; margin-top: 12px; }
     .dest-other.visible { display: block; }
 
-    /* Submit */
-    .btn-whatsapp {
+    /* WhatsApp submit */
+    .btn-wa {
       width: 100%;
-      background: var(--success);
-      color: white;
+      background: linear-gradient(135deg, #25D366, #1db954);
+      color: #fff;
       padding: 16px;
       border-radius: 12px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       border: none;
       cursor: pointer;
       display: flex;
@@ -652,32 +737,30 @@
       gap: 10px;
       margin-top: 8px;
       transition: transform 0.25s, box-shadow 0.25s;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      box-shadow: 0 8px 26px rgba(37,211,102,0.3);
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    .btn-whatsapp:hover {
+    .btn-wa:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 32px rgba(37,211,102,0.4);
+      box-shadow: 0 14px 40px rgba(37,211,102,0.45);
     }
 
-    .btn-whatsapp svg {
-      width: 22px;
-      height: 22px;
-      fill: white;
-    }
+    .btn-wa svg { width: 22px; height: 22px; fill: #fff; }
 
-    .form-disclaimer {
+    .form-disc {
       text-align: center;
-      font-size: 0.75rem;
-      color: var(--text-light);
+      font-size: 0.72rem;
+      color: var(--muted);
       margin-top: 14px;
       line-height: 1.5;
     }
 
-    /* ─── Destinations ──────────────────────────────────────────────── */
-    .destinations { background: white; }
+    /* ── Destinations ─────────────────────────────────────────────── */
+    .destinations { background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); }
 
-    .destinations-header {
+    .dest-header {
       max-width: 1100px;
       margin: 0 auto 48px;
       display: flex;
@@ -687,7 +770,7 @@
       gap: 20px;
     }
 
-    .destinations-grid {
+    .dest-grid {
       max-width: 1100px;
       margin: 0 auto;
       display: grid;
@@ -697,99 +780,81 @@
 
     .dest-card {
       position: relative;
-      border-radius: 20px;
+      border-radius: 18px;
       overflow: hidden;
-      height: 360px;
+      height: 340px;
       cursor: pointer;
+      border: 1px solid var(--glass-border);
       transition: transform 0.35s, box-shadow 0.35s;
     }
 
     .dest-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.55), 0 0 32px rgba(5,99,245,0.18);
     }
 
     .dest-img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 0.6s;
+      filter: brightness(0.82);
     }
 
-    .dest-card:hover .dest-img { transform: scale(1.07); }
+    .dest-card:hover .dest-img { transform: scale(1.08); filter: brightness(1); }
 
-    .dest-gradient {
+    .dest-grad {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(10,25,50,0.85) 0%,
-        rgba(10,25,50,0.3) 50%,
-        transparent 100%
-      );
+      background: linear-gradient(to top, rgba(3,14,36,0.92) 0%, rgba(3,14,36,0.35) 55%, transparent 100%);
     }
 
-    .dest-content {
+    .dest-body {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 28px 24px;
+      padding: 24px 20px;
     }
 
     .dest-tag {
       display: inline-block;
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(6px);
-      color: white;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      background: rgba(5,99,245,0.22);
+      border: 1px solid rgba(41,121,255,0.38);
+      color: var(--cyan);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 50px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .dest-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: white;
-      margin-bottom: 4px;
-    }
+    .dest-name { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 4px; letter-spacing: -0.02em; }
+    .dest-info { font-size: 0.78rem; color: rgba(255,255,255,0.6); }
 
-    .dest-card.featured .dest-name { font-size: 2rem; }
-
-    .dest-info {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .dest-cta {
+    .dest-cta-btn {
       position: absolute;
-      top: 20px; right: 20px;
-      background: white;
-      color: var(--navy);
-      border: none;
+      top: 16px; right: 16px;
+      background: rgba(5,99,245,0.18);
+      backdrop-filter: blur(8px);
+      color: var(--cyan);
+      border: 1px solid rgba(0,180,216,0.38);
       border-radius: 50px;
-      padding: 8px 18px;
-      font-size: 0.78rem;
+      padding: 7px 16px;
+      font-size: 0.73rem;
       font-weight: 600;
       cursor: pointer;
       opacity: 0;
       transform: translateY(-6px);
       transition: opacity 0.25s, transform 0.25s;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
-    .dest-card:hover .dest-cta {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .dest-card:hover .dest-cta-btn { opacity: 1; transform: translateY(0); }
+    .dest-cta-btn:hover { background: rgba(5,99,245,0.38); }
 
-    /* ─── Features ──────────────────────────────────────────────────── */
-    .features { background: var(--cream); }
+    /* ── Features ─────────────────────────────────────────────────── */
+    .features { background: var(--bg); }
 
     .features-inner {
       max-width: 1100px;
@@ -800,227 +865,178 @@
       align-items: center;
     }
 
-    .features-visual {
-      position: relative;
-    }
+    .features-visual { position: relative; }
 
     .features-img {
       width: 100%;
-      border-radius: 24px;
-      object-fit: cover;
+      border-radius: 20px;
       aspect-ratio: 4/5;
-      box-shadow: var(--shadow);
+      object-fit: cover;
+      filter: brightness(0.78);
+      border: 1px solid var(--glass-border);
     }
 
-    .features-float {
+    .feat-float {
       position: absolute;
-      bottom: -24px;
-      right: -24px;
-      background: var(--navy);
-      color: white;
-      padding: 24px 28px;
+      bottom: -24px; right: -24px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      padding: 22px 26px;
       border-radius: 16px;
-      box-shadow: 0 16px 40px rgba(27,63,122,0.3);
+      box-shadow: 0 16px 44px var(--glow-b);
     }
 
-    .features-float .number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      line-height: 1;
-    }
+    .feat-float .num { font-size: 2.4rem; font-weight: 700; line-height: 1; }
+    .feat-float .lbl { font-size: 0.76rem; opacity: 0.88; margin-top: 4px; line-height: 1.4; }
 
-    .features-float .label {
-      font-size: 0.8rem;
-      opacity: 0.75;
-      margin-top: 4px;
-    }
+    .feat-list { display: flex; flex-direction: column; gap: 14px; }
 
-    .features-content .section-title { margin-bottom: 20px; }
-
-    .features-content p {
-      color: var(--text-light);
-      line-height: 1.75;
-      margin-bottom: 36px;
-    }
-
-    .feature-list {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .feature-item {
+    .feat-item {
       display: flex;
       align-items: flex-start;
       gap: 14px;
+      padding: 14px 16px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      transition: border-color 0.25s;
     }
 
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--navy);
-      border-radius: 12px;
+    .feat-item:hover { border-color: rgba(0,180,216,0.28); }
+
+    .feat-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       flex-shrink: 0;
+      box-shadow: 0 4px 14px var(--glow-b);
     }
 
-    .feature-text strong {
-      display: block;
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 3px;
-    }
+    .feat-text strong { display: block; font-size: 0.9rem; font-weight: 600; color: #fff; margin-bottom: 3px; }
+    .feat-text span  { font-size: 0.81rem; color: var(--muted); line-height: 1.5; }
 
-    .feature-text span {
-      font-size: 0.84rem;
-      color: var(--text-light);
-      line-height: 1.5;
-    }
+    /* ── Testimonials ─────────────────────────────────────────────── */
+    .testimonials { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); }
 
-    /* ─── Testimonials ──────────────────────────────────────────────── */
-    .testimonials { background: white; }
+    .testi-inner { max-width: 1100px; margin: 0 auto; }
+    .testi-header { margin-bottom: 48px; }
 
-    .testimonials-inner { max-width: 1100px; margin: 0 auto; }
-
-    .testimonials-header { margin-bottom: 48px; }
-
-    .testimonials-grid {
+    .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .testi-card {
-      background: var(--cream);
-      border-radius: 20px;
-      padding: 28px;
-      position: relative;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      padding: 26px;
+      backdrop-filter: blur(12px);
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
 
-    .testi-stars {
-      color: #f59e0b;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-      letter-spacing: 2px;
+    .testi-card:hover {
+      border-color: rgba(5,99,245,0.28);
+      box-shadow: 0 8px 32px rgba(5,99,245,0.09);
     }
+
+    .testi-stars { color: #fbbf24; font-size: 0.85rem; margin-bottom: 14px; letter-spacing: 3px; }
 
     .testi-text {
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: var(--text);
+      font-size: 0.88rem;
+      line-height: 1.76;
+      color: var(--muted);
       margin-bottom: 20px;
       font-style: italic;
     }
 
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
 
-    .testi-avatar {
-      width: 42px;
-      height: 42px;
+    .testi-av {
+      width: 40px; height: 40px;
       border-radius: 50%;
-      background: var(--navy);
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      color: white;
-      font-size: 0.9rem;
+      color: #fff;
+      font-size: 0.8rem;
     }
 
-    .testi-info strong {
-      display: block;
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
-    }
+    .testi-info strong { display: block; font-size: 0.85rem; font-weight: 600; color: #fff; }
+    .testi-info span   { font-size: 0.74rem; color: var(--muted); }
 
-    .testi-info span {
-      font-size: 0.78rem;
-      color: var(--text-light);
-    }
-
-    /* ─── CTA Band ──────────────────────────────────────────────────── */
+    /* ── CTA Band ─────────────────────────────────────────────────── */
     .cta-band {
-      background: var(--navy);
-      padding: 80px 5%;
+      background: linear-gradient(135deg, #0a2570 0%, var(--blue) 50%, #0098b5 100%);
+      padding: 84px 5%;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
 
-    .cta-band h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      color: white;
-      margin-bottom: 16px;
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
+      background-size: 44px 44px;
     }
 
-    .cta-band p {
-      color: rgba(255,255,255,0.72);
-      font-size: 1.05rem;
-      margin-bottom: 36px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+    .cta-band h2 { font-size: clamp(1.9rem, 3.8vw, 2.9rem); color: #fff; margin-bottom: 16px; font-weight: 700; letter-spacing: -0.02em; position: relative; }
+    .cta-band > p { color: rgba(255,255,255,0.74); font-size: 1rem; margin-bottom: 38px; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; }
 
-    .cta-buttons {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
 
     .btn-white {
-      background: white;
-      color: var(--navy);
+      background: #fff;
+      color: var(--blue);
       padding: 14px 32px;
       border-radius: 50px;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: transform 0.25s, box-shadow 0.25s;
     }
 
-    .btn-white:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
+    .btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.22); }
 
     .btn-outline-white {
       background: transparent;
-      color: white;
-      border: 2px solid rgba(255,255,255,0.4);
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.42);
       padding: 14px 32px;
       border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       display: inline-flex;
       align-items: center;
       gap: 8px;
       transition: border-color 0.25s, background 0.25s;
     }
 
-    .btn-outline-white:hover {
-      border-color: white;
-      background: rgba(255,255,255,0.1);
-    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 
-    /* ─── Footer ────────────────────────────────────────────────────── */
+    /* ── Footer ───────────────────────────────────────────────────── */
     footer {
-      background: var(--navy-dark);
+      background: #020b1c;
+      border-top: 1px solid var(--glass-border);
       padding: 64px 5% 32px;
+      position: relative;
+      z-index: 1;
     }
 
     .footer-grid {
@@ -1030,13 +1046,11 @@
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
       gap: 48px;
       padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--glass-border);
       margin-bottom: 32px;
     }
 
-    .footer-brand {}
-
-    .footer-logo {
+    .footer-logo-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -1044,74 +1058,55 @@
       margin-bottom: 16px;
     }
 
-    .footer-logo img {
-      height: 40px;
-      border-radius: 50%;
-      background: white;
-      padding: 2px;
-    }
-
-    .footer-logo span {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: white;
-    }
-
-    .footer-brand p {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 10px;
-    }
-
-    .social-link {
-      width: 36px;
-      height: 36px;
+    .footer-logo-mark {
+      width: 36px; height: 36px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .footer-logo-wrap span { font-family: 'Orbitron', sans-serif; font-size: 0.88rem; font-weight: 700; color: #fff; }
+
+    .footer-brand p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+
+    .socials { display: flex; gap: 10px; }
+
+    .soc-link {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
       display: flex;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      font-size: 1rem;
-      transition: background 0.2s, transform 0.2s;
+      font-size: 0.88rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
     }
 
-    .social-link:hover {
-      background: rgba(255,255,255,0.18);
+    .soc-link:hover {
+      background: rgba(5,99,245,0.14);
+      border-color: rgba(5,99,245,0.38);
       transform: translateY(-2px);
     }
 
     .footer-col h4 {
-      font-size: 0.8rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 20px;
+      color: var(--cyan);
+      font-family: 'Orbitron', sans-serif;
+      margin-bottom: 18px;
     }
 
-    .footer-col ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
-    .footer-col ul li a {
-      color: rgba(255,255,255,0.65);
-      text-decoration: none;
-      font-size: 0.88rem;
-      transition: color 0.2s;
-    }
-
-    .footer-col ul li a:hover { color: white; }
+    .footer-col ul li a { color: var(--muted); text-decoration: none; font-size: 0.84rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
 
     .footer-bottom {
       max-width: 1100px;
@@ -1123,20 +1118,15 @@
       gap: 12px;
     }
 
-    .footer-bottom p {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-    }
+    .footer-bottom p { font-size: 0.74rem; color: rgba(255,255,255,0.28); }
 
-    /* ─── Floating WhatsApp ─────────────────────────────────────────── */
+    /* ── Floating WA ──────────────────────────────────────────────── */
     .wa-float {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
+      bottom: 28px; right: 28px;
       z-index: 200;
-      width: 58px;
-      height: 58px;
-      background: var(--success);
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, #25D366, #1db954);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -1147,21 +1137,17 @@
       animation: bounceIn 1s 2s ease both;
     }
 
-    .wa-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 40px rgba(37,211,102,0.55);
-    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 14px 42px rgba(37,211,102,0.55); }
+    .wa-float svg { width: 26px; height: 26px; fill: #fff; }
 
-    .wa-float svg { width: 28px; height: 28px; fill: white; }
-
-    .wa-tooltip {
+    .wa-tip {
       position: absolute;
-      right: 68px;
-      top: 50%;
+      right: 68px; top: 50%;
       transform: translateY(-50%);
-      background: var(--navy-dark);
-      color: white;
-      font-size: 0.8rem;
+      background: var(--bg2);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      font-size: 0.76rem;
       font-weight: 500;
       padding: 8px 14px;
       border-radius: 8px;
@@ -1169,99 +1155,57 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s;
+      backdrop-filter: blur(10px);
     }
 
-    .wa-float:hover .wa-tooltip { opacity: 1; }
+    .wa-float:hover .wa-tip { opacity: 1; }
 
-    /* ─── Animations ────────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    /* ── Animations ───────────────────────────────────────────────── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes scrollAnim { 0% { opacity:1; transform:translateY(0); } 100% { opacity:0; transform:translateY(16px); } }
+    @keyframes bounceIn { 0% { opacity:0; transform:scale(0.5); } 70% { transform:scale(1.1); } 100% { opacity:1; transform:scale(1); } }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+    .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(74,222,128,0.3); }
-      50%       { box-shadow: 0 0 0 6px rgba(74,222,128,0.1); }
-    }
-
-    @keyframes scrollDown {
-      0%   { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(20px); }
-    }
-
-    @keyframes bounceIn {
-      0%   { opacity: 0; transform: scale(0.5); }
-      70%  { transform: scale(1.1); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── Mobile ────────────────────────────────────────────────────── */
+    /* ── Responsive ───────────────────────────────────────────────── */
     @media (max-width: 1024px) {
-      .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+      .dest-grid { grid-template-columns: repeat(2, 1fr); }
       .features-inner { grid-template-columns: 1fr; gap: 48px; }
       .features-visual { order: -1; }
-      .features-float { bottom: -16px; right: -8px; }
+      .feat-float { bottom: -16px; right: -8px; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--glass-border); }
     }
 
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
-
       .form-wrapper { grid-template-columns: 1fr; gap: 40px; }
       .form-card { padding: 32px 24px; }
       .form-row { grid-template-columns: 1fr; }
-      .radio-group { grid-template-columns: repeat(3, 1fr); }
-
-      /* Evita zoom automático en iOS al enfocar inputs */
-      .form-control { font-size: 16px; }
-
-      .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+      .fc { font-size: 16px; }
+      .dest-grid { grid-template-columns: repeat(2, 1fr); }
       .dest-card { height: 240px; }
-      .dest-cta { opacity: 1; transform: translateY(0); }
-      .dest-name { font-size: 1.2rem; }
-
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .dest-cta-btn { opacity: 1; transform: translateY(0); }
+      .testi-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.1); }
-
-      /* Botón flotante WhatsApp más pequeño en mobile */
-      .wa-float { width: 52px; height: 52px; bottom: 20px; right: 20px; }
-      .wa-tooltip { display: none; }
-
-      /* Hero más compacto */
-      .hero-buttons { flex-direction: column; align-items: center; }
-      .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
-
-      /* CTA band */
-      .cta-buttons { flex-direction: column; align-items: center; }
+      .wa-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+      .wa-tip { display: none; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; max-width: 300px; justify-content: center; }
+      .cta-btns { flex-direction: column; align-items: center; }
       .btn-white, .btn-outline-white { width: 100%; max-width: 300px; justify-content: center; }
     }
 
     @media (max-width: 480px) {
-      section { padding: 60px 5%; }
-      .form-section { padding: 60px 4%; }
-      .form-card { padding: 24px 18px; }
-      .radio-group { grid-template-columns: repeat(3, 1fr); }
-      .destinations-grid { grid-template-columns: 1fr; }
+      section { padding: 64px 5%; }
+      .form-section { padding: 64px 4%; }
+      .form-card { padding: 28px 18px; }
+      .dest-grid { grid-template-columns: 1fr; }
       .dest-card { height: 260px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -1270,18 +1214,21 @@
 </head>
 <body>
 
-  <!-- ─── NAVBAR ──────────────────────────────────────────────────── -->
+  <!-- Background layers -->
+  <div class="bg-layer">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+  </div>
+  <div class="bg-grid"></div>
+
+  <!-- NAVBAR -->
   <nav class="nav" id="navbar">
     <a href="#" class="nav-logo">
-      <!-- Logo SVG inline como fallback; reemplazar por la imagen real del logo si se tiene -->
-      <svg width="44" height="44" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
-        <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
-        <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
-        <path d="M 10 22 Q 22 14 34 22" stroke="white" stroke-width="1.5" fill="none"/>
-      </svg>
-      <div class="nav-logo-text">
-        Nos Fuimos
-        <span>Agencia de Viajes · CBA</span>
+      <div class="logo-mark">✈️</div>
+      <div>
+        <div class="logo-name">NOS FUIMOS</div>
+        <div class="logo-sub">Agencia · Córdoba</div>
       </div>
     </a>
 
@@ -1297,44 +1244,46 @@
     </div>
   </nav>
 
-  <!-- Mobile menu (simple) -->
-  <div id="mobile-menu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy-dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;">
-    <a href="#cotiza" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Cotizá tu viaje</a>
-    <a href="#destinos" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Destinos</a>
-    <a href="#nosotros" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Nosotros</a>
-    <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" style="background:var(--success);color:white;text-decoration:none;font-size:1rem;font-weight:600;padding:14px 36px;border-radius:50px">💬 Escribirnos por WhatsApp</a>
-    <button onclick="toggleMenu()" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.9rem;margin-top:8px">Cerrar ✕</button>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(3,14,36,0.97);backdrop-filter:blur(24px);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;">
+    <a href="#cotiza" onclick="toggleMenu()" style="color:#fff;text-decoration:none;font-size:1.3rem;font-weight:600">Cotizá tu viaje</a>
+    <a href="#destinos" onclick="toggleMenu()" style="color:#fff;text-decoration:none;font-size:1.3rem;font-weight:600">Destinos</a>
+    <a href="#nosotros" onclick="toggleMenu()" style="color:#fff;text-decoration:none;font-size:1.3rem;font-weight:600">Nosotros</a>
+    <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" style="background:linear-gradient(135deg,#25D366,#1db954);color:#fff;text-decoration:none;font-size:0.95rem;font-weight:700;padding:14px 36px;border-radius:50px;box-shadow:0 8px 24px rgba(37,211,102,0.3)">💬 Escribirnos por WhatsApp</a>
+    <button onclick="toggleMenu()" style="background:none;border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.65);padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.9rem;font-family:inherit">Cerrar ✕</button>
   </div>
 
-  <!-- ─── HERO ─────────────────────────────────────────────────────── -->
+  <!-- HERO -->
   <section class="hero" id="inicio">
-    <div class="hero-bg" id="heroBg"></div>
-    <div class="hero-overlay"></div>
+    <div class="hero-bg-img">
+      <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" alt="Avión en vuelo" />
+    </div>
+
     <div class="hero-content">
       <div class="hero-badge">
         <span class="dot"></span>
         Córdoba · Argentina
       </div>
-      <h1>¿A dónde querés <em>volar</em> hoy?</h1>
+
+      <h1>¿A dónde querés<br/><span class="grad">volar hoy?</span></h1>
+
       <p>
         Somos tu agencia de viajes en Córdoba.<br/>
-        Vuelos a USA, Europa y Caribe con las mejores ofertas.
+        Vuelos a USA, Europa y Caribe. Cotizamos en menos de 24 horas.
       </p>
-      <div class="hero-buttons">
-        <a href="#cotiza" class="btn-primary">
-          ✈️ Cotizá tu viaje gratis
-        </a>
-        <a href="#destinos" class="btn-secondary">
-          Ver destinos
-        </a>
+
+      <div class="hero-btns">
+        <a href="#cotiza" class="btn-primary">✈️ Cotizá tu viaje gratis</a>
+        <a href="#destinos" class="btn-ghost">Ver destinos</a>
       </div>
     </div>
+
     <div class="hero-scroll">
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ─── STATS ────────────────────────────────────────────────────── -->
+  <!-- STATS -->
   <div class="stats-bar">
     <div class="stat-item">
       <span class="stat-number">+2000</span>
@@ -1354,43 +1303,44 @@
     </div>
   </div>
 
-  <!-- ─── FORM SECTION ─────────────────────────────────────────────── -->
+  <!-- FORM / CRM -->
   <section class="form-section" id="cotiza">
     <div class="form-wrapper">
 
       <!-- Info lateral -->
       <div class="form-info reveal">
         <div class="section-tag">Cotización</div>
-        <h2 class="section-title">Armá el viaje de tus sueños</h2>
+        <h2 class="section-title">Armá el viaje<br/>de tus sueños</h2>
         <p>
-          Completá el formulario y te enviamos una cotización personalizada por WhatsApp en menos de 24 horas.
+          Completá el formulario y te enviamos una cotización
+          personalizada por WhatsApp en menos de 24 horas.
           Sin costo, sin compromiso.
         </p>
         <div class="info-cards">
           <div class="info-card">
-            <div class="info-card-icon">⚡</div>
-            <div class="info-card-text">
+            <div class="ic-icon">⚡</div>
+            <div class="ic-text">
               <strong>Respuesta rápida</strong>
               <span>Te contactamos en menos de 24 horas</span>
             </div>
           </div>
           <div class="info-card">
-            <div class="info-card-icon">💎</div>
-            <div class="info-card-text">
+            <div class="ic-icon">💎</div>
+            <div class="ic-text">
               <strong>Presupuesto personalizado</strong>
               <span>Cotizamos según tus fechas y necesidades</span>
             </div>
           </div>
           <div class="info-card">
-            <div class="info-card-icon">🛡️</div>
-            <div class="info-card-text">
+            <div class="ic-icon">🛡️</div>
+            <div class="ic-text">
               <strong>Sin costo ni compromiso</strong>
               <span>La consulta es completamente gratis</span>
             </div>
           </div>
           <div class="info-card">
-            <div class="info-card-icon">🌍</div>
-            <div class="info-card-text">
+            <div class="ic-icon">🌍</div>
+            <div class="ic-text">
               <strong>Múltiples destinos</strong>
               <span>USA, Europa, Caribe y mucho más</span>
             </div>
@@ -1398,17 +1348,17 @@
         </div>
       </div>
 
-      <!-- El formulario -->
+      <!-- FORM CARD -->
       <div class="form-card reveal" style="transition-delay:0.15s">
         <h3>Pre-consulta de viaje ✈️</h3>
-        <p class="form-subtitle">Completá los datos y te cotizamos por WhatsApp</p>
+        <p class="form-sub">Completá los datos y te cotizamos directo por WhatsApp</p>
 
         <form id="quoteForm" novalidate>
 
           <!-- Destino -->
           <div class="form-group">
-            <label for="destino">Destino <span class="required">*</span></label>
-            <select id="destino" class="form-control" required onchange="handleDestino(this)">
+            <label for="destino">Destino <span class="req">*</span></label>
+            <select id="destino" class="fc" required onchange="handleDestino(this)">
               <option value="">— Seleccioná un destino —</option>
               <optgroup label="⭐ Más solicitados">
                 <option value="Miami, USA">🌴 Miami, USA</option>
@@ -1430,19 +1380,38 @@
               <option value="otro">✏️ Otro destino...</option>
             </select>
             <div class="dest-other" id="otroDestino">
-              <input type="text" id="otroDestinoInput" class="form-control" placeholder="¿A dónde querés ir?" />
+              <input type="text" id="otroDestinoInput" class="fc" placeholder="¿A dónde querés ir?" />
             </div>
           </div>
 
-          <!-- Fechas -->
+          <!-- Aeropuerto de salida -->
+          <div class="form-group">
+            <label for="aeropuerto">Aeropuerto de salida <span class="req">*</span></label>
+            <select id="aeropuerto" class="fc" required>
+              <option value="">— Seleccioná el aeropuerto —</option>
+              <optgroup label="Argentina">
+                <option value="Córdoba · COR — Ambrosio Taravella">🏙️ Córdoba · COR — Ambrosio Taravella</option>
+                <option value="Buenos Aires · EZE — Ministro Pistarini">🌆 Buenos Aires · EZE — Ezeiza</option>
+                <option value="Buenos Aires · AEP — Jorge Newbery">🌃 Buenos Aires · AEP — Aeroparque</option>
+                <option value="Mendoza · MDZ — El Plumerillo">🏔️ Mendoza · MDZ — El Plumerillo</option>
+                <option value="Rosario · ROS — Islas Malvinas">🌿 Rosario · ROS — Islas Malvinas</option>
+                <option value="Bariloche · BRC">⛷️ Bariloche · BRC</option>
+                <option value="Salta · SLA — Martín M. de Güemes">🌵 Salta · SLA</option>
+                <option value="Tucumán · TUC — Benjamín Matienzo">🌸 Tucumán · TUC</option>
+              </optgroup>
+              <option value="Otro aeropuerto">✏️ Otro aeropuerto...</option>
+            </select>
+          </div>
+
+          <!-- Fecha + Días -->
           <div class="form-row">
             <div class="form-group">
-              <label for="fechaSalida">Fecha de salida <span class="required">*</span></label>
-              <input type="date" id="fechaSalida" class="form-control" required />
+              <label for="fechaSalida">Fecha de salida <span class="req">*</span></label>
+              <input type="date" id="fechaSalida" class="fc" required />
             </div>
             <div class="form-group">
-              <label for="cantDias">Cantidad de días <span class="required">*</span></label>
-              <select id="cantDias" class="form-control" required>
+              <label for="cantDias">Duración estimada <span class="req">*</span></label>
+              <select id="cantDias" class="fc" required>
                 <option value="">— días —</option>
                 <option value="3-5 días">3 a 5 días</option>
                 <option value="6-8 días">6 a 8 días</option>
@@ -1456,85 +1425,76 @@
 
           <!-- Pasajeros -->
           <div class="form-group">
-            <label>Pasajeros <span class="required">*</span></label>
-            <div class="passenger-row">
-              <div class="passenger-info">
+            <label>Pasajeros <span class="req">*</span></label>
+            <div class="pax-row">
+              <div class="pax-info">
                 <strong>Adultos</strong>
                 <small>Mayores de 12 años</small>
               </div>
               <div class="counter">
-                <button type="button" class="counter-btn" onclick="changeCount('adultos',-1)">−</button>
-                <span class="counter-value" id="adultos-val">1</span>
-                <button type="button" class="counter-btn" onclick="changeCount('adultos',1)">+</button>
+                <button type="button" class="ctr-btn" onclick="changeCount('adultos',-1)">−</button>
+                <span class="ctr-val" id="adultos-val">1</span>
+                <button type="button" class="ctr-btn" onclick="changeCount('adultos',1)">+</button>
               </div>
             </div>
-            <div class="passenger-row">
-              <div class="passenger-info">
+            <div class="pax-row">
+              <div class="pax-info">
                 <strong>Menores</strong>
                 <small>2 a 11 años</small>
               </div>
               <div class="counter">
-                <button type="button" class="counter-btn" onclick="changeCount('menores',-1)">−</button>
-                <span class="counter-value" id="menores-val">0</span>
-                <button type="button" class="counter-btn" onclick="changeCount('menores',1)">+</button>
+                <button type="button" class="ctr-btn" onclick="changeCount('menores',-1)">−</button>
+                <span class="ctr-val" id="menores-val">0</span>
+                <button type="button" class="ctr-btn" onclick="changeCount('menores',1)">+</button>
               </div>
             </div>
           </div>
 
           <!-- Equipaje -->
           <div class="form-group">
-            <label>Tipo de equipaje <span class="required">*</span></label>
+            <label>Tipo de equipaje <span class="req">*</span></label>
             <div class="radio-group">
               <div class="radio-option">
                 <input type="radio" name="equipaje" id="eq-mano" value="Solo equipaje de mano" checked />
-                <label class="radio-label" for="eq-mano">
-                  <span class="icon">🎒</span>
-                  Solo de mano
-                </label>
+                <label class="rl" for="eq-mano"><span class="ico">🎒</span>Solo de mano</label>
               </div>
               <div class="radio-option">
                 <input type="radio" name="equipaje" id="eq-bodega" value="Equipaje en bodega" />
-                <label class="radio-label" for="eq-bodega">
-                  <span class="icon">🧳</span>
-                  En bodega
-                </label>
+                <label class="rl" for="eq-bodega"><span class="ico">🧳</span>En bodega</label>
               </div>
               <div class="radio-option">
                 <input type="radio" name="equipaje" id="eq-ambos" value="Mano y bodega" />
-                <label class="radio-label" for="eq-ambos">
-                  <span class="icon">✈️</span>
-                  Los dos
-                </label>
+                <label class="rl" for="eq-ambos"><span class="ico">✈️</span>Los dos</label>
               </div>
             </div>
           </div>
 
-          <!-- Nombre y WhatsApp -->
+          <!-- Nombre + WhatsApp -->
           <div class="form-row">
             <div class="form-group">
-              <label for="nombre">Tu nombre <span class="required">*</span></label>
-              <input type="text" id="nombre" class="form-control" placeholder="Nombre y apellido" required />
+              <label for="nombre">Tu nombre <span class="req">*</span></label>
+              <input type="text" id="nombre" class="fc" placeholder="Nombre y apellido" required />
             </div>
             <div class="form-group">
-              <label for="whatsapp">WhatsApp <span class="required">*</span></label>
-              <input type="tel" id="whatsapp" class="form-control" placeholder="Ej: 351 123 4567" required />
+              <label for="whatsapp">Tu WhatsApp <span class="req">*</span></label>
+              <input type="tel" id="whatsapp" class="fc" placeholder="Ej: 351 123 4567" required />
             </div>
           </div>
 
           <!-- Comentarios -->
           <div class="form-group">
             <label for="comentarios">Comentarios adicionales</label>
-            <textarea id="comentarios" class="form-control" rows="3" placeholder="Hotel incluido, viaje de aniversario, fechas flexibles..."></textarea>
+            <textarea id="comentarios" class="fc" rows="3" placeholder="Hotel incluido, viaje de aniversario, fechas flexibles..."></textarea>
           </div>
 
-          <button type="submit" class="btn-whatsapp">
+          <button type="submit" class="btn-wa">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
             Enviar consulta por WhatsApp
           </button>
 
-          <p class="form-disclaimer">
+          <p class="form-disc">
             Al enviar, serás redirigido a WhatsApp con tu consulta lista.<br/>
             Te respondemos en menos de 24 horas 🕐
           </p>
@@ -1543,133 +1503,133 @@
     </div>
   </section>
 
-  <!-- ─── DESTINOS ─────────────────────────────────────────────────── -->
+  <!-- DESTINOS -->
   <section class="destinations" id="destinos">
-    <div class="destinations-header reveal">
+    <div class="dest-header reveal">
       <div>
         <div class="section-tag">Destinos</div>
         <h2 class="section-title">Los más elegidos</h2>
       </div>
-      <p class="section-subtitle" style="max-width:360px;text-align:right">
+      <p class="section-sub" style="max-width:340px;text-align:right">
         Desde Córdoba volás directo al mundo. Estos son los favoritos de nuestros pasajeros.
       </p>
     </div>
 
-    <div class="destinations-grid">
+    <div class="dest-grid">
       <div class="dest-card reveal" onclick="goForm('Miami, USA')" style="transition-delay:0.1s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?auto=format&fit=crop&w=800&q=80" alt="Miami" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
-          <span class="dest-tag">⭐ El favorito</span>
+        <div class="dest-grad"></div>
+        <div class="dest-body">
+          <span class="dest-tag">El favorito</span>
           <div class="dest-name">Miami</div>
           <div class="dest-info">✈️ USA · Sol y playa</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
 
       <div class="dest-card reveal" onclick="goForm('Cancún, México')" style="transition-delay:0.15s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Cancún" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
+        <div class="dest-grad"></div>
+        <div class="dest-body">
           <span class="dest-tag">Caribe</span>
           <div class="dest-name">Cancún</div>
           <div class="dest-info">✈️ México · Todo incluido</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
 
       <div class="dest-card reveal" onclick="goForm('Punta Cana, Rep. Dominicana')" style="transition-delay:0.2s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Punta Cana" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
+        <div class="dest-grad"></div>
+        <div class="dest-body">
           <span class="dest-tag">Caribe</span>
           <div class="dest-name">Punta Cana</div>
           <div class="dest-info">✈️ Rep. Dominicana · Paraíso</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
 
       <div class="dest-card reveal" onclick="goForm('Panamá')" style="transition-delay:0.25s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1512813195386-6cf811ad3542?auto=format&fit=crop&w=800&q=80" alt="Panamá" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
+        <div class="dest-grad"></div>
+        <div class="dest-body">
           <span class="dest-tag">Américas</span>
           <div class="dest-name">Panamá</div>
           <div class="dest-info">✈️ Panamá · Ciudad y playa</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
 
       <div class="dest-card reveal" onclick="goForm('Nueva York, USA')" style="transition-delay:0.3s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80" alt="Nueva York" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
+        <div class="dest-grad"></div>
+        <div class="dest-body">
           <span class="dest-tag">USA</span>
           <div class="dest-name">Nueva York</div>
           <div class="dest-info">✈️ USA · La gran manzana</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
 
       <div class="dest-card reveal" onclick="goForm('España')" style="transition-delay:0.35s">
         <img class="dest-img" src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=800&q=80" alt="España" loading="lazy"/>
-        <div class="dest-gradient"></div>
-        <div class="dest-content">
+        <div class="dest-grad"></div>
+        <div class="dest-body">
           <span class="dest-tag">Europa</span>
           <div class="dest-name">España</div>
           <div class="dest-info">✈️ Europa · Cultura y vida</div>
         </div>
-        <button class="dest-cta">Cotizar ahora</button>
+        <button class="dest-cta-btn">Cotizar ahora</button>
       </div>
     </div>
   </section>
 
-  <!-- ─── NOSOTROS / FEATURES ──────────────────────────────────────── -->
+  <!-- NOSOTROS -->
   <section class="features" id="nosotros">
     <div class="features-inner">
       <div class="features-visual reveal">
         <img class="features-img"
           src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=800&q=80"
           alt="Viajeros felices" loading="lazy"/>
-        <div class="features-float">
-          <span class="number">✈️</span>
-          <span class="label">Detrás de cada vuelo,<br/>estamos nosotros</span>
+        <div class="feat-float">
+          <span class="num">✈️</span>
+          <span class="lbl">Detrás de cada vuelo,<br/>estamos nosotros</span>
         </div>
       </div>
 
       <div class="features-content reveal" style="transition-delay:0.2s">
         <div class="section-tag">Sobre nosotros</div>
         <h2 class="section-title">Por qué elegirnos</h2>
-        <p>
-          Somos <strong>Nos Fuimos CBA</strong>, una agencia de viajes cordobesa que nació con un único objetivo:
-          hacerte viajar más y mejor. Cotizamos fácil, rápido y con ofertas imperdibles a los mejores destinos del mundo.
+        <p style="color:var(--muted);line-height:1.75;margin-bottom:28px">
+          Somos <strong style="color:#fff">Nos Fuimos CBA</strong>, una agencia de viajes cordobesa que nació con un único objetivo:
+          hacerte viajar más y mejor. Cotizamos fácil, rápido y con ofertas imperdibles.
         </p>
 
-        <div class="feature-list">
-          <div class="feature-item">
-            <div class="feature-icon">🎯</div>
-            <div class="feature-text">
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-icon">🎯</div>
+            <div class="feat-text">
               <strong>Cotización personalizada</strong>
-              <span>Armamos el viaje según tus fechas, presupuesto y preferencias. Nada genérico.</span>
+              <span>Armamos el viaje según tus fechas, presupuesto y preferencias.</span>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon">💬</div>
-            <div class="feature-text">
+          <div class="feat-item">
+            <div class="feat-icon">💬</div>
+            <div class="feat-text">
               <strong>Atención directa por WhatsApp</strong>
               <span>Hablás con personas reales, no bots. Respondemos rápido y sin vueltas.</span>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon">💸</div>
-            <div class="feature-text">
+          <div class="feat-item">
+            <div class="feat-icon">💸</div>
+            <div class="feat-text">
               <strong>Ofertas imperdibles</strong>
               <span>Accedemos a las mejores tarifas para que viajes más por menos dinero.</span>
             </div>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon">🛡️</div>
-            <div class="feature-text">
+          <div class="feat-item">
+            <div class="feat-icon">🛡️</div>
+            <div class="feat-text">
               <strong>Acompañamiento total</strong>
               <span>Desde la cotización hasta que volvés, estamos para lo que necesités.</span>
             </div>
@@ -1679,22 +1639,20 @@
     </div>
   </section>
 
-  <!-- ─── TESTIMONIALS ─────────────────────────────────────────────── -->
+  <!-- TESTIMONIOS -->
   <section class="testimonials">
-    <div class="testimonials-inner">
-      <div class="testimonials-header reveal">
+    <div class="testi-inner">
+      <div class="testi-header reveal">
         <div class="section-tag">Testimonios</div>
         <h2 class="section-title">Lo que dicen los que ya se fueron</h2>
       </div>
 
-      <div class="testimonials-grid">
+      <div class="testi-grid">
         <div class="testi-card reveal" style="transition-delay:0.1s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."
-          </p>
+          <p class="testi-text">"Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."</p>
           <div class="testi-author">
-            <div class="testi-avatar">SL</div>
+            <div class="testi-av">SL</div>
             <div class="testi-info">
               <strong>Sofía L.</strong>
               <span>Viajó a Nueva York</span>
@@ -1704,11 +1662,9 @@
 
         <div class="testi-card reveal" style="transition-delay:0.2s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡Y el viaje superó todas las expectativas!"
-          </p>
+          <p class="testi-text">"La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡El viaje superó todas las expectativas!"</p>
           <div class="testi-author">
-            <div class="testi-avatar">MR</div>
+            <div class="testi-av">MR</div>
             <div class="testi-info">
               <strong>Matías R.</strong>
               <span>Viajó a Cancún</span>
@@ -1718,11 +1674,9 @@
 
         <div class="testi-card reveal" style="transition-delay:0.3s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"
-          </p>
+          <p class="testi-text">"Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"</p>
           <div class="testi-author">
-            <div class="testi-avatar">VG</div>
+            <div class="testi-av">VG</div>
             <div class="testi-info">
               <strong>Valentina G.</strong>
               <span>Viajó por Europa</span>
@@ -1733,53 +1687,41 @@
     </div>
   </section>
 
-  <!-- ─── CTA BAND ─────────────────────────────────────────────────── -->
+  <!-- CTA BAND -->
   <div class="cta-band">
-    <h2>¿Listo para volar? ✈️</h2>
-    <p>
-      No esperes más. Cotizá tu viaje gratis y en minutos tenés nuestra propuesta en tu WhatsApp.
-    </p>
-    <div class="cta-buttons">
-      <a href="#cotiza" class="btn-white">
-        ✈️ Cotizar ahora
-      </a>
-      <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="btn-outline-white">
-        💬 Hablar por WhatsApp
-      </a>
+    <h2>¿Listo para despegar? ✈️</h2>
+    <p>No esperes más. Cotizá tu viaje gratis y en minutos tenés nuestra propuesta en tu WhatsApp.</p>
+    <div class="cta-btns">
+      <a href="#cotiza" class="btn-white">✈️ Cotizar ahora</a>
+      <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="btn-outline-white">💬 Hablar por WhatsApp</a>
     </div>
   </div>
 
-  <!-- ─── FOOTER ────────────────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="#" class="footer-logo">
-          <svg width="36" height="36" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
-            <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
-            <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
-          </svg>
+        <a href="#" class="footer-logo-wrap">
+          <div class="footer-logo-mark">✈️</div>
           <span>Nos Fuimos CBA</span>
         </a>
-        <p>
-          Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe con las mejores ofertas.
-          Cotizá fácil por WhatsApp.
-        </p>
-        <div class="social-links">
-          <a href="https://www.instagram.com/nosfuimos.cba/" target="_blank" class="social-link" title="Instagram">📷</a>
-          <a href="https://wa.me/5493518060947" target="_blank" class="social-link" title="WhatsApp">💬</a>
-          <a href="https://www.facebook.com/nosfuimos.cba" target="_blank" class="social-link" title="Facebook">📘</a>
+        <p>Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe con las mejores ofertas. Cotizá fácil por WhatsApp.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/nosfuimos.cba/" target="_blank" class="soc-link" title="Instagram">📷</a>
+          <a href="https://wa.me/5493518060947" target="_blank" class="soc-link" title="WhatsApp">💬</a>
+          <a href="https://www.facebook.com/nosfuimos.cba" target="_blank" class="soc-link" title="Facebook">📘</a>
         </div>
       </div>
 
       <div class="footer-col">
         <h4>Destinos</h4>
         <ul>
-          <li><a href="#destinos" onclick="goForm('Miami, USA')">Miami</a></li>
-          <li><a href="#destinos" onclick="goForm('Cancún, México')">Cancún</a></li>
-          <li><a href="#destinos" onclick="goForm('Punta Cana, Rep. Dominicana')">Punta Cana</a></li>
-          <li><a href="#destinos" onclick="goForm('Panamá')">Panamá</a></li>
-          <li><a href="#destinos" onclick="goForm('Nueva York, USA')">Nueva York</a></li>
-          <li><a href="#destinos" onclick="goForm('España')">España</a></li>
+          <li><a href="#cotiza" onclick="goForm('Miami, USA')">Miami</a></li>
+          <li><a href="#cotiza" onclick="goForm('Cancún, México')">Cancún</a></li>
+          <li><a href="#cotiza" onclick="goForm('Punta Cana, Rep. Dominicana')">Punta Cana</a></li>
+          <li><a href="#cotiza" onclick="goForm('Panamá')">Panamá</a></li>
+          <li><a href="#cotiza" onclick="goForm('Nueva York, USA')">Nueva York</a></li>
+          <li><a href="#cotiza" onclick="goForm('España')">España</a></li>
         </ul>
       </div>
 
@@ -1809,39 +1751,32 @@
     </div>
   </footer>
 
-  <!-- Botón flotante WhatsApp -->
+  <!-- Floating WhatsApp -->
   <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="wa-float" title="Escribinos por WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
-    <span class="wa-tooltip">¡Escribinos ahora!</span>
+    <span class="wa-tip">¡Escribinos ahora!</span>
   </a>
 
-  <!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
   <script>
-    // ── IMPORTANTE: Reemplazá este número por el número de WhatsApp real de la agencia
-    // Formato: código de país (54) + código de área sin 0 (351) + número sin 15
     const WA_NUMBER = '5493518060947';
 
-    // ── Navbar scroll ──
+    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── Hero image animation ──
-    const heroBg = document.getElementById('heroBg');
-    setTimeout(() => heroBg.classList.add('loaded'), 100);
-
-    // ── Mobile menu ──
+    // Mobile menu
     function toggleMenu() {
       const menu = document.getElementById('mobile-menu');
-      const isOpen = menu.style.display === 'flex';
-      menu.style.display = isOpen ? 'none' : 'flex';
-      document.body.style.overflow = isOpen ? '' : 'hidden';
+      const open = menu.style.display === 'flex';
+      menu.style.display = open ? 'none' : 'flex';
+      document.body.style.overflow = open ? '' : 'hidden';
     }
 
-    // ── Pasajeros counter ──
+    // Passenger counter
     const counts = { adultos: 1, menores: 0 };
 
     function changeCount(type, delta) {
@@ -1850,72 +1785,71 @@
       document.getElementById(type + '-val').textContent = counts[type];
     }
 
-    // ── Destino "otro" ──
+    // Show "otro destino" input
     function handleDestino(sel) {
-      const other = document.getElementById('otroDestino');
-      other.classList.toggle('visible', sel.value === 'otro');
+      document.getElementById('otroDestino').classList.toggle('visible', sel.value === 'otro');
     }
 
-    // ── Ir al form con destino preseleccionado ──
+    // Pre-select destination and scroll to form
     function goForm(destino) {
       const sel = document.getElementById('destino');
-      for (let opt of sel.options) {
+      for (const opt of sel.options) {
         if (opt.value === destino) { sel.value = destino; break; }
       }
       document.getElementById('cotiza').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // ── Form submit → WhatsApp ──
+    // Form submit → WhatsApp
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const destino = document.getElementById('destino').value;
-      const otroDestino = document.getElementById('otroDestinoInput').value;
-      const destinoFinal = destino === 'otro' ? otroDestino : destino;
-      const fecha = document.getElementById('fechaSalida').value;
-      const dias = document.getElementById('cantDias').value;
-      const equipaje = document.querySelector('input[name="equipaje"]:checked')?.value || '';
-      const nombre = document.getElementById('nombre').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const comentarios = document.getElementById('comentarios').value.trim();
+      const destino    = document.getElementById('destino').value;
+      const otroInput  = document.getElementById('otroDestinoInput').value.trim();
+      const destinoFin = destino === 'otro' ? otroInput : destino;
+      const aeropuerto = document.getElementById('aeropuerto').value;
+      const fecha      = document.getElementById('fechaSalida').value;
+      const dias       = document.getElementById('cantDias').value;
+      const equipaje   = document.querySelector('input[name="equipaje"]:checked')?.value || '';
+      const nombre     = document.getElementById('nombre').value.trim();
+      const whatsapp   = document.getElementById('whatsapp').value.trim();
+      const notas      = document.getElementById('comentarios').value.trim();
 
-      // Validación básica
-      if (!destinoFinal) { alert('Por favor seleccioná un destino.'); return; }
-      if (!fecha) { alert('Por favor ingresá una fecha de salida aproximada.'); return; }
-      if (!dias) { alert('Por favor seleccioná la cantidad de días.'); return; }
-      if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
-      if (!whatsapp) { alert('Por favor ingresá tu WhatsApp.'); return; }
+      if (!destinoFin)  { alert('Por favor seleccioná un destino.');               return; }
+      if (!aeropuerto)  { alert('Por favor seleccioná el aeropuerto de salida.');   return; }
+      if (!fecha)       { alert('Por favor ingresá una fecha de salida.');           return; }
+      if (!dias)        { alert('Por favor seleccioná la cantidad de días.');        return; }
+      if (!nombre)      { alert('Por favor ingresá tu nombre.');                     return; }
+      if (!whatsapp)    { alert('Por favor ingresá tu número de WhatsApp.');         return; }
 
-      const fechaFormateada = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
+      const fechaFmt = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
         day: 'numeric', month: 'long', year: 'numeric'
       });
 
-      const msg = [
-        `✈️ *CONSULTA DE VIAJE - NOS FUIMOS CBA*`,
+      const lines = [
+        `✈️ *CONSULTA DE VIAJE — NOS FUIMOS CBA*`,
         ``,
         `👤 *Nombre:* ${nombre}`,
         `📱 *WhatsApp:* ${whatsapp}`,
         ``,
-        `🌍 *Destino:* ${destinoFinal}`,
-        `📅 *Fecha de salida:* ${fechaFormateada}`,
-        `⏳ *Duración:* ${dias}`,
+        `🌍 *Destino:* ${destinoFin}`,
+        `🛫 *Aeropuerto de salida:* ${aeropuerto}`,
+        `📅 *Fecha de salida:* ${fechaFmt}`,
+        `⏳ *Duración estimada:* ${dias}`,
         ``,
         `👥 *Pasajeros:*`,
         `   • Adultos: ${counts.adultos}`,
         `   • Menores: ${counts.menores}`,
         ``,
         `🧳 *Equipaje:* ${equipaje}`,
-        comentarios ? `\n💬 *Comentarios:* ${comentarios}` : '',
+        notas ? `\n💬 *Comentarios:* ${notas}` : '',
         ``,
-        `_Enviado desde nosfuimos.cba_`
-      ].filter(Boolean).join('\n');
+        `_Enviado desde nosfuimos.cba_`,
+      ].filter(l => l !== null).join('\n');
 
-      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines)}`, '_blank');
     });
 
-    // ── Intersection Observer (reveal animations) ──
-    const revealEls = document.querySelectorAll('.reveal');
+    // Reveal on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1925,13 +1859,13 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    revealEls.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── Set min date on fecha input ──
-    const fechaInput = document.getElementById('fechaSalida');
-    const today = new Date();
-    today.setDate(today.getDate() + 1);
-    fechaInput.min = today.toISOString().split('T')[0];
+    // Min date = tomorrow
+    const fi = document.getElementById('fechaSalida');
+    const tom = new Date();
+    tom.setDate(tom.getDate() + 1);
+    fi.min = tom.toISOString().split('T')[0];
   </script>
 </body>
 </html>
