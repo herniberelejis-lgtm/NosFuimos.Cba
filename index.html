@@ -1771,8 +1771,8 @@
     // ── Configuración ──────────────────────────────────────────────────
     const WA_NUMBER = '5493518060947';
 
-    // Pegá acá la URL del webhook de Make.com cuando lo tengas
-    const WEBHOOK_URL = 'https://hook.us2.make.com/ou30ms8i0pamttqw916g0w6wypvmm647';
+    const TG_TOKEN   = '8831887218:AAGMrNshEaUV3hiW1_Bbh9xfeLA_G03cTJE';
+    const TG_CHAT_ID = '6969195655';
 
     // ── Mapeo de aeropuertos a códigos IATA ───────────────────────────
     const AIRPORT_IATA = {
@@ -1918,34 +1918,33 @@
 
       window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 
-      // ── 2. Webhook al agente Make.com (automático) ────────────────────
-      // El agente recibirá los datos estructurados + links de búsqueda pre-armados
-      // y te mandará por WhatsApp el resumen listo para validar.
-      if (WEBHOOK_URL && WEBHOOK_URL !== 'PEGAR_URL_DE_MAKE_AQUI') {
-        fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            nombre,
-            whatsapp_cliente:  whatsapp,
-            destino:           destinoFin,
-            destino_iata:      toIata,
-            aeropuerto,
-            aeropuerto_iata:   fromIata,
-            fecha,
-            fecha_legible:     fechaFmt,
-            duracion:          dias,
-            adultos:           counts.adultos,
-            menores:           counts.menores,
-            equipaje,
-            comentarios:       notas,
-            skyscanner_url:    skyscannerUrl,
-            google_flights_url: googleFlightsUrl,
-            timestamp:         new Date().toISOString(),
-            fuente:            'website',
-          }),
-        }).catch(() => {}); // fallo silencioso si el webhook no está configurado
-      }
+      // ── 2. Notificación directa a Telegram ───────────────────────────
+      const tgLines = [
+        '🛫 *Nueva consulta — Nos Fuimos CBA*',
+        '',
+        `👤 *Cliente:* ${nombre}`,
+        `📱 *WhatsApp:* ${whatsapp}`,
+        '',
+        `🌎 *Destino:* ${destinoFin}`,
+        `🛫 *Sale desde:* ${aeropuerto}`,
+        `📅 *Fecha:* ${fechaFmt}`,
+        `📆 *Duración:* ${dias} días`,
+        `🧳 *Equipaje:* ${equipaje}`,
+        `👥 *Pasajeros:* ${counts.adultos} adulto${counts.adultos > 1 ? 's' : ''}${counts.menores > 0 ? `, ${counts.menores} menor${counts.menores > 1 ? 'es' : ''}` : ''}`,
+      ];
+      if (notas) tgLines.push('', `💬 *Comentarios:* ${notas}`);
+      if (skyscannerUrl)    tgLines.push('', `✈️ Skyscanner: ${skyscannerUrl}`);
+      if (googleFlightsUrl) tgLines.push(`🔍 Google Flights: ${googleFlightsUrl}`);
+
+      fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id:    TG_CHAT_ID,
+          text:       tgLines.join('\n'),
+          parse_mode: 'Markdown',
+        }),
+      }).catch(() => {});
     });
 
     // ── Reveal on scroll ──────────────────────────────────────────────
