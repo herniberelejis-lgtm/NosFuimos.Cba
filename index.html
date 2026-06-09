@@ -1771,11 +1771,13 @@
     // ── Configuración ──────────────────────────────────────────────────
     const WA_NUMBER = '5493518060947';
 
-    const TG_TOKEN   = '8831887218:AAGMrNshEaUV3hiW1_Bbh9xfeLA_G03cTJE';
-    const TG_CHAT_ID = '6969195655';
+    // Worker de Cloudflare que envía las notificaciones a Telegram de forma segura.
+    // El token del bot queda guardado en Cloudflare, no en este archivo.
+    // Desplegá telegram-worker/worker.js en Cloudflare Workers y pegá la URL acá.
+    const TG_WORKER_URL = '';
 
     // URL donde está hosteado el sitio (para links al cotizador)
-    // Ejemplo: 'https://nosfuimos-cba.github.io' — dejá vacío si no está publicado aún
+    // Ejemplo: 'https://herniberelejis-lgtm.github.io/NosFuimos.Cba'
     const SITE_URL = '';
 
     // ── Mapeo de aeropuertos a códigos IATA ───────────────────────────
@@ -1958,15 +1960,13 @@
         tgLines.push('', `📋 Cotizar: ${SITE_URL}/cotizador.html?${cParams}`);
       }
 
-      fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id:    TG_CHAT_ID,
-          text:       tgLines.join('\n'),
-          parse_mode: 'Markdown',
-        }),
-      }).catch(() => {});
+      if (TG_WORKER_URL) {
+        fetch(TG_WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: tgLines.join('\n') }),
+        }).catch(() => {});
+      }
     });
 
     // ── Reveal on scroll ──────────────────────────────────────────────
