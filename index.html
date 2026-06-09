@@ -443,6 +443,64 @@
       color: var(--text-light);
     }
 
+    .form-social-proof {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mini-testi {
+      background: var(--navy);
+      color: white;
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+
+    .mini-testi-stars {
+      color: #FFD700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .mini-testi-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 10px;
+    }
+
+    .mini-testi-author {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    .ig-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border: 1.5px solid rgba(27,63,122,0.12);
+      border-radius: 50px;
+      padding: 12px 18px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s;
+      box-shadow: 0 2px 10px rgba(27,63,122,0.06);
+    }
+
+    .ig-pill:hover {
+      box-shadow: 0 4px 18px rgba(27,63,122,0.14);
+      transform: translateY(-1px);
+    }
+
+    .ig-pill svg { flex-shrink: 0; }
+
     /* ── The Form Card ── */
     .form-card {
       background: white;
@@ -1340,6 +1398,22 @@
               <span>USA, Europa, Caribe y mucho más</span>
             </div>
           </div>
+        </div>
+
+        <div class="form-social-proof">
+          <div class="mini-testi">
+            <div class="mini-testi-stars">★★★★★</div>
+            <p class="mini-testi-text">"En pocas horas tenía mi paquete a Miami cotizado. Atención increíble, viaje soñado."</p>
+            <span class="mini-testi-author">— Florencia G., Córdoba Capital</span>
+          </div>
+          <a class="ig-pill" href="https://instagram.com/nosfuimos.cba" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#1B3F7A" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4" stroke="#1B3F7A" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="#1B3F7A"/>
+            </svg>
+            Seguinos en @nosfuimos.cba
+          </a>
         </div>
       </div>
 
