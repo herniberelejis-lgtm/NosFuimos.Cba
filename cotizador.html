@@ -559,6 +559,40 @@
     document.getElementById('quoteWrap').classList.remove('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  // ── Auto-cargar desde URL params (link enviado por Telegram) ──────
+  window.addEventListener('DOMContentLoaded', () => {
+    const p = new URLSearchParams(window.location.search);
+    if (!p.toString()) return;
+
+    const set = (id, val) => { if (val) document.getElementById(id).value = val; };
+
+    set('fCliente',      p.get('nombre'));
+    set('fAerolinea',    p.get('aerolinea'));
+    set('fOrigenNombre', p.get('origen'));
+    set('fOrigenIATA',   p.get('origenIATA'));
+    set('fDestinoNombre',p.get('destino'));
+    set('fDestinoIATA',  p.get('destinoIATA'));
+    set('fFechaIda',     p.get('fechaIda'));
+
+    // Calcular fecha de vuelta: fechaIda + días
+    if (p.get('fechaIda') && p.get('dias')) {
+      const d = new Date(p.get('fechaIda') + 'T12:00:00');
+      d.setDate(d.getDate() + parseInt(p.get('dias')));
+      document.getElementById('fFechaVuelta').value = d.toISOString().split('T')[0];
+    }
+
+    // Incluye equipaje
+    if (p.get('equipaje')) {
+      const eq = p.get('equipaje');
+      document.getElementById('fIncluye').value =
+        `Tarifa con impuestos, equipaje ${eq} en la ida y vuelta.`;
+    }
+
+    // Scroll suave al formulario con highlight
+    document.querySelector('.panel').style.border = '2px solid #1B3F7A';
+    setTimeout(() => { document.querySelector('.panel').style.border = ''; }, 2000);
+  });
 </script>
 </body>
 </html>

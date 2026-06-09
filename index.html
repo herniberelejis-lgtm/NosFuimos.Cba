@@ -1774,6 +1774,10 @@
     const TG_TOKEN   = '8831887218:AAGMrNshEaUV3hiW1_Bbh9xfeLA_G03cTJE';
     const TG_CHAT_ID = '6969195655';
 
+    // URL donde está hosteado el sitio (para links al cotizador)
+    // Ejemplo: 'https://nosfuimos-cba.github.io' — dejá vacío si no está publicado aún
+    const SITE_URL = '';
+
     // ── Mapeo de aeropuertos a códigos IATA ───────────────────────────
     const AIRPORT_IATA = {
       'Córdoba · COR — Ambrosio Taravella':               'COR',
@@ -1935,6 +1939,24 @@
       if (notas) tgLines.push('', `💬 *Comentarios:* ${notas}`);
       if (skyscannerUrl)    tgLines.push('', `✈️ Skyscanner: ${skyscannerUrl}`);
       if (googleFlightsUrl) tgLines.push(`🔍 Google Flights: ${googleFlightsUrl}`);
+
+      if (SITE_URL) {
+        const origenCiudad = aeropuerto.split(' · ')[0].trim();
+        const destinoCiudad = destinoFin.split(',')[0].trim();
+        const cParams = new URLSearchParams({
+          nombre,
+          origen:      origenCiudad,
+          origenIATA:  fromIata  || '',
+          destino:     destinoCiudad,
+          destinoIATA: toIata    || '',
+          fechaIda:    fecha,
+          dias,
+          adultos:     counts.adultos,
+          menores:     counts.menores,
+          equipaje,
+        });
+        tgLines.push('', `📋 Cotizar: ${SITE_URL}/cotizador.html?${cParams}`);
+      }
 
       fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
         method: 'POST',
