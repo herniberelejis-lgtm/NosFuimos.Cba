@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cotizador — Nos Fuimos CBA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1B3F7A;
+      --cream: #F7F3ED;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
+      color: #1a1a2e;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    /* ── FORM PANEL ─────────────────────────────────────── */
+    .panel {
+      max-width: 700px;
+      margin: 0 auto 32px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.1);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      background: var(--navy);
+      color: #fff;
+      padding: 20px 28px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-body { padding: 24px 28px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .full    { grid-column: 1 / -1; }
+
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    label  { font-size: .8rem; font-weight: 600; color: #5a6a7e; text-transform: uppercase; letter-spacing: .04em; }
+
+    input, select, textarea {
+      padding: 10px 14px;
+      border: 1.5px solid #dde3ee;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--navy); }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 18px 0 8px;
+      border-bottom: 2px solid var(--cream);
+      margin-bottom: 16px;
+    }
+
+    .price-row {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .price-row .field { flex: 1; min-width: 140px; }
+
+    .price-result {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+    .price-result span { font-size: .85rem; opacity: .8; }
+    .price-result strong { font-size: 1.5rem; font-weight: 700; }
+    .price-result .margin { font-size: .8rem; background: rgba(255,255,255,.15); padding: 4px 10px; border-radius: 20px; }
+
+    .btn-generate {
+      width: 100%;
+      padding: 14px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background .2s;
+    }
+    .btn-generate:hover { background: #0f2547; }
+
+    /* ── QUOTE PREVIEW ──────────────────────────────────── */
+    .quote-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      display: none;
+    }
+    .quote-wrap.visible { display: block; }
+
+    .quote-actions {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .quote-actions button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-print  { background: var(--navy); color: #fff; }
+    .btn-edit   { background: #fff; color: var(--navy); border: 2px solid var(--navy); }
+
+    /* ── THE ACTUAL QUOTE (matches PDF style) ───────────── */
+    #quote {
+      background: #fff;
+      padding: 48px 52px;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.1);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1a1a2e;
+    }
+
+    .q-logo {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .q-logo-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--navy);
+      color: #fff;
+      padding: 14px 24px 10px;
+      border-radius: 16px;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.1;
+    }
+    .q-logo-box .nos    { font-size: 1.5rem; font-weight: 700; }
+    .q-logo-box .fuimos { font-size: 1.5rem; font-weight: 700; letter-spacing: .05em; }
+    .q-logo-box .cba    { font-size: .95rem; letter-spacing: .2em; opacity: .85; margin-top: 2px; }
+    .q-logo-box .plane  { font-size: 1.2rem; margin-bottom: 4px; }
+
+    .q-summary { margin-bottom: 20px; }
+    .q-summary p { margin-bottom: 4px; }
+    .q-summary p strong { font-weight: 600; }
+    .q-summary a { color: var(--navy); }
+
+    .q-price-block {
+      font-style: italic;
+      margin: 16px 0 20px;
+      line-height: 1.9;
+    }
+    .q-price-block .price-line {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .q-segment { margin-bottom: 24px; }
+
+    .q-segment-title {
+      font-weight: 700;
+      font-size: .95rem;
+      border-bottom: 1.5px solid #1a1a2e;
+      padding-bottom: 4px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .q-segment-title .airline-badge {
+      font-style: italic;
+      font-size: .85rem;
+      opacity: .7;
+    }
+
+    .q-flight-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 4px 0;
+    }
+    .q-flight-icon {
+      color: var(--navy);
+      font-size: 1.1rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .q-flight-detail { flex: 1; }
+    .q-flight-detail .route {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .q-flight-detail .times {
+      color: #444;
+      font-size: .9rem;
+      margin-top: 2px;
+    }
+    .q-flight-detail .duration {
+      font-size: .82rem;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .q-contact {
+      text-align: center;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #dde;
+      font-size: .9rem;
+      line-height: 2;
+      font-weight: 600;
+    }
+
+    /* ── PRINT STYLES ───────────────────────────────────── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .panel, .quote-actions, .btn-generate { display: none !important; }
+      .quote-wrap { display: block !important; max-width: 100%; margin: 0; }
+      #quote {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 32px 40px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      #quote { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── INPUT FORM ─────────────────────────────────────── -->
+<div class="panel" id="formPanel">
+  <div class="panel-header">✈️ &nbsp;Generador de Cotizaciones — Nos Fuimos CBA</div>
+  <div class="panel-body">
+
+    <div class="section-label">Datos del cliente</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Nombre del cliente</label>
+        <input id="fCliente" type="text" placeholder="Ej: Lucio Ferez" />
+      </div>
+      <div class="field">
+        <label>Aerolínea</label>
+        <input id="fAerolinea" type="text" placeholder="Ej: Air Europa" />
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">Tramo de ida</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Origen</label>
+        <input id="fOrigenNombre" type="text" placeholder="Córdoba" />
+      </div>
+      <div class="field">
+        <label>Código IATA origen</label>
+        <input id="fOrigenIATA" type="text" placeholder="COR" maxlength="3" style="text-transform:uppercase" />
+      </div>
+      <div class="field">
+        <label>Destino</label>
+        <input id="fDestinoNombre" type="text" placeholder="Madrid" />
+      </div>
+      <div class="field">
+        <label>Código IATA destino</label>
+        <input id="fDestinoIATA" type="text" placeholder="MAD" maxlength="3" style="text-transform:uppercase" />
+      </div>
+      <div class="field">
+        <label>Fecha de ida</label>
+        <input id="fFechaIda" type="date" />
+      </div>
+      <div class="field">
+        <label>Tipo</label>
+        <select id="fTipo">
+          <option value="roundtrip">Ida y vuelta</option>
+          <option value="oneway">Solo ida</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Hora salida ida</label>
+        <input id="fSalidaIda" type="time" />
+      </div>
+      <div class="field">
+        <label>Hora llegada ida</label>
+        <input id="fLlegadaIda" type="time" />
+      </div>
+      <div class="field full">
+        <label>Duración vuelo de ida</label>
+        <input id="fDuracionIda" type="text" placeholder="Ej: 12 h 5 min" />
+      </div>
+    </div>
+
+    <div id="vueltaSection">
+      <div class="section-label" style="margin-top:20px">Tramo de vuelta</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Fecha de vuelta</label>
+          <input id="fFechaVuelta" type="date" />
+        </div>
+        <div class="field">
+          <label>Duración vuelo de vuelta</label>
+          <input id="fDuracionVuelta" type="text" placeholder="Ej: 12 h 40 min" />
+        </div>
+        <div class="field">
+          <label>Hora salida vuelta</label>
+          <input id="fSalidaVuelta" type="time" />
+        </div>
+        <div class="field">
+          <label>Hora llegada vuelta</label>
+          <input id="fLlegadaVuelta" type="time" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">Tarifa e incluye</div>
+    <div class="grid-2">
+      <div class="field full">
+        <label>Descripción de lo que incluye</label>
+        <input id="fIncluye" type="text" value="Tarifa con impuestos, equipaje de mano hasta 12kg en la ida y vuelta." />
+      </div>
+      <div class="field full">
+        <label>Válido hasta</label>
+        <input id="fValidez" type="text" placeholder="Ej: que finalice el cupo promocional" value="que finalice el cupo promocional" />
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:20px">Precio</div>
+    <div class="price-row">
+      <div class="field">
+        <label>Precio base (USD/persona)</label>
+        <input id="fPrecioBase" type="number" placeholder="Ej: 455" min="0" step="1" />
+      </div>
+      <div class="field">
+        <label>Moneda</label>
+        <select id="fMoneda">
+          <option value="USD">USD</option>
+          <option value="ARS">ARS</option>
+          <option value="EUR">EUR</option>
+        </select>
+      </div>
+    </div>
+    <div class="price-result" id="priceResult" style="display:none">
+      <div>
+        <span>Precio cotización por persona</span><br/>
+        <strong id="priceOutput">—</strong>
+      </div>
+      <div class="margin" id="marginOutput"></div>
+    </div>
+
+    <button class="btn-generate" onclick="generateQuote()">Generar cotización ↓</button>
+  </div>
+</div>
+
+<!-- ── QUOTE OUTPUT ────────────────────────────────────── -->
+<div class="quote-wrap" id="quoteWrap">
+  <div class="quote-actions">
+    <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+    <button class="btn-edit"  onclick="editQuote()">✏️ Editar</button>
+  </div>
+
+  <div id="quote">
+    <div class="q-logo">
+      <div class="q-logo-box">
+        <div class="plane">✈</div>
+        <div class="nos">Nos</div>
+        <div class="fuimos">fuimos</div>
+        <div class="cba">CBA</div>
+      </div>
+    </div>
+
+    <div class="q-summary" id="qSummary"></div>
+    <div class="q-price-block" id="qPriceBlock"></div>
+    <div id="qIda" class="q-segment"></div>
+    <div id="qVuelta" class="q-segment"></div>
+
+    <div class="q-contact">
+      -Instagram: <a href="https://instagram.com/nosfuimos.cba">@nosfuimos.cba</a><br/>
+      -Mail: <a href="mailto:nosfuimos.cba@gmail.com">nosfuimos.cba@gmail.com</a><br/>
+      -Wpp: <a href="https://wa.me/5493518060947">+54 9 351 8060947</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Mostrar/ocultar vuelta según tipo ────────────────────
+  document.getElementById('fTipo').addEventListener('change', function() {
+    document.getElementById('vueltaSection').style.display =
+      this.value === 'oneway' ? 'none' : '';
+  });
+
+  // ── Calcular precio redondeado en tiempo real ────────────
+  document.getElementById('fPrecioBase').addEventListener('input', updatePrice);
+  document.getElementById('fMoneda').addEventListener('change', updatePrice);
+
+  function calcRoundedPrice(raw) {
+    // Redondea hacia arriba al próximo múltiplo de 50, con mínimo $50 de margen
+    return Math.ceil((raw + 50) / 50) * 50;
+  }
+
+  function updatePrice() {
+    const raw = parseFloat(document.getElementById('fPrecioBase').value);
+    const moneda = document.getElementById('fMoneda').value;
+    const result = document.getElementById('priceResult');
+    if (!raw || raw <= 0) { result.style.display = 'none'; return; }
+    const rounded = calcRoundedPrice(raw);
+    const margin  = rounded - raw;
+    document.getElementById('priceOutput').textContent = `${rounded.toLocaleString()} ${moneda}`;
+    document.getElementById('marginOutput').textContent = `+${margin} ${moneda} margen`;
+    result.style.display = 'flex';
+  }
+
+  // ── Helpers de formato ────────────────────────────────────
+  function formatDate(dateStr) {
+    if (!dateStr) return '';
+    const [y, m, d] = dateStr.split('-');
+    const months = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    return `${parseInt(d)} ${months[parseInt(m)-1]} ${y}`;
+  }
+
+  function formatDateFull(dateStr) {
+    if (!dateStr) return '';
+    const [y, m, d] = dateStr.split('-');
+    return `${d.padStart(2,'0')}/${m.padStart(2,'0')}/${y}`;
+  }
+
+  function dayOfWeek(dateStr) {
+    if (!dateStr) return '';
+    const days = ['dom','lun','mar','mié','jue','vie','sáb'];
+    const d = new Date(dateStr + 'T12:00:00');
+    return days[d.getDay()];
+  }
+
+  function formatTime(timeStr) {
+    if (!timeStr) return '';
+    const [h, m] = timeStr.split(':');
+    const hour = parseInt(h);
+    const ampm = hour >= 12 ? 'p.m.' : 'a.m.';
+    const hour12 = hour % 12 || 12;
+    return `${hour12}:${m} ${ampm}`;
+  }
+
+  // ── Generar cotización ────────────────────────────────────
+  function generateQuote() {
+    const aerolinea    = document.getElementById('fAerolinea').value || 'Aerolínea';
+    const origenNombre = document.getElementById('fOrigenNombre').value || 'Origen';
+    const origenIATA   = document.getElementById('fOrigenIATA').value.toUpperCase() || 'XXX';
+    const destinoNombre= document.getElementById('fDestinoNombre').value || 'Destino';
+    const destinoIATA  = document.getElementById('fDestinoIATA').value.toUpperCase() || 'YYY';
+    const fechaIda     = document.getElementById('fFechaIda').value;
+    const salidaIda    = document.getElementById('fSalidaIda').value;
+    const llegadaIda   = document.getElementById('fLlegadaIda').value;
+    const duracionIda  = document.getElementById('fDuracionIda').value || '';
+    const tipo         = document.getElementById('fTipo').value;
+    const fechaVuelta  = document.getElementById('fFechaVuelta').value;
+    const salidaVuelta = document.getElementById('fSalidaVuelta').value;
+    const llegadaVuelta= document.getElementById('fLlegadaVuelta').value;
+    const duracionVuelta= document.getElementById('fDuracionVuelta').value || '';
+    const incluye      = document.getElementById('fIncluye').value;
+    const validez      = document.getElementById('fValidez').value;
+    const rawPrice     = parseFloat(document.getElementById('fPrecioBase').value) || 0;
+    const moneda       = document.getElementById('fMoneda').value;
+    const price        = calcRoundedPrice(rawPrice);
+
+    // Summary
+    let summaryHtml = `<p>- <strong>Volando</strong> con <strong><u>${aerolinea}</u></strong> desde <strong>${origenNombre}</strong> hacia <strong>${destinoNombre}</strong> directo.</p>`;
+    if (tipo === 'roundtrip') {
+      summaryHtml += `<p>- <strong>Vuelta</strong> volando con <strong><u>${aerolinea}</u></strong> desde <strong>${destinoNombre}</strong> hacia <strong>${origenNombre}</strong> directo.</p>`;
+    }
+    document.getElementById('qSummary').innerHTML = summaryHtml;
+
+    // Price block
+    document.getElementById('qPriceBlock').innerHTML =
+      `${incluye}<br/><span class="price-line">Precio por persona ${price.toLocaleString()} ${moneda}</span><br/>Válido hasta ${validez}`;
+
+    // Ida segment
+    const idaHtml = `
+      <div class="q-segment-title">
+        IDA ${formatDateFull(fechaIda)} ${origenIATA}-${destinoIATA}
+        <span class="airline-badge">(${aerolinea})</span>
+      </div>
+      <div class="q-flight-row">
+        <div class="q-flight-icon">✈</div>
+        <div class="q-flight-detail">
+          <div class="route">Vuelo de ida · ${dayOfWeek(fechaIda)}, ${formatDate(fechaIda)}</div>
+          <div class="times">
+            ${salidaIda ? formatTime(salidaIda) + ' · ' + origenNombre + ' (' + origenIATA + ')' : ''}
+          </div>
+          ${duracionIda ? `<div class="duration">Tiempo de viaje: ${duracionIda}</div>` : ''}
+          <div class="times">
+            ${llegadaIda ? formatTime(llegadaIda) + ' · ' + destinoNombre + ' (' + destinoIATA + ')' : ''}
+          </div>
+        </div>
+      </div>`;
+    document.getElementById('qIda').innerHTML = idaHtml;
+
+    // Vuelta segment
+    if (tipo === 'roundtrip' && fechaVuelta) {
+      const vueltaHtml = `
+        <div class="q-segment-title">
+          VUELTA ${formatDateFull(fechaVuelta)} ${destinoIATA}-${origenIATA}
+          <span class="airline-badge">(${aerolinea})</span>
+        </div>
+        <div class="q-flight-row">
+          <div class="q-flight-icon">✈</div>
+          <div class="q-flight-detail">
+            <div class="route">Vuelo de regreso · ${dayOfWeek(fechaVuelta)}, ${formatDate(fechaVuelta)}</div>
+            <div class="times">
+              ${salidaVuelta ? formatTime(salidaVuelta) + ' · ' + destinoNombre + ' (' + destinoIATA + ')' : ''}
+            </div>
+            ${duracionVuelta ? `<div class="duration">Tiempo de viaje: ${duracionVuelta}</div>` : ''}
+            <div class="times">
+              ${llegadaVuelta ? formatTime(llegadaVuelta) + ' · ' + origenNombre + ' (' + origenIATA + ')' : ''}
+            </div>
+          </div>
+        </div>`;
+      document.getElementById('qVuelta').innerHTML = vueltaHtml;
+    } else {
+      document.getElementById('qVuelta').innerHTML = '';
+    }
+
+    document.getElementById('quoteWrap').classList.add('visible');
+    document.getElementById('quoteWrap').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function editQuote() {
+    document.getElementById('quoteWrap').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
