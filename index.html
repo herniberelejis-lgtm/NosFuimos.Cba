@@ -479,24 +479,24 @@
     }
 
     .ig-pill {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: white;
-      border: 1.5px solid rgba(27,63,122,0.12);
+      background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
       border-radius: 50px;
-      padding: 12px 18px;
-      font-size: 0.85rem;
+      padding: 12px 20px;
+      font-size: 0.88rem;
       font-weight: 600;
-      color: var(--navy);
+      color: white;
       text-decoration: none;
-      transition: box-shadow 0.2s, transform 0.2s;
-      box-shadow: 0 2px 10px rgba(27,63,122,0.06);
+      transition: box-shadow 0.2s, transform 0.2s, filter 0.2s;
+      box-shadow: 0 4px 18px rgba(131,58,180,0.35);
     }
 
     .ig-pill:hover {
-      box-shadow: 0 4px 18px rgba(27,63,122,0.14);
-      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(131,58,180,0.5);
+      transform: translateY(-2px);
+      filter: brightness(1.05);
     }
 
     .ig-pill svg { flex-shrink: 0; }
@@ -676,9 +676,80 @@
       text-align: center;
     }
 
-    /* Destination custom input */
-    .dest-other { display: none; margin-top: 12px; }
-    .dest-other.visible { display: block; }
+    /* Destination autocomplete */
+    .autocomplete-wrap { position: relative; }
+    .autocomplete-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0; right: 0;
+      background: white;
+      border: 1.5px solid rgba(27,63,122,0.15);
+      border-radius: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(27,63,122,0.13);
+    }
+    .autocomplete-list.open { display: block; }
+    .autocomplete-item {
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.12s;
+      border-bottom: 1px solid rgba(27,63,122,0.05);
+    }
+    .autocomplete-item:last-child { border-bottom: none; }
+    .autocomplete-item:hover, .autocomplete-item.ac-active {
+      background: rgba(27,63,122,0.06);
+    }
+    .autocomplete-item .ac-iata {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-family: monospace;
+      letter-spacing: 0.05em;
+      background: rgba(27,63,122,0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Flexible dates */
+    .flex-check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.88rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0 !important;
+      margin-bottom: 0 !important;
+      color: var(--text);
+      user-select: none;
+    }
+    .flex-check {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--navy);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .flex-opts {
+      display: none;
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: rgba(27,63,122,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(27,63,122,0.09);
+    }
+    .flex-opts.visible { display: block; }
+    .flex-row { display: flex; gap: 12px; align-items: flex-start; }
+    .flex-col { flex: 1; }
+    .flex-col label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px; }
+    .flex-col textarea { resize: vertical; min-height: 60px; }
 
     /* Submit */
     .btn-whatsapp {
@@ -1408,9 +1479,9 @@
           </div>
           <a class="ig-pill" href="https://instagram.com/nosfuimos.cba" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#1B3F7A" stroke-width="1.8"/>
-              <circle cx="12" cy="12" r="4" stroke="#1B3F7A" stroke-width="1.8"/>
-              <circle cx="17.5" cy="6.5" r="1" fill="#1B3F7A"/>
+              <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="white"/>
             </svg>
             Seguinos en @nosfuimos.cba
           </a>
@@ -1426,30 +1497,10 @@
 
           <!-- Destino -->
           <div class="form-group">
-            <label for="destino">Destino <span class="required">*</span></label>
-            <select id="destino" class="form-control" required onchange="handleDestino(this)">
-              <option value="">— Seleccioná un destino —</option>
-              <optgroup label="⭐ Más solicitados">
-                <option value="Miami, USA">🌴 Miami, USA</option>
-                <option value="Cancún, México">🏖️ Cancún, México</option>
-                <option value="Punta Cana, Rep. Dominicana">🌺 Punta Cana, Rep. Dominicana</option>
-                <option value="Panamá">🌉 Panamá</option>
-                <option value="Nueva York, USA">🗽 Nueva York, USA</option>
-                <option value="España">💃 España</option>
-              </optgroup>
-              <optgroup label="Otros destinos">
-                <option value="Orlando, USA">🎡 Orlando, USA</option>
-                <option value="París, Francia">🗼 París, Francia</option>
-                <option value="Roma, Italia">🏛️ Roma, Italia</option>
-                <option value="Lisboa, Portugal">🎸 Lisboa, Portugal</option>
-                <option value="Jamaica">🌊 Jamaica</option>
-                <option value="Cuba">🎶 Cuba</option>
-                <option value="Aruba">🏝️ Aruba</option>
-              </optgroup>
-              <option value="otro">✏️ Otro destino...</option>
-            </select>
-            <div class="dest-other" id="otroDestino">
-              <input type="text" id="otroDestinoInput" class="form-control" placeholder="¿A dónde querés ir?" />
+            <label for="destinoInput">Destino <span class="required">*</span></label>
+            <div class="autocomplete-wrap" id="destinoWrap">
+              <input type="text" id="destinoInput" class="form-control" placeholder="¿A dónde querés ir? Ej: Miami, Cancún, Europa…" autocomplete="off" />
+              <div class="autocomplete-list" id="destinoList"></div>
             </div>
           </div>
 
@@ -1489,6 +1540,32 @@
                 <option value="más de 15 días">Más de 15 días</option>
                 <option value="flexible">Soy flexible</option>
               </select>
+            </div>
+          </div>
+
+          <!-- Fechas flexibles -->
+          <div class="form-group" style="margin-top:-6px">
+            <label class="flex-check-label">
+              <input type="checkbox" id="fechaFlex" class="flex-check" />
+              <span>Mis fechas son flexibles</span>
+            </label>
+            <div class="flex-opts" id="flexOpts">
+              <div class="flex-row">
+                <div class="flex-col" style="max-width:160px">
+                  <label for="flexMargen">Margen de días (+/-)</label>
+                  <select id="flexMargen" class="form-control">
+                    <option value="2">± 2 días</option>
+                    <option value="3" selected>± 3 días</option>
+                    <option value="5">± 5 días</option>
+                    <option value="7">± 1 semana</option>
+                    <option value="15">± 2 semanas</option>
+                  </select>
+                </div>
+                <div class="flex-col">
+                  <label for="flexNota">¿Cuándo aproximadamente podés viajar?</label>
+                  <textarea id="flexNota" class="form-control" rows="2" placeholder="Ej: cualquier fin de semana largo de agosto, o entre julio y septiembre…"></textarea>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1866,22 +1943,76 @@
       'Tucumán · TUC — Benjamín Matienzo':                'TUC',
     };
 
-    // ── Mapeo de destinos a códigos IATA ─────────────────────────────
-    const DEST_IATA = {
-      'Miami, USA':                  'MIA',
-      'Cancún, México':              'CUN',
-      'Punta Cana, Rep. Dominicana': 'PUJ',
-      'Panamá':                      'PTY',
-      'Nueva York, USA':             'JFK',
-      'España':                      'MAD',
-      'Orlando, USA':                'MCO',
-      'París, Francia':              'CDG',
-      'Roma, Italia':                'FCO',
-      'Lisboa, Portugal':            'LIS',
-      'Jamaica':                     'KIN',
-      'Cuba':                        'HAV',
-      'Aruba':                       'AUA',
-    };
+    // ── Lista de destinos con IATA (autocomplete) ────────────────────
+    const DESTINATIONS = [
+      { e:'🌴', label:'Miami, USA',                   iata:'MIA' },
+      { e:'🏖️', label:'Cancún, México',               iata:'CUN' },
+      { e:'🌺', label:'Punta Cana, Rep. Dominicana',  iata:'PUJ' },
+      { e:'🌉', label:'Panamá',                        iata:'PTY' },
+      { e:'🗽', label:'Nueva York, USA',               iata:'JFK' },
+      { e:'💃', label:'Madrid, España',                iata:'MAD' },
+      { e:'🏟️', label:'Barcelona, España',             iata:'BCN' },
+      { e:'💃', label:'España',                        iata:'MAD' },
+      { e:'🎡', label:'Orlando, USA',                  iata:'MCO' },
+      { e:'🗼', label:'París, Francia',                iata:'CDG' },
+      { e:'🏛️', label:'Roma, Italia',                  iata:'FCO' },
+      { e:'👗', label:'Milán, Italia',                 iata:'MXP' },
+      { e:'🚣', label:'Venecia, Italia',               iata:'VCE' },
+      { e:'🎸', label:'Lisboa, Portugal',              iata:'LIS' },
+      { e:'🌊', label:'Jamaica',                       iata:'KIN' },
+      { e:'🎶', label:'Cuba',                          iata:'HAV' },
+      { e:'🎶', label:'La Habana, Cuba',               iata:'HAV' },
+      { e:'🏝️', label:'Aruba',                         iata:'AUA' },
+      { e:'🎬', label:'Los Ángeles, USA',              iata:'LAX' },
+      { e:'🎰', label:'Las Vegas, USA',                iata:'LAS' },
+      { e:'🏙️', label:'Chicago, USA',                  iata:'ORD' },
+      { e:'🇺🇸', label:'Estados Unidos',               iata:'MIA' },
+      { e:'🇲🇽', label:'México',                       iata:'MEX' },
+      { e:'🌮', label:'Ciudad de México',              iata:'MEX' },
+      { e:'🇨🇴', label:'Colombia',                     iata:'BOG' },
+      { e:'🇨🇴', label:'Bogotá, Colombia',             iata:'BOG' },
+      { e:'🌸', label:'Medellín, Colombia',            iata:'MDE' },
+      { e:'🏰', label:'Cartagena, Colombia',           iata:'CTG' },
+      { e:'🇵🇪', label:'Lima, Perú',                   iata:'LIM' },
+      { e:'🏔️', label:'Cusco, Perú',                   iata:'CUZ' },
+      { e:'🇨🇱', label:'Santiago, Chile',              iata:'SCL' },
+      { e:'🇧🇷', label:'São Paulo, Brasil',            iata:'GRU' },
+      { e:'🌊', label:'Río de Janeiro, Brasil',        iata:'GIG' },
+      { e:'🇺🇾', label:'Montevideo, Uruguay',          iata:'MVD' },
+      { e:'🇵🇾', label:'Asunción, Paraguay',           iata:'ASU' },
+      { e:'🌋', label:'Quito, Ecuador',                iata:'UIO' },
+      { e:'🌿', label:'San José, Costa Rica',          iata:'SJO' },
+      { e:'🏔️', label:'Guatemala',                     iata:'GUA' },
+      { e:'🏝️', label:'Nassau, Bahamas',               iata:'NAS' },
+      { e:'🌺', label:'Bridgetown, Barbados',          iata:'BGI' },
+      { e:'🌷', label:'Ámsterdam, Países Bajos',       iata:'AMS' },
+      { e:'🎡', label:'Londres, Reino Unido',          iata:'LHR' },
+      { e:'🏛️', label:'Berlín, Alemania',              iata:'BER' },
+      { e:'🎼', label:'Viena, Austria',                iata:'VIE' },
+      { e:'⛰️', label:'Zurich, Suiza',                 iata:'ZRH' },
+      { e:'🏰', label:'Praga, República Checa',        iata:'PRG' },
+      { e:'🏛️', label:'Atenas, Grecia',                iata:'ATH' },
+      { e:'🌅', label:'Santorini, Grecia',             iata:'JTR' },
+      { e:'🕌', label:'Estambul, Turquía',             iata:'IST' },
+      { e:'⛩️', label:'Tokio, Japón',                  iata:'NRT' },
+      { e:'🇰🇷', label:'Seúl, Corea del Sur',          iata:'ICN' },
+      { e:'🌃', label:'Hong Kong',                     iata:'HKG' },
+      { e:'🦁', label:'Singapur',                      iata:'SIN' },
+      { e:'🏯', label:'Bangkok, Tailandia',            iata:'BKK' },
+      { e:'🏖️', label:'Phuket, Tailandia',             iata:'HKT' },
+      { e:'🌺', label:'Bali, Indonesia',               iata:'DPS' },
+      { e:'🏝️', label:'Maldivas',                      iata:'MLE' },
+      { e:'🏙️', label:'Dubai, Emiratos Árabes',        iata:'DXB' },
+      { e:'🏺', label:'El Cairo, Egipto',              iata:'CAI' },
+      { e:'🕌', label:'Marrakech, Marruecos',          iata:'RAK' },
+      { e:'🦁', label:'Johannesburgo, Sudáfrica',      iata:'JNB' },
+      { e:'🦘', label:'Sídney, Australia',             iata:'SYD' },
+      { e:'🍁', label:'Toronto, Canadá',               iata:'YYZ' },
+      { e:'🏔️', label:'Vancouver, Canadá',             iata:'YVR' },
+    ];
+
+    // ── Mapeo de destinos a códigos IATA (retrocompatibilidad) ────────
+    const DEST_IATA = Object.fromEntries(DESTINATIONS.map(d => [d.label, d.iata]));
 
     // ── Constructores de URL ──────────────────────────────────────────
     function buildSkyscanner(fromIata, toIata, fecha, adults, children) {
@@ -1925,17 +2056,77 @@
       document.getElementById(type + '-val').textContent = counts[type];
     }
 
-    // ── Destino "otro" ────────────────────────────────────────────────
-    function handleDestino(sel) {
-      document.getElementById('otroDestino').classList.toggle('visible', sel.value === 'otro');
+    // ── Autocomplete de destino ───────────────────────────────────────
+    let selectedDestIata = '';
+    const destinoInput = document.getElementById('destinoInput');
+    const destinoList  = document.getElementById('destinoList');
+
+    function normalize(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     }
 
-    // ── Pre-seleccionar destino ───────────────────────────────────────
-    function goForm(destino) {
-      const sel = document.getElementById('destino');
-      for (const opt of sel.options) {
-        if (opt.value === destino) { sel.value = destino; break; }
+    function renderSuggestions(q) {
+      if (!q) { destinoList.classList.remove('open'); return; }
+      const matches = DESTINATIONS.filter(d =>
+        normalize(d.label).includes(normalize(q)) ||
+        d.iata.toLowerCase().startsWith(q.toLowerCase())
+      ).slice(0, 9);
+      if (!matches.length) { destinoList.classList.remove('open'); return; }
+      destinoList.innerHTML = matches.map(d =>
+        `<div class="autocomplete-item" data-iata="${d.iata}" data-label="${d.label}">
+           <span>${d.e} ${d.label}</span>
+           <span class="ac-iata">${d.iata}</span>
+         </div>`
+      ).join('');
+      destinoList.classList.add('open');
+      destinoList.querySelectorAll('.autocomplete-item').forEach(item => {
+        item.addEventListener('mousedown', e => {
+          e.preventDefault();
+          destinoInput.value   = item.dataset.label;
+          selectedDestIata     = item.dataset.iata;
+          destinoList.classList.remove('open');
+        });
+      });
+    }
+
+    destinoInput.addEventListener('input', function() {
+      selectedDestIata = '';
+      renderSuggestions(this.value.trim());
+    });
+    destinoInput.addEventListener('blur', () => {
+      setTimeout(() => destinoList.classList.remove('open'), 160);
+    });
+    destinoInput.addEventListener('keydown', function(e) {
+      const items  = [...destinoList.querySelectorAll('.autocomplete-item')];
+      const active = destinoList.querySelector('.autocomplete-item.ac-active');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!active) { items[0]?.classList.add('ac-active'); }
+        else { active.classList.remove('ac-active'); (active.nextElementSibling || items[0]).classList.add('ac-active'); }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!active) { items.at(-1)?.classList.add('ac-active'); }
+        else { active.classList.remove('ac-active'); (active.previousElementSibling || items.at(-1)).classList.add('ac-active'); }
+      } else if (e.key === 'Enter' && active) {
+        e.preventDefault();
+        destinoInput.value = active.dataset.label;
+        selectedDestIata   = active.dataset.iata;
+        destinoList.classList.remove('open');
+      } else if (e.key === 'Escape') {
+        destinoList.classList.remove('open');
       }
+    });
+
+    // ── Fechas flexibles ──────────────────────────────────────────────
+    document.getElementById('fechaFlex').addEventListener('change', function() {
+      document.getElementById('flexOpts').classList.toggle('visible', this.checked);
+    });
+
+    // ── Pre-seleccionar destino desde las cards ───────────────────────
+    function goForm(destino) {
+      destinoInput.value = destino;
+      const found = DESTINATIONS.find(d => d.label === destino);
+      selectedDestIata = found ? found.iata : '';
       document.getElementById('cotiza').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -1943,9 +2134,7 @@
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const destino    = document.getElementById('destino').value;
-      const otroInput  = document.getElementById('otroDestinoInput').value.trim();
-      const destinoFin = destino === 'otro' ? otroInput : destino;
+      const destinoFin = document.getElementById('destinoInput').value.trim();
       const aeropuerto = document.getElementById('aeropuerto').value;
       const fecha      = document.getElementById('fechaSalida').value;
       const dias       = document.getElementById('cantDias').value;
@@ -1953,13 +2142,16 @@
       const nombre     = document.getElementById('nombre').value.trim();
       const whatsapp   = document.getElementById('whatsapp').value.trim();
       const notas      = document.getElementById('comentarios').value.trim();
+      const esFlex     = document.getElementById('fechaFlex').checked;
+      const flexMargen = document.getElementById('flexMargen').value;
+      const flexNota   = document.getElementById('flexNota').value.trim();
 
-      if (!destinoFin)  { alert('Por favor seleccioná un destino.');              return; }
-      if (!aeropuerto)  { alert('Por favor seleccioná el aeropuerto de salida.'); return; }
-      if (!fecha)       { alert('Por favor ingresá una fecha de salida.');         return; }
-      if (!dias)        { alert('Por favor seleccioná la cantidad de días.');      return; }
-      if (!nombre)      { alert('Por favor ingresá tu nombre.');                   return; }
-      if (!whatsapp)    { alert('Por favor ingresá tu WhatsApp.');                 return; }
+      if (!destinoFin)  { alert('Por favor escribí un destino.');                   return; }
+      if (!aeropuerto)  { alert('Por favor seleccioná el aeropuerto de salida.');   return; }
+      if (!fecha)       { alert('Por favor ingresá una fecha de salida.');           return; }
+      if (!dias)        { alert('Por favor seleccioná la cantidad de días.');        return; }
+      if (!nombre)      { alert('Por favor ingresá tu nombre.');                     return; }
+      if (!whatsapp)    { alert('Por favor ingresá tu WhatsApp.');                   return; }
 
       const fechaFmt = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
         day: 'numeric', month: 'long', year: 'numeric'
@@ -1967,7 +2159,7 @@
 
       // Códigos IATA
       const fromIata = AIRPORT_IATA[aeropuerto] || '';
-      const toIata   = DEST_IATA[destinoFin]    || '';
+      const toIata   = selectedDestIata || DEST_IATA[destinoFin] || '';
       const fromCity = aeropuerto.split('·')[0].trim();
 
       // URLs pre-armadas para el agente
@@ -1983,7 +2175,8 @@
         ``,
         `🌍 *Destino:* ${destinoFin}`,
         `🛫 *Aeropuerto de salida:* ${aeropuerto}`,
-        `📅 *Fecha de salida:* ${fechaFmt}`,
+        `📅 *Fecha de salida:* ${fechaFmt}${esFlex ? ` _(flexible ± ${flexMargen} días)_` : ''}`,
+        esFlex && flexNota ? `🗓️ *Flexibilidad:* ${flexNota}` : '',
         `⏳ *Duración:* ${dias}`,
         ``,
         `👥 *Pasajeros:*`,
@@ -2007,11 +2200,12 @@
         '',
         `🌎 *Destino:* ${destinoFin}`,
         `🛫 *Sale desde:* ${aeropuerto}`,
-        `📅 *Fecha:* ${fechaFmt}`,
+        `📅 *Fecha:* ${fechaFmt}${esFlex ? ` _(flexible ± ${flexMargen} días)_` : ''}`,
         `📆 *Duración:* ${dias} días`,
         `🧳 *Equipaje:* ${equipaje}`,
         `👥 *Pasajeros:* ${counts.adultos} adulto${counts.adultos > 1 ? 's' : ''}${counts.menores > 0 ? `, ${counts.menores} menor${counts.menores > 1 ? 'es' : ''}` : ''}`,
       ];
+      if (esFlex && flexNota) tgLines.push(`🗓️ *Cuándo:* ${flexNota}`);
       if (notas) tgLines.push('', `💬 *Comentarios:* ${notas}`);
       if (skyscannerUrl)    tgLines.push('', `✈️ Skyscanner: ${skyscannerUrl}`);
       if (googleFlightsUrl) tgLines.push(`🔍 Google Flights: ${googleFlightsUrl}`);
