@@ -2310,32 +2310,30 @@
 
     // ── Constructores de URL ──────────────────────────────────────────
     function buildSkyscanner(fromIata, toIata, fecha, adults, children) {
-      if (!fromIata || !toIata) return '';
-      const d  = new Date(fecha + 'T00:00:00');
-      const yy = String(d.getFullYear()).slice(-2);
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      return `https://www.skyscanner.com.ar/transport/flights/${fromIata}/${toIata}/${yy}${mm}${dd}/?adults=${adults}&children=${children}&cabinclass=economy`;
+      if (!fromIata || !toIata || !fecha) return '';
+      const d    = new Date(fecha + 'T00:00:00');
+      const yyyy = d.getFullYear();
+      const mm   = String(d.getMonth() + 1).padStart(2, '0');
+      const dd   = String(d.getDate()).padStart(2, '0');
+      return `https://www.skyscanner.com.ar/transport/flights/${fromIata}/${toIata}/${yyyy}${mm}${dd}/?adults=${adults}&children=${children}&cabinclass=economy&currency=ARS`;
     }
 
     function buildDespegar(fromIata, toIata, fecha, adults, children) {
-      if (!fromIata || !toIata) return '';
-      const d  = new Date(fecha + 'T00:00:00');
-      const yy = d.getFullYear();
-      const mm = String(d.getMonth() + 1).padStart(2, '0');
-      const dd = String(d.getDate()).padStart(2, '0');
-      return `https://www.despegar.com.ar/vuelos/ofertas/${fromIata}/${toIata}/${yy}-${mm}-${dd}/1/${adults}/${children}/0/?from=SB`;
+      if (!fromIata || !toIata || !fecha) return '';
+      const d    = new Date(fecha + 'T00:00:00');
+      const yyyy = d.getFullYear();
+      const mm   = String(d.getMonth() + 1).padStart(2, '0');
+      const dd   = String(d.getDate()).padStart(2, '0');
+      return `https://www.despegar.com.ar/vuelos/ofertas/${fromIata}/${toIata}/${yyyy}-${mm}-${dd}/1/${adults}/${children}/0/?from=SB`;
     }
 
     function buildGoogleFlights(fromIata, toIata, fromCity, toCity, fechaFmt, adults, children) {
-      if (fromIata && toIata) {
-        const pax = adults + (children > 0 ? `,${children}` : '');
-        return `https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA1LTAxagcIARIDQ09ScgcIARIDTUlBQAFIAXABggELCP___________wFAAUgB&hl=es-419&curr=ARS`
-          .replace('COR', fromIata).replace('MIA', toIata);
-      }
+      // Google Flights deep link con IATA + fecha ISO
+      const q = fromIata && toIata
+        ? `vuelos de ${fromIata} a ${toIata} ${fechaFmt}`
+        : `vuelos de ${fromCity} a ${toCity} ${fechaFmt}`;
       const pax = `${adults} adulto${adults > 1 ? 's' : ''}${children > 0 ? ` ${children} niño${children > 1 ? 's' : ''}` : ''}`;
-      const q   = `vuelos de ${fromCity} a ${toCity} ${fechaFmt} ${pax}`;
-      return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}&hl=es-419&curr=ARS`;
+      return `https://www.google.com/travel/flights?q=${encodeURIComponent(q + ' ' + pax)}&hl=es-419&gl=ar&curr=ARS`;
     }
 
     // ── Navbar scroll ──────────────────────────────────────────────────
