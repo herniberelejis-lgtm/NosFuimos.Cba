@@ -4,7 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nos Fuimos CBA | Agencia de Viajes en Córdoba</title>
-  <meta name="description" content="Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe. Cotizá fácil y rápido." />
+  <meta name="description" content="Agencia de viajes en Córdoba, Argentina. Cotizá vuelos a USA, Europa y Caribe de forma rápida y personalizada. Respuesta en menos de 24 h por WhatsApp. ¡Sin costo ni compromiso!" />
+  <link rel="canonical" href="https://nosfuimoscba.github.io/NosFuimos.Cba/" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://nosfuimoscba.github.io/NosFuimos.Cba/" />
+  <meta property="og:title"       content="Nos Fuimos CBA | Agencia de Viajes en Córdoba" />
+  <meta property="og:description" content="Cotizá tu viaje a USA, Europa o el Caribe desde Córdoba. Atención personalizada por WhatsApp. Sin costo ni compromiso." />
+  <meta property="og:image"       content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:locale"      content="es_AR" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Nos Fuimos CBA | Agencia de Viajes en Córdoba" />
+  <meta name="twitter:description" content="Cotizá tu viaje a USA, Europa o el Caribe desde Córdoba. Atención personalizada por WhatsApp." />
+  <meta name="twitter:image"       content="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" />
+
+  <!-- Schema.org TravelAgency -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Nos Fuimos CBA",
+    "description": "Agencia de viajes en Córdoba, Argentina. Vuelos a USA, Europa y Caribe con cotización personalizada por WhatsApp.",
+    "url": "https://nosfuimoscba.github.io/NosFuimos.Cba/",
+    "telephone": "+5493518060947",
+    "address": { "@type": "PostalAddress", "addressLocality": "Córdoba", "addressCountry": "AR" },
+    "sameAs": ["https://www.instagram.com/nosfuimos.cba/", "https://www.facebook.com/nosfuimos.cba"],
+    "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+5493518060947", "availableLanguage": "Spanish" }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -393,8 +422,6 @@
       align-items: start;
     }
 
-    .form-info {}
-
     .form-info .section-title { margin-bottom: 20px; }
 
     .form-info p {
@@ -445,6 +472,93 @@
       color: var(--text-light);
     }
 
+    .form-social-proof {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mini-testi {
+      background: var(--navy);
+      color: white;
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+
+    .mini-testi-stars {
+      color: #FFD700;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .mini-testi-text {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      font-style: italic;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 10px;
+    }
+
+    .mini-testi-author {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+
+    .ig-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s, filter 0.2s;
+      box-shadow: 0 4px 18px rgba(131,58,180,0.35);
+    }
+
+    .ig-pill:hover {
+      box-shadow: 0 6px 24px rgba(131,58,180,0.5);
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .ig-pill svg { flex-shrink: 0; }
+
+    .fb-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1877F2;
+      border-radius: 50px;
+      padding: 12px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+      transition: box-shadow 0.2s, transform 0.2s, filter 0.2s;
+      box-shadow: 0 4px 18px rgba(24,119,242,0.35);
+    }
+
+    .fb-pill:hover {
+      box-shadow: 0 6px 24px rgba(24,119,242,0.5);
+      transform: translateY(-2px);
+      filter: brightness(1.07);
+    }
+
+    .fb-pill svg { flex-shrink: 0; }
+
+    .social-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     /* ── The Form Card ── */
     .form-card {
       background: white;
@@ -466,9 +580,7 @@
       margin-bottom: 32px;
     }
 
-    .form-group {
-      margin-bottom: 22px;
-    }
+    .form-group { margin-bottom: 22px; }
 
     .form-group label {
       display: block;
@@ -479,10 +591,7 @@
       letter-spacing: 0.02em;
     }
 
-    .form-group label .required {
-      color: var(--navy);
-      margin-left: 2px;
-    }
+    .form-group label .required { color: var(--navy); margin-left: 2px; }
 
     .form-control {
       width: 100%;
@@ -527,9 +636,7 @@
       gap: 10px;
     }
 
-    .radio-option {
-      position: relative;
-    }
+    .radio-option { position: relative; }
 
     .radio-option input[type="radio"] {
       position: absolute;
@@ -627,13 +734,96 @@
       text-align: center;
     }
 
-    /* Destination custom input */
-    .dest-other {
+    /* Destination autocomplete */
+    .autocomplete-wrap { position: relative; }
+    .autocomplete-list {
       display: none;
-      margin-top: 12px;
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0; right: 0;
+      background: white;
+      border: 1.5px solid rgba(27,63,122,0.15);
+      border-radius: 12px;
+      max-height: 240px;
+      overflow-y: auto;
+      z-index: 200;
+      box-shadow: 0 8px 32px rgba(27,63,122,0.13);
+    }
+    .autocomplete-list.open { display: block; }
+    .autocomplete-item {
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.12s;
+      border-bottom: 1px solid rgba(27,63,122,0.05);
+    }
+    .autocomplete-item:last-child { border-bottom: none; }
+    .autocomplete-item:hover, .autocomplete-item.ac-active {
+      background: rgba(27,63,122,0.06);
+    }
+    .autocomplete-item .ac-iata {
+      margin-left: auto;
+      font-size: 0.72rem;
+      color: var(--text-light);
+      font-family: monospace;
+      letter-spacing: 0.05em;
+      background: rgba(27,63,122,0.07);
+      padding: 2px 6px;
+      border-radius: 4px;
     }
 
-    .dest-other.visible { display: block; }
+    /* Flexible dates */
+    .flex-check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 0.88rem !important;
+      font-weight: 500 !important;
+      letter-spacing: 0 !important;
+      margin-bottom: 0 !important;
+      color: var(--text);
+      user-select: none;
+    }
+    .flex-check {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--navy);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .flex-opts {
+      display: none;
+      margin-top: 14px;
+      padding: 16px 18px;
+      background: rgba(27,63,122,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(27,63,122,0.09);
+    }
+    .flex-opts.visible { display: block; }
+    .flex-row { display: flex; gap: 12px; align-items: flex-start; }
+    .flex-col { flex: 1; }
+    .flex-col label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-light); margin-bottom: 6px; }
+    .flex-col textarea { resize: vertical; min-height: 60px; }
+
+    /* Return date toggle */
+    .vuelta-toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-top: 8px;
+      user-select: none;
+    }
+    .vuelta-toggle-label input { accent-color: var(--navy); width: 15px; height: 15px; }
+    .vuelta-field { display: none; margin-top: 10px; }
+    .vuelta-field.visible { display: block; }
 
     /* Submit */
     .btn-whatsapp {
@@ -653,6 +843,7 @@
       margin-top: 8px;
       transition: transform 0.25s, box-shadow 0.25s;
       letter-spacing: 0.02em;
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-whatsapp:hover {
@@ -660,11 +851,7 @@
       box-shadow: 0 10px 32px rgba(37,211,102,0.4);
     }
 
-    .btn-whatsapp svg {
-      width: 22px;
-      height: 22px;
-      fill: white;
-    }
+    .btn-whatsapp svg { width: 22px; height: 22px; fill: white; }
 
     .form-disclaimer {
       text-align: center;
@@ -757,14 +944,9 @@
       margin-bottom: 4px;
     }
 
-    .dest-card.featured .dest-name { font-size: 2rem; }
-
     .dest-info {
       font-size: 0.82rem;
       color: rgba(255,255,255,0.75);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .dest-cta {
@@ -781,6 +963,7 @@
       opacity: 0;
       transform: translateY(-6px);
       transition: opacity 0.25s, transform 0.25s;
+      font-family: 'Inter', sans-serif;
     }
 
     .dest-card:hover .dest-cta {
@@ -800,9 +983,7 @@
       align-items: center;
     }
 
-    .features-visual {
-      position: relative;
-    }
+    .features-visual { position: relative; }
 
     .features-img {
       width: 100%;
@@ -814,8 +995,7 @@
 
     .features-float {
       position: absolute;
-      bottom: -24px;
-      right: -24px;
+      bottom: -24px; right: -24px;
       background: var(--navy);
       color: white;
       padding: 24px 28px;
@@ -899,7 +1079,6 @@
       background: var(--cream);
       border-radius: 20px;
       padding: 28px;
-      position: relative;
     }
 
     .testi-stars {
@@ -1034,21 +1213,12 @@
       margin-bottom: 32px;
     }
 
-    .footer-brand {}
-
     .footer-logo {
       display: flex;
       align-items: center;
       gap: 10px;
       text-decoration: none;
       margin-bottom: 16px;
-    }
-
-    .footer-logo img {
-      height: 40px;
-      border-radius: 50%;
-      background: white;
-      padding: 2px;
     }
 
     .footer-logo span {
@@ -1065,10 +1235,7 @@
       margin-bottom: 20px;
     }
 
-    .social-links {
-      display: flex;
-      gap: 10px;
-    }
+    .social-links { display: flex; gap: 10px; }
 
     .social-link {
       width: 36px;
@@ -1123,19 +1290,14 @@
       gap: 12px;
     }
 
-    .footer-bottom p {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.35);
-    }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
 
     /* ─── Floating WhatsApp ─────────────────────────────────────────── */
     .wa-float {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
+      bottom: 28px; right: 28px;
       z-index: 200;
-      width: 58px;
-      height: 58px;
+      width: 58px; height: 58px;
       background: var(--success);
       border-radius: 50%;
       display: flex;
@@ -1156,8 +1318,7 @@
 
     .wa-tooltip {
       position: absolute;
-      right: 68px;
-      top: 50%;
+      right: 68px; top: 50%;
       transform: translateY(-50%);
       background: var(--navy-dark);
       color: white;
@@ -1206,10 +1367,7 @@
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── Mobile ────────────────────────────────────────────────────── */
     @media (max-width: 1024px) {
@@ -1228,8 +1386,6 @@
       .form-card { padding: 32px 24px; }
       .form-row { grid-template-columns: 1fr; }
       .radio-group { grid-template-columns: repeat(3, 1fr); }
-
-      /* Evita zoom automático en iOS al enfocar inputs */
       .form-control { font-size: 16px; }
 
       .destinations-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1243,15 +1399,12 @@
       .stat-item:nth-child(2) { border-right: none; }
       .stat-item:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.1); }
 
-      /* Botón flotante WhatsApp más pequeño en mobile */
       .wa-float { width: 52px; height: 52px; bottom: 20px; right: 20px; }
       .wa-tooltip { display: none; }
 
-      /* Hero más compacto */
       .hero-buttons { flex-direction: column; align-items: center; }
       .btn-primary, .btn-secondary { width: 100%; max-width: 300px; justify-content: center; }
 
-      /* CTA band */
       .cta-buttons { flex-direction: column; align-items: center; }
       .btn-white, .btn-outline-white { width: 100%; max-width: 300px; justify-content: center; }
     }
@@ -1265,7 +1418,66 @@
       .dest-card { height: 260px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      /* Fix autocomplete dropdown mobile overflow */
+      .autocomplete-list {
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
     }
+
+    /* ─── Price Estimator ──────────────────────────────────────────── */
+    .price-estimate {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(27,63,122,0.06), rgba(27,63,122,0.03));
+      border: 1px solid rgba(27,63,122,0.15);
+      border-radius: 10px;
+      font-size: 0.88rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+    .price-estimate.visible { display: block; }
+    .price-estimate strong { color: var(--navy); }
+
+    /* ─── FAQ ──────────────────────────────────────────────────────── */
+    .faq-section { background: var(--cream); padding: 80px 5%; }
+    .faq-section .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,4vw,2.6rem); color: var(--navy); margin-bottom: 12px; }
+    .faq-section .section-subtitle { text-align: center; color: var(--text-light); font-size: 1.05rem; margin-bottom: 48px; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--white); border-radius: 12px; box-shadow: 0 2px 12px rgba(27,63,122,0.06); overflow: hidden; }
+    .faq-item input[type="checkbox"] { display: none; }
+    .faq-label {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 18px 22px; cursor: pointer; font-weight: 500; color: var(--navy);
+      font-size: 0.97rem; user-select: none;
+      transition: background 0.2s;
+    }
+    .faq-label:hover { background: rgba(27,63,122,0.04); }
+    .faq-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; transition: transform 0.3s; }
+    .faq-item input:checked ~ .faq-label .faq-icon { transform: rotate(45deg); }
+    .faq-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+      padding: 0 22px;
+      color: var(--text-light); font-size: 0.93rem; line-height: 1.7;
+    }
+    .faq-item input:checked ~ .faq-body { max-height: 300px; padding: 0 22px 18px; }
+
+    /* ─── Toast ────────────────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: #1a7a4a; color: white;
+      padding: 14px 26px; border-radius: 50px;
+      font-size: 0.95rem; font-weight: 500; white-space: nowrap;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      opacity: 0; pointer-events: none; z-index: 9999;
+      transition: opacity 0.35s, transform 0.35s;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @media (max-width: 480px) { .toast { white-space: normal; text-align: center; width: 88vw; } }
   </style>
 </head>
 <body>
@@ -1273,12 +1485,7 @@
   <!-- ─── NAVBAR ──────────────────────────────────────────────────── -->
   <nav class="nav" id="navbar">
     <a href="#" class="nav-logo">
-      <!-- Logo SVG inline como fallback; reemplazar por la imagen real del logo si se tiene -->
-      <svg width="44" height="44" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
-        <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
-        <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
-        <path d="M 10 22 Q 22 14 34 22" stroke="white" stroke-width="1.5" fill="none"/>
-      </svg>
+      <img src="logo.svg" alt="Nos Fuimos CBA" style="height:44px;width:44px;border-radius:50%;flex-shrink:0" />
       <div class="nav-logo-text">
         Nos Fuimos
         <span>Agencia de Viajes · CBA</span>
@@ -1297,13 +1504,13 @@
     </div>
   </nav>
 
-  <!-- Mobile menu (simple) -->
+  <!-- Mobile menu -->
   <div id="mobile-menu" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy-dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;">
     <a href="#cotiza" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Cotizá tu viaje</a>
     <a href="#destinos" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Destinos</a>
     <a href="#nosotros" onclick="toggleMenu()" style="color:white;text-decoration:none;font-size:1.3rem;font-weight:500">Nosotros</a>
     <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" style="background:var(--success);color:white;text-decoration:none;font-size:1rem;font-weight:600;padding:14px 36px;border-radius:50px">💬 Escribirnos por WhatsApp</a>
-    <button onclick="toggleMenu()" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.9rem;margin-top:8px">Cerrar ✕</button>
+    <button onclick="toggleMenu()" style="background:none;border:1px solid rgba(255,255,255,0.3);color:white;padding:10px 24px;border-radius:50px;cursor:pointer;font-size:0.9rem;font-family:inherit">Cerrar ✕</button>
   </div>
 
   <!-- ─── HERO ─────────────────────────────────────────────────────── -->
@@ -1321,12 +1528,8 @@
         Vuelos a USA, Europa y Caribe con las mejores ofertas.
       </p>
       <div class="hero-buttons">
-        <a href="#cotiza" class="btn-primary">
-          ✈️ Cotizá tu viaje gratis
-        </a>
-        <a href="#destinos" class="btn-secondary">
-          Ver destinos
-        </a>
+        <a href="#cotiza" class="btn-primary">✈️ Cotizá tu viaje gratis</a>
+        <a href="#destinos" class="btn-secondary">Ver destinos</a>
       </div>
     </div>
     <div class="hero-scroll">
@@ -1354,7 +1557,7 @@
     </div>
   </div>
 
-  <!-- ─── FORM SECTION ─────────────────────────────────────────────── -->
+  <!-- ─── FORM / CRM ───────────────────────────────────────────────── -->
   <section class="form-section" id="cotiza">
     <div class="form-wrapper">
 
@@ -1396,6 +1599,30 @@
             </div>
           </div>
         </div>
+
+        <div class="form-social-proof">
+          <div class="mini-testi">
+            <div class="mini-testi-stars">★★★★★</div>
+            <p class="mini-testi-text">"En pocas horas tenía mi paquete a Miami cotizado. Atención increíble, viaje soñado."</p>
+            <span class="mini-testi-author">— Florencia G., Córdoba Capital</span>
+          </div>
+          <div class="social-pills">
+            <a class="ig-pill" href="https://instagram.com/nosfuimos.cba" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="1.8"/>
+                <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+              </svg>
+              Instagram
+            </a>
+            <a class="fb-pill" href="https://www.facebook.com/nosfuimos.cba" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.268h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+              </svg>
+              Facebook
+            </a>
+          </div>
+        </div>
       </div>
 
       <!-- El formulario -->
@@ -1407,31 +1634,30 @@
 
           <!-- Destino -->
           <div class="form-group">
-            <label for="destino">Destino <span class="required">*</span></label>
-            <select id="destino" class="form-control" required onchange="handleDestino(this)">
-              <option value="">— Seleccioná un destino —</option>
-              <optgroup label="⭐ Más solicitados">
-                <option value="Miami, USA">🌴 Miami, USA</option>
-                <option value="Cancún, México">🏖️ Cancún, México</option>
-                <option value="Punta Cana, Rep. Dominicana">🌺 Punta Cana, Rep. Dominicana</option>
-                <option value="Panamá">🌉 Panamá</option>
-                <option value="Nueva York, USA">🗽 Nueva York, USA</option>
-                <option value="España">💃 España</option>
-              </optgroup>
-              <optgroup label="Otros destinos">
-                <option value="Orlando, USA">🎡 Orlando, USA</option>
-                <option value="París, Francia">🗼 París, Francia</option>
-                <option value="Roma, Italia">🏛️ Roma, Italia</option>
-                <option value="Lisboa, Portugal">🎸 Lisboa, Portugal</option>
-                <option value="Jamaica">🌊 Jamaica</option>
-                <option value="Cuba">🎶 Cuba</option>
-                <option value="Aruba">🏝️ Aruba</option>
-              </optgroup>
-              <option value="otro">✏️ Otro destino...</option>
-            </select>
-            <div class="dest-other" id="otroDestino">
-              <input type="text" id="otroDestinoInput" class="form-control" placeholder="¿A dónde querés ir?" />
+            <label for="destinoInput">Destino <span class="required">*</span></label>
+            <div class="autocomplete-wrap" id="destinoWrap">
+              <input type="text" id="destinoInput" class="form-control" placeholder="¿A dónde querés ir? Ej: Miami, Cancún, Europa…" autocomplete="off" />
+              <div class="autocomplete-list" id="destinoList"></div>
             </div>
+          </div>
+
+          <!-- Aeropuerto de salida -->
+          <div class="form-group">
+            <label for="aeropuerto">Aeropuerto de salida <span class="required">*</span></label>
+            <select id="aeropuerto" class="form-control" required>
+              <option value="">— Seleccioná el aeropuerto —</option>
+              <optgroup label="Argentina">
+                <option value="Córdoba · COR — Ambrosio Taravella">🏙️ Córdoba · COR — Ambrosio Taravella</option>
+                <option value="Buenos Aires · EZE — Ministro Pistarini (Ezeiza)">🌆 Buenos Aires · EZE — Ezeiza</option>
+                <option value="Buenos Aires · AEP — Jorge Newbery (Aeroparque)">🌃 Buenos Aires · AEP — Aeroparque</option>
+                <option value="Mendoza · MDZ — El Plumerillo">🏔️ Mendoza · MDZ</option>
+                <option value="Rosario · ROS — Islas Malvinas">🌿 Rosario · ROS</option>
+                <option value="Bariloche · BRC">⛷️ Bariloche · BRC</option>
+                <option value="Salta · SLA — Martín M. de Güemes">🌵 Salta · SLA</option>
+                <option value="Tucumán · TUC — Benjamín Matienzo">🌸 Tucumán · TUC</option>
+              </optgroup>
+              <option value="Otro aeropuerto">✏️ Otro aeropuerto...</option>
+            </select>
           </div>
 
           <!-- Fechas -->
@@ -1439,6 +1665,14 @@
             <div class="form-group">
               <label for="fechaSalida">Fecha de salida <span class="required">*</span></label>
               <input type="date" id="fechaSalida" class="form-control" required />
+              <label class="vuelta-toggle-label">
+                <input type="checkbox" id="idaVuelta" />
+                Agregar fecha de vuelta
+              </label>
+              <div class="vuelta-field" id="vueltaField">
+                <label for="fechaVuelta" style="font-size:0.82rem;font-weight:600;color:var(--text);display:block;margin-bottom:6px;margin-top:2px">Fecha de vuelta</label>
+                <input type="date" id="fechaVuelta" class="form-control" />
+              </div>
             </div>
             <div class="form-group">
               <label for="cantDias">Cantidad de días <span class="required">*</span></label>
@@ -1451,6 +1685,32 @@
                 <option value="más de 15 días">Más de 15 días</option>
                 <option value="flexible">Soy flexible</option>
               </select>
+            </div>
+          </div>
+
+          <!-- Fechas flexibles -->
+          <div class="form-group" style="margin-top:-6px">
+            <label class="flex-check-label">
+              <input type="checkbox" id="fechaFlex" class="flex-check" />
+              <span>Mis fechas son flexibles</span>
+            </label>
+            <div class="flex-opts" id="flexOpts">
+              <div class="flex-row">
+                <div class="flex-col" style="max-width:160px">
+                  <label for="flexMargen">Margen de días (+/-)</label>
+                  <select id="flexMargen" class="form-control">
+                    <option value="2">± 2 días</option>
+                    <option value="3" selected>± 3 días</option>
+                    <option value="5">± 5 días</option>
+                    <option value="7">± 1 semana</option>
+                    <option value="15">± 2 semanas</option>
+                  </select>
+                </div>
+                <div class="flex-col">
+                  <label for="flexNota">¿Cuándo aproximadamente podés viajar?</label>
+                  <textarea id="flexNota" class="form-control" rows="2" placeholder="Ej: cualquier fin de semana largo de agosto, o entre julio y septiembre…"></textarea>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1533,6 +1793,9 @@
             </svg>
             Enviar consulta por WhatsApp
           </button>
+
+          <!-- Price Estimator -->
+          <div class="price-estimate" id="priceEstimate"></div>
 
           <p class="form-disclaimer">
             Al enviar, serás redirigido a WhatsApp con tu consulta lista.<br/>
@@ -1624,7 +1887,7 @@
     </div>
   </section>
 
-  <!-- ─── NOSOTROS / FEATURES ──────────────────────────────────────── -->
+  <!-- ─── NOSOTROS ─────────────────────────────────────────────────── -->
   <section class="features" id="nosotros">
     <div class="features-inner">
       <div class="features-visual reveal">
@@ -1690,9 +1953,7 @@
       <div class="testimonials-grid">
         <div class="testi-card reveal" style="transition-delay:0.1s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."
-          </p>
+          <p class="testi-text">"Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."</p>
           <div class="testi-author">
             <div class="testi-avatar">SL</div>
             <div class="testi-info">
@@ -1704,9 +1965,7 @@
 
         <div class="testi-card reveal" style="transition-delay:0.2s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡Y el viaje superó todas las expectativas!"
-          </p>
+          <p class="testi-text">"La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡Y el viaje superó todas las expectativas!"</p>
           <div class="testi-author">
             <div class="testi-avatar">MR</div>
             <div class="testi-info">
@@ -1718,9 +1977,7 @@
 
         <div class="testi-card reveal" style="transition-delay:0.3s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">
-            "Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"
-          </p>
+          <p class="testi-text">"Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"</p>
           <div class="testi-author">
             <div class="testi-avatar">VG</div>
             <div class="testi-info">
@@ -1733,19 +1990,99 @@
     </div>
   </section>
 
+  <!-- ─── FAQ ─────────────────────────────────────────────────────── -->
+  <section class="faq-section" id="faq">
+    <h2 class="section-title reveal">Preguntas frecuentes</h2>
+    <p class="section-subtitle reveal">Todo lo que necesitás saber antes de cotizar</p>
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq1" />
+        <label class="faq-label" for="faq1">
+          ¿Cómo funciona la cotización?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          Completás el formulario con tu destino, fechas y cantidad de pasajeros. Al enviarlo, llegamos tu consulta por WhatsApp y también nos llega una notificación interna. En menos de 24&nbsp;h te mandamos opciones reales con precios.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq2" />
+        <label class="faq-label" for="faq2">
+          ¿Cuánto tarda en responderme?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          Nuestro tiempo de respuesta promedio es de 2 a 4&nbsp;horas en horario laboral. En días de alta demanda puede extenderse hasta 24&nbsp;h, pero siempre te confirmamos que recibimos tu consulta.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq3" />
+        <label class="faq-label" for="faq3">
+          ¿Puedo pagar en cuotas?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          Sí. Trabajamos con múltiples medios de pago. Dependiendo de la aerolínea y la tarjeta podés acceder a cuotas con o sin interés. Te detallamos las opciones disponibles en tu cotización.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq4" />
+        <label class="faq-label" for="faq4">
+          ¿Hacen paquetes con hotel incluido?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          ¡Sí! Podemos armar paquetes completos: vuelo + hotel, y si querés, también traslados y excursiones. Indicalo en el campo de comentarios del formulario y te cotizamos todo junto.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq5" />
+        <label class="faq-label" for="faq5">
+          ¿Viajan desde Córdoba capital?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          Sí, somos una agencia con base en Córdoba y conocemos muy bien los vuelos que salen desde el Aeropuerto Internacional Ambrosio Taravella (COR). También podemos cotizar salidas desde Buenos Aires, Rosario o Mendoza si te conviene más.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq6" />
+        <label class="faq-label" for="faq6">
+          ¿Qué pasa si necesito cambiar las fechas?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          Antes de confirmar y pagar, las fechas se pueden ajustar sin costo. Una vez emitidos los tickets, cada aerolínea tiene su propia política de cambios. Te asesoramos sobre eso en el momento de la compra para que no haya sorpresas.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <input type="checkbox" id="faq7" />
+        <label class="faq-label" for="faq7">
+          ¿Tiene algún costo cotizar?
+          <span class="faq-icon">+</span>
+        </label>
+        <div class="faq-body">
+          No, la cotización es completamente gratuita y sin compromiso. Solo pagás si decidís confirmar el viaje.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ─── CTA BAND ─────────────────────────────────────────────────── -->
   <div class="cta-band">
     <h2>¿Listo para volar? ✈️</h2>
-    <p>
-      No esperes más. Cotizá tu viaje gratis y en minutos tenés nuestra propuesta en tu WhatsApp.
-    </p>
+    <p>No esperes más. Cotizá tu viaje gratis y en minutos tenés nuestra propuesta en tu WhatsApp.</p>
     <div class="cta-buttons">
-      <a href="#cotiza" class="btn-white">
-        ✈️ Cotizar ahora
-      </a>
-      <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="btn-outline-white">
-        💬 Hablar por WhatsApp
-      </a>
+      <a href="#cotiza" class="btn-white">✈️ Cotizar ahora</a>
+      <a href="https://wa.me/5493518060947?text=Hola!%20quiero%20cotizar%20un%20viaje%20%E2%9C%88%EF%B8%8F" target="_blank" class="btn-outline-white">💬 Hablar por WhatsApp</a>
     </div>
   </div>
 
@@ -1754,16 +2091,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="footer-logo">
-          <svg width="36" height="36" viewBox="0 0 44 44" style="background:white;border-radius:50%;padding:3px">
-            <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
-            <text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
-          </svg>
+          <img src="logo.svg" alt="Nos Fuimos CBA" style="height:36px;width:36px;border-radius:50%" />
           <span>Nos Fuimos CBA</span>
         </a>
-        <p>
-          Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe con las mejores ofertas.
-          Cotizá fácil por WhatsApp.
-        </p>
+        <p>Agencia de viajes en Córdoba. Vuelos a USA, Europa y Caribe con las mejores ofertas. Cotizá fácil por WhatsApp.</p>
         <div class="social-links">
           <a href="https://www.instagram.com/nosfuimos.cba/" target="_blank" class="social-link" title="Instagram">📷</a>
           <a href="https://wa.me/5493518060947" target="_blank" class="social-link" title="WhatsApp">💬</a>
@@ -1774,12 +2105,12 @@
       <div class="footer-col">
         <h4>Destinos</h4>
         <ul>
-          <li><a href="#destinos" onclick="goForm('Miami, USA')">Miami</a></li>
-          <li><a href="#destinos" onclick="goForm('Cancún, México')">Cancún</a></li>
-          <li><a href="#destinos" onclick="goForm('Punta Cana, Rep. Dominicana')">Punta Cana</a></li>
-          <li><a href="#destinos" onclick="goForm('Panamá')">Panamá</a></li>
-          <li><a href="#destinos" onclick="goForm('Nueva York, USA')">Nueva York</a></li>
-          <li><a href="#destinos" onclick="goForm('España')">España</a></li>
+          <li><a href="#cotiza" onclick="goForm('Miami, USA')">Miami</a></li>
+          <li><a href="#cotiza" onclick="goForm('Cancún, México')">Cancún</a></li>
+          <li><a href="#cotiza" onclick="goForm('Punta Cana, Rep. Dominicana')">Punta Cana</a></li>
+          <li><a href="#cotiza" onclick="goForm('Panamá')">Panamá</a></li>
+          <li><a href="#cotiza" onclick="goForm('Nueva York, USA')">Nueva York</a></li>
+          <li><a href="#cotiza" onclick="goForm('España')">España</a></li>
         </ul>
       </div>
 
@@ -1817,31 +2148,214 @@
     <span class="wa-tooltip">¡Escribinos ahora!</span>
   </a>
 
+  <!-- Toast notification -->
+  <div class="toast" id="toast">¡Consulta enviada! Te respondemos en menos de 24 h 🎉</div>
+
   <!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
   <script>
-    // ── IMPORTANTE: Reemplazá este número por el número de WhatsApp real de la agencia
-    // Formato: código de país (54) + código de área sin 0 (351) + número sin 15
+    // ── Configuración ──────────────────────────────────────────────────
     const WA_NUMBER = '5493518060947';
 
-    // ── Navbar scroll ──
+    // Worker de Cloudflare que envía las notificaciones a Telegram de forma segura.
+    // El token del bot queda guardado en Cloudflare, no en este archivo.
+    // Desplegá telegram-worker/worker.js en Cloudflare Workers y pegá la URL acá.
+    const TG_WORKER_URL = 'https://morning-dew-4507.cafecitosfinanciero.workers.dev';
+
+    // URL donde está hosteado el sitio (para links al cotizador)
+    // Ejemplo: 'https://nosfuimoscba.github.io/NosFuimos.Cba'
+    const SITE_URL = 'https://nosfuimoscba.github.io/NosFuimos.Cba';
+
+    // ── Mapeo de aeropuertos a códigos IATA ───────────────────────────
+    const AIRPORT_IATA = {
+      'Córdoba · COR — Ambrosio Taravella':               'COR',
+      'Buenos Aires · EZE — Ministro Pistarini (Ezeiza)': 'EZE',
+      'Buenos Aires · AEP — Jorge Newbery (Aeroparque)':  'AEP',
+      'Mendoza · MDZ — El Plumerillo':                    'MDZ',
+      'Rosario · ROS — Islas Malvinas':                   'ROS',
+      'Bariloche · BRC':                                  'BRC',
+      'Salta · SLA — Martín M. de Güemes':                'SLA',
+      'Tucumán · TUC — Benjamín Matienzo':                'TUC',
+    };
+
+    // ── Lista de destinos con IATA (autocomplete) ────────────────────
+    const DESTINATIONS = [
+      { e:'🌴', label:'Miami, USA',                   iata:'MIA' },
+      { e:'🏖️', label:'Cancún, México',               iata:'CUN' },
+      { e:'🌺', label:'Punta Cana, Rep. Dominicana',  iata:'PUJ' },
+      { e:'🌉', label:'Panamá',                        iata:'PTY' },
+      { e:'🗽', label:'Nueva York, USA',               iata:'JFK' },
+      { e:'💃', label:'Madrid, España',                iata:'MAD' },
+      { e:'🏟️', label:'Barcelona, España',             iata:'BCN' },
+      { e:'💃', label:'España',                        iata:'MAD' },
+      { e:'🎡', label:'Orlando, USA',                  iata:'MCO' },
+      { e:'🗼', label:'París, Francia',                iata:'CDG' },
+      { e:'🏛️', label:'Roma, Italia',                  iata:'FCO' },
+      { e:'👗', label:'Milán, Italia',                 iata:'MXP' },
+      { e:'🚣', label:'Venecia, Italia',               iata:'VCE' },
+      { e:'🎸', label:'Lisboa, Portugal',              iata:'LIS' },
+      { e:'🌊', label:'Jamaica',                       iata:'KIN' },
+      { e:'🎶', label:'Cuba',                          iata:'HAV' },
+      { e:'🎶', label:'La Habana, Cuba',               iata:'HAV' },
+      { e:'🏝️', label:'Aruba',                         iata:'AUA' },
+      { e:'🎬', label:'Los Ángeles, USA',              iata:'LAX' },
+      { e:'🎰', label:'Las Vegas, USA',                iata:'LAS' },
+      { e:'🏙️', label:'Chicago, USA',                  iata:'ORD' },
+      { e:'🇺🇸', label:'Estados Unidos',               iata:'MIA' },
+      { e:'🇲🇽', label:'México',                       iata:'MEX' },
+      { e:'🌮', label:'Ciudad de México',              iata:'MEX' },
+      { e:'🇨🇴', label:'Colombia',                     iata:'BOG' },
+      { e:'🇨🇴', label:'Bogotá, Colombia',             iata:'BOG' },
+      { e:'🌸', label:'Medellín, Colombia',            iata:'MDE' },
+      { e:'🏰', label:'Cartagena, Colombia',           iata:'CTG' },
+      { e:'🇵🇪', label:'Lima, Perú',                   iata:'LIM' },
+      { e:'🏔️', label:'Cusco, Perú',                   iata:'CUZ' },
+      { e:'🇨🇱', label:'Santiago, Chile',              iata:'SCL' },
+      { e:'🇧🇷', label:'São Paulo, Brasil',            iata:'GRU' },
+      { e:'🌊', label:'Río de Janeiro, Brasil',        iata:'GIG' },
+      { e:'🇺🇾', label:'Montevideo, Uruguay',          iata:'MVD' },
+      { e:'🇵🇾', label:'Asunción, Paraguay',           iata:'ASU' },
+      { e:'🌋', label:'Quito, Ecuador',                iata:'UIO' },
+      { e:'🌿', label:'San José, Costa Rica',          iata:'SJO' },
+      { e:'🏔️', label:'Guatemala',                     iata:'GUA' },
+      { e:'🏝️', label:'Nassau, Bahamas',               iata:'NAS' },
+      { e:'🌺', label:'Bridgetown, Barbados',          iata:'BGI' },
+      { e:'🌷', label:'Ámsterdam, Países Bajos',       iata:'AMS' },
+      { e:'🎡', label:'Londres, Reino Unido',          iata:'LHR' },
+      { e:'🏛️', label:'Berlín, Alemania',              iata:'BER' },
+      { e:'🎼', label:'Viena, Austria',                iata:'VIE' },
+      { e:'⛰️', label:'Zurich, Suiza',                 iata:'ZRH' },
+      { e:'🏰', label:'Praga, República Checa',        iata:'PRG' },
+      { e:'🏛️', label:'Atenas, Grecia',                iata:'ATH' },
+      { e:'🌅', label:'Santorini, Grecia',             iata:'JTR' },
+      { e:'🕌', label:'Estambul, Turquía',             iata:'IST' },
+      { e:'⛩️', label:'Tokio, Japón',                  iata:'NRT' },
+      { e:'🇰🇷', label:'Seúl, Corea del Sur',          iata:'ICN' },
+      { e:'🌃', label:'Hong Kong',                     iata:'HKG' },
+      { e:'🦁', label:'Singapur',                      iata:'SIN' },
+      { e:'🏯', label:'Bangkok, Tailandia',            iata:'BKK' },
+      { e:'🏖️', label:'Phuket, Tailandia',             iata:'HKT' },
+      { e:'🌺', label:'Bali, Indonesia',               iata:'DPS' },
+      { e:'🏝️', label:'Maldivas',                      iata:'MLE' },
+      { e:'🏙️', label:'Dubai, Emiratos Árabes',        iata:'DXB' },
+      { e:'🏺', label:'El Cairo, Egipto',              iata:'CAI' },
+      { e:'🕌', label:'Marrakech, Marruecos',          iata:'RAK' },
+      { e:'🦁', label:'Johannesburgo, Sudáfrica',      iata:'JNB' },
+      { e:'🦘', label:'Sídney, Australia',             iata:'SYD' },
+      { e:'🍁', label:'Toronto, Canadá',               iata:'YYZ' },
+      { e:'🏔️', label:'Vancouver, Canadá',             iata:'YVR' },
+    ];
+
+    // ── Mapeo de destinos a códigos IATA (retrocompatibilidad) ────────
+    const DEST_IATA = Object.fromEntries(DESTINATIONS.map(d => [d.label, d.iata]));
+
+    // ── Info por destino (para Telegram + price estimator) ───────────
+    const DEST_TIPS = {
+      'Miami, USA':                  { visa:'⚠️ ESTA requerida (US$21)',   temp:'Nov – Abr', vuelo:'~11 h', precio:'US$ 700 – 1.200' },
+      'Cancún, México':              { visa:'✅ Sin visa',                  temp:'Nov – Abr', vuelo:'~8 h',  precio:'US$ 600 – 950'   },
+      'Punta Cana, Rep. Dominicana': { visa:'✅ Sin visa',                  temp:'Nov – May', vuelo:'~6 h',  precio:'US$ 550 – 900'   },
+      'Panamá':                      { visa:'✅ Sin visa',                  temp:'Todo el año',vuelo:'~7 h', precio:'US$ 500 – 850'   },
+      'Nueva York, USA':             { visa:'⚠️ ESTA requerida (US$21)',   temp:'Sep – Nov', vuelo:'~13 h', precio:'US$ 900 – 1.500' },
+      'Madrid, España':              { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~13 h', precio:'US$ 850 – 1.400' },
+      'Barcelona, España':           { visa:'✅ Sin visa (90 días)',        temp:'May – Sep', vuelo:'~13 h', precio:'US$ 850 – 1.400' },
+      'España':                      { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~13 h', precio:'US$ 850 – 1.400' },
+      'Orlando, USA':                { visa:'⚠️ ESTA requerida (US$21)',   temp:'Mar – May', vuelo:'~11 h', precio:'US$ 700 – 1.200' },
+      'París, Francia':              { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~14 h', precio:'US$ 950 – 1.600' },
+      'Roma, Italia':                { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~14 h', precio:'US$ 900 – 1.500' },
+      'Milán, Italia':               { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~14 h', precio:'US$ 900 – 1.500' },
+      'Venecia, Italia':             { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~14 h', precio:'US$ 900 – 1.500' },
+      'Lisboa, Portugal':            { visa:'✅ Sin visa (90 días)',        temp:'May – Sep', vuelo:'~12 h', precio:'US$ 800 – 1.300' },
+      'Jamaica':                     { visa:'✅ Sin visa',                  temp:'Nov – Abr', vuelo:'~7 h',  precio:'US$ 650 – 1.000' },
+      'Cuba':                        { visa:'🟡 Tarjeta turista (US$25)',  temp:'Nov – Abr', vuelo:'~6 h',  precio:'US$ 500 – 800'   },
+      'La Habana, Cuba':             { visa:'🟡 Tarjeta turista (US$25)',  temp:'Nov – Abr', vuelo:'~6 h',  precio:'US$ 500 – 800'   },
+      'Aruba':                       { visa:'✅ Sin visa',                  temp:'Todo el año',vuelo:'~7 h', precio:'US$ 600 – 950'   },
+      'Los Ángeles, USA':            { visa:'⚠️ ESTA requerida (US$21)',   temp:'Mar – May', vuelo:'~15 h', precio:'US$ 900 – 1.600' },
+      'Las Vegas, USA':              { visa:'⚠️ ESTA requerida (US$21)',   temp:'Sep – Nov', vuelo:'~16 h', precio:'US$ 900 – 1.600' },
+      'Chicago, USA':                { visa:'⚠️ ESTA requerida (US$21)',   temp:'Jun – Ago', vuelo:'~13 h', precio:'US$ 900 – 1.500' },
+      'Bogotá, Colombia':            { visa:'✅ Sin visa',                  temp:'Dic – Feb', vuelo:'~5 h',  precio:'US$ 400 – 700'   },
+      'Medellín, Colombia':          { visa:'✅ Sin visa',                  temp:'Dic – Feb', vuelo:'~5 h',  precio:'US$ 400 – 700'   },
+      'Cartagena, Colombia':         { visa:'✅ Sin visa',                  temp:'Dic – Abr', vuelo:'~6 h',  precio:'US$ 450 – 750'   },
+      'Lima, Perú':                  { visa:'✅ Sin visa',                  temp:'Jun – Sep', vuelo:'~4 h',  precio:'US$ 350 – 600'   },
+      'Cusco, Perú':                 { visa:'✅ Sin visa',                  temp:'Abr – Oct', vuelo:'~5 h',  precio:'US$ 400 – 700'   },
+      'Santiago, Chile':             { visa:'✅ Sin visa',                  temp:'Nov – Mar', vuelo:'~2 h',  precio:'US$ 200 – 400'   },
+      'São Paulo, Brasil':           { visa:'✅ Sin visa',                  temp:'Mar – May', vuelo:'~3 h',  precio:'US$ 250 – 500'   },
+      'Río de Janeiro, Brasil':      { visa:'✅ Sin visa',                  temp:'Dic – Mar', vuelo:'~4 h',  precio:'US$ 300 – 600'   },
+      'Montevideo, Uruguay':         { visa:'✅ Sin visa',                  temp:'Nov – Mar', vuelo:'~1 h',  precio:'US$ 150 – 300'   },
+      'Asunción, Paraguay':          { visa:'✅ Sin visa',                  temp:'Abr – Jun', vuelo:'~2 h',  precio:'US$ 200 – 350'   },
+      'San José, Costa Rica':        { visa:'✅ Sin visa',                  temp:'Dic – Abr', vuelo:'~9 h',  precio:'US$ 650 – 1.000' },
+      'Nassau, Bahamas':             { visa:'✅ Sin visa',                  temp:'Nov – May', vuelo:'~7 h',  precio:'US$ 700 – 1.100' },
+      'Ámsterdam, Países Bajos':     { visa:'✅ Sin visa (90 días)',        temp:'Jun – Ago', vuelo:'~15 h', precio:'US$ 950 – 1.600' },
+      'Londres, Reino Unido':        { visa:'🟡 ETA requerida (£10)',      temp:'Jun – Ago', vuelo:'~15 h', precio:'US$ 950 – 1.600' },
+      'Berlín, Alemania':            { visa:'✅ Sin visa (90 días)',        temp:'Jun – Ago', vuelo:'~15 h', precio:'US$ 900 – 1.500' },
+      'Viena, Austria':              { visa:'✅ Sin visa (90 días)',        temp:'May – Sep', vuelo:'~15 h', precio:'US$ 900 – 1.500' },
+      'Zurich, Suiza':               { visa:'✅ Sin visa (90 días)',        temp:'Jun – Sep', vuelo:'~15 h', precio:'US$ 950 – 1.600' },
+      'Praga, República Checa':      { visa:'✅ Sin visa (90 días)',        temp:'May – Sep', vuelo:'~16 h', precio:'US$ 900 – 1.500' },
+      'Atenas, Grecia':              { visa:'✅ Sin visa (90 días)',        temp:'Abr – Jun', vuelo:'~16 h', precio:'US$ 900 – 1.500' },
+      'Santorini, Grecia':           { visa:'✅ Sin visa (90 días)',        temp:'May – Sep', vuelo:'~16 h', precio:'US$ 950 – 1.600' },
+      'Estambul, Turquía':           { visa:'✅ Sin visa',                  temp:'Abr – Jun', vuelo:'~15 h', precio:'US$ 800 – 1.400' },
+      'Tokio, Japón':                { visa:'✅ Sin visa (90 días)',        temp:'Mar – May', vuelo:'~24 h', precio:'US$ 1.400 – 2.200'},
+      'Seúl, Corea del Sur':         { visa:'✅ Sin visa (90 días)',        temp:'Mar – May', vuelo:'~24 h', precio:'US$ 1.300 – 2.100'},
+      'Hong Kong':                   { visa:'✅ Sin visa (90 días)',        temp:'Oct – Dic', vuelo:'~22 h', precio:'US$ 1.200 – 2.000'},
+      'Singapur':                    { visa:'✅ Sin visa',                  temp:'Feb – Abr', vuelo:'~20 h', precio:'US$ 1.200 – 2.000'},
+      'Bangkok, Tailandia':          { visa:'🟡 Visa on arrival (US$35)', temp:'Nov – Feb', vuelo:'~20 h', precio:'US$ 1.100 – 1.800'},
+      'Phuket, Tailandia':           { visa:'🟡 Visa on arrival (US$35)', temp:'Nov – Feb', vuelo:'~21 h', precio:'US$ 1.100 – 1.800'},
+      'Bali, Indonesia':             { visa:'🟡 Visa on arrival (US$35)', temp:'May – Sep', vuelo:'~22 h', precio:'US$ 1.200 – 1.900'},
+      'Maldivas':                    { visa:'✅ Sin visa (30 días)',        temp:'Nov – Abr', vuelo:'~18 h', precio:'US$ 1.500 – 2.500'},
+      'Dubai, Emiratos Árabes':      { visa:'✅ Sin visa (30 días)',        temp:'Oct – Abr', vuelo:'~18 h', precio:'US$ 1.100 – 1.900'},
+      'El Cairo, Egipto':            { visa:'🟡 Visa on arrival (US$25)', temp:'Oct – Abr', vuelo:'~16 h', precio:'US$ 900 – 1.500' },
+      'Marrakech, Marruecos':        { visa:'✅ Sin visa (90 días)',        temp:'Mar – May', vuelo:'~16 h', precio:'US$ 900 – 1.400' },
+      'Sídney, Australia':           { visa:'🟡 eVisitor requerida',      temp:'Nov – Mar', vuelo:'~24 h', precio:'US$ 1.600 – 2.600'},
+      'Toronto, Canadá':             { visa:'🟡 eTA requerida (CAD$7)',   temp:'Jun – Sep', vuelo:'~15 h', precio:'US$ 1.000 – 1.800'},
+      'Vancouver, Canadá':           { visa:'🟡 eTA requerida (CAD$7)',   temp:'Jun – Sep', vuelo:'~17 h', precio:'US$ 1.100 – 1.900'},
+    };
+
+    // ── Constructores de URL ──────────────────────────────────────────
+    function buildSkyscanner(fromIata, toIata, fecha, adults, children) {
+      if (!fromIata || !toIata) return '';
+      const d  = new Date(fecha + 'T00:00:00');
+      const yy = String(d.getFullYear()).slice(-2);
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `https://www.skyscanner.com.ar/transport/flights/${fromIata}/${toIata}/${yy}${mm}${dd}/?adults=${adults}&children=${children}&cabinclass=economy`;
+    }
+
+    function buildDespegar(fromIata, toIata, fecha, adults, children) {
+      if (!fromIata || !toIata) return '';
+      const d  = new Date(fecha + 'T00:00:00');
+      const yy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `https://www.despegar.com.ar/vuelos/ofertas/${fromIata}/${toIata}/${yy}-${mm}-${dd}/1/${adults}/${children}/0/?from=SB`;
+    }
+
+    function buildGoogleFlights(fromIata, toIata, fromCity, toCity, fechaFmt, adults, children) {
+      if (fromIata && toIata) {
+        const pax = adults + (children > 0 ? `,${children}` : '');
+        return `https://www.google.com/travel/flights/search?tfs=CBwQAhoeEgoyMDI2LTA1LTAxagcIARIDQ09ScgcIARIDTUlBQAFIAXABggELCP___________wFAAUgB&hl=es-419&curr=ARS`
+          .replace('COR', fromIata).replace('MIA', toIata);
+      }
+      const pax = `${adults} adulto${adults > 1 ? 's' : ''}${children > 0 ? ` ${children} niño${children > 1 ? 's' : ''}` : ''}`;
+      const q   = `vuelos de ${fromCity} a ${toCity} ${fechaFmt} ${pax}`;
+      return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}&hl=es-419&curr=ARS`;
+    }
+
+    // ── Navbar scroll ──────────────────────────────────────────────────
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // ── Hero image animation ──
-    const heroBg = document.getElementById('heroBg');
-    setTimeout(() => heroBg.classList.add('loaded'), 100);
+    // Hero image animation
+    setTimeout(() => document.getElementById('heroBg').classList.add('loaded'), 100);
 
-    // ── Mobile menu ──
+    // ── Mobile menu ───────────────────────────────────────────────────
     function toggleMenu() {
-      const menu = document.getElementById('mobile-menu');
+      const menu   = document.getElementById('mobile-menu');
       const isOpen = menu.style.display === 'flex';
-      menu.style.display = isOpen ? 'none' : 'flex';
+      menu.style.display        = isOpen ? 'none' : 'flex';
       document.body.style.overflow = isOpen ? '' : 'hidden';
     }
 
-    // ── Pasajeros counter ──
+    // ── Passenger counter ─────────────────────────────────────────────
     const counts = { adultos: 1, menores: 0 };
 
     function changeCount(type, delta) {
@@ -1850,54 +2364,148 @@
       document.getElementById(type + '-val').textContent = counts[type];
     }
 
-    // ── Destino "otro" ──
-    function handleDestino(sel) {
-      const other = document.getElementById('otroDestino');
-      other.classList.toggle('visible', sel.value === 'otro');
+    // ── Autocomplete de destino ───────────────────────────────────────
+    let selectedDestIata = '';
+    const destinoInput = document.getElementById('destinoInput');
+    const destinoList  = document.getElementById('destinoList');
+
+    function normalize(s) {
+      return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
     }
 
-    // ── Ir al form con destino preseleccionado ──
-    function goForm(destino) {
-      const sel = document.getElementById('destino');
-      for (let opt of sel.options) {
-        if (opt.value === destino) { sel.value = destino; break; }
+    function renderSuggestions(q) {
+      if (!q) { destinoList.classList.remove('open'); return; }
+      const matches = DESTINATIONS.filter(d =>
+        normalize(d.label).includes(normalize(q)) ||
+        d.iata.toLowerCase().startsWith(q.toLowerCase())
+      ).slice(0, 9);
+      if (!matches.length) { destinoList.classList.remove('open'); return; }
+      destinoList.innerHTML = matches.map(d =>
+        `<div class="autocomplete-item" data-iata="${d.iata}" data-label="${d.label}">
+           <span>${d.e} ${d.label}</span>
+           <span class="ac-iata">${d.iata}</span>
+         </div>`
+      ).join('');
+      destinoList.classList.add('open');
+      destinoList.querySelectorAll('.autocomplete-item').forEach(item => {
+        item.addEventListener('mousedown', e => {
+          e.preventDefault();
+          destinoInput.value   = item.dataset.label;
+          selectedDestIata     = item.dataset.iata;
+          destinoList.classList.remove('open');
+        });
+      });
+    }
+
+    destinoInput.addEventListener('input', function() {
+      selectedDestIata = '';
+      renderSuggestions(this.value.trim());
+    });
+    destinoInput.addEventListener('blur', () => {
+      setTimeout(() => destinoList.classList.remove('open'), 160);
+    });
+    destinoInput.addEventListener('keydown', function(e) {
+      const items  = [...destinoList.querySelectorAll('.autocomplete-item')];
+      const active = destinoList.querySelector('.autocomplete-item.ac-active');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (!active) { items[0]?.classList.add('ac-active'); }
+        else { active.classList.remove('ac-active'); (active.nextElementSibling || items[0]).classList.add('ac-active'); }
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (!active) { items.at(-1)?.classList.add('ac-active'); }
+        else { active.classList.remove('ac-active'); (active.previousElementSibling || items.at(-1)).classList.add('ac-active'); }
+      } else if (e.key === 'Enter' && active) {
+        e.preventDefault();
+        destinoInput.value = active.dataset.label;
+        selectedDestIata   = active.dataset.iata;
+        destinoList.classList.remove('open');
+      } else if (e.key === 'Escape') {
+        destinoList.classList.remove('open');
       }
+    });
+
+    // ── Toggle fecha de vuelta ────────────────────────────────────────
+    document.getElementById('idaVuelta').addEventListener('change', function() {
+      const field = document.getElementById('vueltaField');
+      field.classList.toggle('visible', this.checked);
+      if (!this.checked) document.getElementById('fechaVuelta').value = '';
+    });
+
+    // Fecha de vuelta mínima = día siguiente a la salida
+    document.getElementById('fechaSalida').addEventListener('change', function() {
+      const v = document.getElementById('fechaVuelta');
+      v.min = this.value || '';
+      if (v.value && v.value < this.value) v.value = '';
+    });
+
+    // ── Fechas flexibles ──────────────────────────────────────────────
+    document.getElementById('fechaFlex').addEventListener('change', function() {
+      document.getElementById('flexOpts').classList.toggle('visible', this.checked);
+    });
+
+    // ── Pre-seleccionar destino desde las cards ───────────────────────
+    function goForm(destino) {
+      destinoInput.value = destino;
+      const found = DESTINATIONS.find(d => d.label === destino);
+      selectedDestIata = found ? found.iata : '';
       document.getElementById('cotiza').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // ── Form submit → WhatsApp ──
+    // ── Form submit ───────────────────────────────────────────────────
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      const destino = document.getElementById('destino').value;
-      const otroDestino = document.getElementById('otroDestinoInput').value;
-      const destinoFinal = destino === 'otro' ? otroDestino : destino;
-      const fecha = document.getElementById('fechaSalida').value;
-      const dias = document.getElementById('cantDias').value;
-      const equipaje = document.querySelector('input[name="equipaje"]:checked')?.value || '';
-      const nombre = document.getElementById('nombre').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const comentarios = document.getElementById('comentarios').value.trim();
+      const destinoFin = document.getElementById('destinoInput').value.trim();
+      const aeropuerto = document.getElementById('aeropuerto').value;
+      const fecha      = document.getElementById('fechaSalida').value;
+      const dias       = document.getElementById('cantDias').value;
+      const equipaje   = document.querySelector('input[name="equipaje"]:checked')?.value || '';
+      const nombre     = document.getElementById('nombre').value.trim();
+      const whatsapp   = document.getElementById('whatsapp').value.trim();
+      const notas      = document.getElementById('comentarios').value.trim();
+      const hayVuelta  = document.getElementById('idaVuelta').checked;
+      const fechaVuelta= document.getElementById('fechaVuelta').value;
+      const esFlex     = document.getElementById('fechaFlex').checked;
+      const flexMargen = document.getElementById('flexMargen').value;
+      const flexNota   = document.getElementById('flexNota').value.trim();
 
-      // Validación básica
-      if (!destinoFinal) { alert('Por favor seleccioná un destino.'); return; }
-      if (!fecha) { alert('Por favor ingresá una fecha de salida aproximada.'); return; }
-      if (!dias) { alert('Por favor seleccioná la cantidad de días.'); return; }
-      if (!nombre) { alert('Por favor ingresá tu nombre.'); return; }
-      if (!whatsapp) { alert('Por favor ingresá tu WhatsApp.'); return; }
+      if (!destinoFin)  { alert('Por favor escribí un destino.');                   return; }
+      if (!aeropuerto)  { alert('Por favor seleccioná el aeropuerto de salida.');   return; }
+      if (!fecha)       { alert('Por favor ingresá una fecha de salida.');           return; }
+      if (!dias)        { alert('Por favor seleccioná la cantidad de días.');        return; }
+      if (!nombre)      { alert('Por favor ingresá tu nombre.');                     return; }
+      if (!whatsapp)    { alert('Por favor ingresá tu WhatsApp.');                   return; }
 
-      const fechaFormateada = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
+      const fechaFmt = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
         day: 'numeric', month: 'long', year: 'numeric'
       });
+      const fechaVueltaFmt = hayVuelta && fechaVuelta
+        ? new Date(fechaVuelta + 'T00:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })
+        : '';
 
+      // Códigos IATA
+      const fromIata = AIRPORT_IATA[aeropuerto] || '';
+      const toIata   = selectedDestIata || DEST_IATA[destinoFin] || '';
+      const fromCity = aeropuerto.split('·')[0].trim();
+
+      // URLs pre-armadas para el agente
+      const skyscannerUrl    = buildSkyscanner(fromIata, toIata, fecha, counts.adultos, counts.menores);
+      const despegarUrl      = buildDespegar(fromIata, toIata, fecha, counts.adultos, counts.menores);
+      const googleFlightsUrl = buildGoogleFlights(fromIata, toIata, fromCity, destinoFin, fechaFmt, counts.adultos, counts.menores);
+
+      // ── 1. WhatsApp del cliente a la agencia ──────────────────────────
       const msg = [
-        `✈️ *CONSULTA DE VIAJE - NOS FUIMOS CBA*`,
+        `✈️ *CONSULTA DE VIAJE — NOS FUIMOS CBA*`,
         ``,
         `👤 *Nombre:* ${nombre}`,
         `📱 *WhatsApp:* ${whatsapp}`,
         ``,
-        `🌍 *Destino:* ${destinoFinal}`,
-        `📅 *Fecha de salida:* ${fechaFormateada}`,
+        `🌍 *Destino:* ${destinoFin}`,
+        `🛫 *Aeropuerto de salida:* ${aeropuerto}`,
+        `📅 *Fecha de salida:* ${fechaFmt}${esFlex ? ` _(flexible ± ${flexMargen} días)_` : ''}`,
+        fechaVueltaFmt ? `🔄 *Fecha de vuelta:* ${fechaVueltaFmt}` : '',
+        esFlex && flexNota ? `🗓️ *Flexibilidad:* ${flexNota}` : '',
         `⏳ *Duración:* ${dias}`,
         ``,
         `👥 *Pasajeros:*`,
@@ -1905,17 +2513,80 @@
         `   • Menores: ${counts.menores}`,
         ``,
         `🧳 *Equipaje:* ${equipaje}`,
-        comentarios ? `\n💬 *Comentarios:* ${comentarios}` : '',
+        notas ? `\n💬 *Comentarios:* ${notas}` : '',
         ``,
-        `_Enviado desde nosfuimos.cba_`
+        `_Enviado desde nosfuimos.cba_`,
       ].filter(Boolean).join('\n');
 
-      const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+
+      // ── 2. Notificación a Telegram ────────────────────────────────────
+      const tgLines = [
+        '🛫 *Nueva consulta — Nos Fuimos CBA*',
+        '',
+        `👤 *Cliente:* ${nombre}`,
+        `📱 *WhatsApp:* wa.me/${whatsapp}`,
+        '',
+        `🌎 *Destino:* ${destinoFin}`,
+        `🛫 *Sale desde:* ${aeropuerto}`,
+        `📅 *Fecha de salida:* ${fechaFmt}${esFlex ? ` _(flexible ± ${flexMargen} días)_` : ''}`,
+        `📆 *Duración:* ${dias} días`,
+        `🧳 *Equipaje:* ${equipaje}`,
+        `👥 *Pasajeros:* ${counts.adultos} adulto${counts.adultos > 1 ? 's' : ''}${counts.menores > 0 ? `, ${counts.menores} menor${counts.menores > 1 ? 'es' : ''}` : ''}`,
+      ];
+      if (fechaVueltaFmt) tgLines.push(`🔄 *Vuelta:* ${fechaVueltaFmt}`);
+      if (esFlex && flexNota) tgLines.push(`🗓️ *Cuándo:* ${flexNota}`);
+      if (notas) tgLines.push('', `💬 *Comentarios:* ${notas}`);
+
+      // Links de búsqueda
+      tgLines.push('', '🔎 *Buscar vuelos:*');
+      if (skyscannerUrl)    tgLines.push(`   • ✈️ [Skyscanner](${skyscannerUrl})`);
+      if (despegarUrl)      tgLines.push(`   • 🧳 [Despegar](${despegarUrl})`);
+      if (googleFlightsUrl) tgLines.push(`   • 🔍 [Google Flights](${googleFlightsUrl})`);
+
+      // Info del destino (DEST_TIPS)
+      const tips = DEST_TIPS[destinoFin];
+      if (tips) {
+        tgLines.push('', `📌 *Info ${destinoFin.split(',')[0]}:*`);
+        tgLines.push(`   • 🛂 Visa: ${tips.visa}`);
+        tgLines.push(`   • 🌤️ Mejor época: ${tips.temp}`);
+        tgLines.push(`   • ⏱️ Vuelo desde COR: ${tips.vuelo}`);
+        tgLines.push(`   • 💵 Precio de referencia: ${tips.precio}/persona`);
+      }
+
+      if (SITE_URL) {
+        const origenCiudad  = aeropuerto.split(' · ')[0].trim();
+        const destinoCiudad = destinoFin.split(',')[0].trim();
+        const cParams = new URLSearchParams({
+          nombre, whatsapp,
+          origen:      origenCiudad,
+          origenIATA:  fromIata  || '',
+          destino:     destinoCiudad,
+          destinoIATA: toIata    || '',
+          fechaIda:    fecha,
+          dias,
+          adultos:     counts.adultos,
+          menores:     counts.menores,
+          equipaje,
+        });
+        tgLines.push('', `📋 *Cotizar:* ${SITE_URL}/cotizador.html?${cParams}`);
+      }
+
+      if (TG_WORKER_URL) {
+        fetch(TG_WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: tgLines.join('\n') }),
+        }).catch(() => {});
+      }
+
+      // ── 3. Toast de confirmación ──────────────────────────────────────
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 4000);
     });
 
-    // ── Intersection Observer (reveal animations) ──
-    const revealEls = document.querySelectorAll('.reveal');
+    // ── Reveal on scroll ──────────────────────────────────────────────
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1925,13 +2596,30 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-    revealEls.forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── Set min date on fecha input ──
-    const fechaInput = document.getElementById('fechaSalida');
-    const today = new Date();
-    today.setDate(today.getDate() + 1);
-    fechaInput.min = today.toISOString().split('T')[0];
+    // Fecha mínima = mañana
+    const fi  = document.getElementById('fechaSalida');
+    const tom = new Date();
+    tom.setDate(tom.getDate() + 1);
+    fi.min = tom.toISOString().split('T')[0];
+
+    // ── Price estimator ───────────────────────────────────────────────
+    function updatePriceEstimate() {
+      const label = document.getElementById('destinoInput').value.trim();
+      const box   = document.getElementById('priceEstimate');
+      const tips  = DEST_TIPS[label];
+      if (!tips) { box.classList.remove('visible'); return; }
+      box.innerHTML = `<strong>✈️ Referencia para ${label.split(',')[0]}:</strong> ${tips.precio} por persona · vuelo ~${tips.vuelo} · ${tips.visa}`;
+      box.classList.add('visible');
+    }
+
+    document.getElementById('destinoInput').addEventListener('input', updatePriceEstimate);
+
+    // también actualiza cuando se selecciona del autocomplete
+    document.getElementById('destinoList').addEventListener('mousedown', () => {
+      setTimeout(updatePriceEstimate, 50);
+    });
   </script>
 </body>
 </html>

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cotizador — Nos Fuimos CBA</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1B3F7A;
+      --navy-dark:  #0f2547;
+      --navy-light: #2b5fa8;
+      --cream:      #F7F3ED;
+      --sand:       #EDE6DA;
+      --white:      #FFFFFF;
+      --text:       #1a1a2e;
+      --text-light: #5a6a7e;
+      --success:    #25D366;
+      --danger:     #e53e3e;
+      --radius:     14px;
+      --shadow:     0 4px 24px rgba(27,63,122,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─────────────────────────────────────────────────────── */
+    .header {
+      background: var(--navy-dark);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .header-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+    }
+    .header-logo svg { flex-shrink: 0; }
+    .header-badge {
+      margin-left: auto;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.78rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 5% 80px;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .page-subtitle {
+      color: var(--text-light);
+      font-size: 0.93rem;
+      margin-bottom: 32px;
+    }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ─── Cards ──────────────────────────────────────────────────────── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--sand);
+    }
+    .card.full { grid-column: 1 / -1; }
+
+    /* ─── Trip summary ───────────────────────────────────────────────── */
+    .trip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; }
+    @media (max-width: 480px) { .trip-grid { grid-template-columns: 1fr; } }
+
+    .trip-item { display: flex; flex-direction: column; gap: 2px; }
+    .trip-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-light); }
+    .trip-value { font-size: 0.95rem; font-weight: 500; color: var(--text); }
+    .trip-value.highlight { color: var(--navy); font-weight: 600; font-size: 1.05rem; }
+
+    /* ─── Form elements ──────────────────────────────────────────────── */
+    .field { margin-bottom: 16px; }
+    .field:last-child { margin-bottom: 0; }
+    label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-light); margin-bottom: 6px; }
+    .input {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--sand); border-radius: 10px;
+      font-family: 'Inter', sans-serif; font-size: 0.95rem; color: var(--text);
+      background: var(--white); outline: none;
+      transition: border-color 0.2s;
+    }
+    .input:focus { border-color: var(--navy-light); }
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix span {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      font-size: 0.88rem; color: var(--text-light); pointer-events: none;
+    }
+    .input-prefix .input { padding-left: 34px; }
+
+    /* ─── Servicios opcionales ───────────────────────────────────────── */
+    .servicios-list { display: flex; flex-direction: column; gap: 10px; }
+    .servicio-row { display: grid; grid-template-columns: 1fr 120px 32px; gap: 8px; align-items: center; }
+    .servicio-row .input { font-size: 0.88rem; padding: 8px 12px; }
+    .btn-remove {
+      width: 32px; height: 32px; border: none; border-radius: 8px;
+      background: #fee2e2; color: var(--danger); cursor: pointer;
+      font-size: 1rem; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .btn-remove:hover { background: #fecaca; }
+    .btn-add-servicio {
+      margin-top: 10px;
+      background: none; border: 1.5px dashed var(--sand); border-radius: 10px;
+      color: var(--text-light); font-size: 0.85rem; padding: 8px;
+      width: 100%; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-add-servicio:hover { border-color: var(--navy-light); color: var(--navy); }
+
+    /* ─── Markup ─────────────────────────────────────────────────────── */
+    .markup-row {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      background: rgba(27,63,122,0.04);
+      border-radius: 10px; padding: 14px;
+    }
+    .markup-row label { margin-bottom: 0; white-space: nowrap; }
+    .markup-row input[type="range"] {
+      flex: 1; min-width: 140px; accent-color: var(--navy);
+    }
+    .markup-pct { font-weight: 600; color: var(--navy); min-width: 44px; text-align: center; }
+
+    /* ─── Resumen ────────────────────────────────────────────────────── */
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table td { padding: 8px 0; font-size: 0.93rem; }
+    .summary-table td:last-child { text-align: right; font-weight: 500; }
+    .summary-table tr.separator td { border-top: 1px solid var(--sand); padding-top: 14px; margin-top: 4px; }
+    .summary-table tr.total td { font-size: 1.05rem; font-weight: 700; color: var(--navy); padding-top: 6px; }
+    .summary-table tr.ars-row td { font-size: 0.88rem; color: var(--text-light); padding-bottom: 4px; }
+    .summary-note { font-size: 0.8rem; color: var(--text-light); margin-top: 10px; }
+
+    .tcambio-row { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .tcambio-row label { margin-bottom: 0; white-space: nowrap; font-size: 0.82rem; }
+    .tcambio-row .input { width: 140px; }
+
+    /* ─── CTA buttons ────────────────────────────────────────────────── */
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .btn-wa {
+      flex: 1; min-width: 220px;
+      background: var(--success); color: white;
+      border: none; border-radius: 50px;
+      padding: 14px 24px; font-size: 0.97rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: filter 0.2s, transform 0.15s;
+    }
+    .btn-wa:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-wa svg { width: 22px; height: 22px; fill: white; }
+    .btn-copy {
+      background: none; border: 1.5px solid var(--sand); border-radius: 50px;
+      padding: 14px 20px; font-size: 0.9rem; color: var(--text-light);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-copy:hover { border-color: var(--navy); color: var(--navy); }
+
+    /* ─── Toast ──────────────────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(16px);
+      background: #1a7a4a; color: white; padding: 12px 24px; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 500; white-space: nowrap;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18); opacity: 0; pointer-events: none; z-index: 9999;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="header-logo">
+      <svg width="32" height="32" viewBox="0 0 44 44">
+        <circle cx="22" cy="22" r="20" fill="#1B3F7A"/>
+        <text x="22" y="27" text-anchor="middle" fill="white" font-size="9" font-family="serif" font-weight="bold">NF</text>
+      </svg>
+      Nos Fuimos CBA
+    </a>
+    <span class="header-badge">Cotizador interno</span>
+  </header>
+
+  <div class="container">
+    <h1 class="page-title">Armar cotización</h1>
+    <p class="page-subtitle" id="subtitleCliente">Cargando datos del viaje…</p>
+
+    <div class="grid">
+
+      <!-- ─── Resumen del viaje ─────────────────────────────────────── -->
+      <div class="card full">
+        <div class="card-title">✈️ Datos del viaje</div>
+        <div class="trip-grid" id="tripGrid">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- ─── Costos ───────────────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-title">💵 Costos en USD</div>
+
+        <div class="field">
+          <label>Vuelo (ida / ida+vuelta) por persona</label>
+          <div class="input-prefix">
+            <span>US$</span>
+            <input class="input" type="number" id="costoVuelo" min="0" step="10" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Hotel / alojamiento total</label>
+          <div class="input-prefix">
+            <span>US$</span>
+            <input class="input" type="number" id="costoHotel" min="0" step="10" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Servicios opcionales</label>
+          <div class="servicios-list" id="serviciosList"></div>
+          <button class="btn-add-servicio" onclick="addServicio()">+ Agregar servicio</button>
+        </div>
+      </div>
+
+      <!-- ─── Markup y resumen ─────────────────────────────────────── -->
+      <div class="card">
+        <div class="card-title">📊 Markup y precio final</div>
+
+        <div class="markup-row">
+          <label>Markup agencia</label>
+          <input type="range" id="markupRange" min="5" max="50" step="5" value="15" oninput="updateMarkupLabel(this.value)" />
+          <span class="markup-pct" id="markupLabel">15%</span>
+        </div>
+
+        <br/>
+
+        <table class="summary-table" id="summaryTable">
+          <tr><td>Vuelo</td><td id="sVuelo">US$ 0</td></tr>
+          <tr><td>Hotel</td><td id="sHotel">US$ 0</td></tr>
+          <tr id="sExtrasRow" style="display:none"><td>Extras</td><td id="sExtras">US$ 0</td></tr>
+          <tr class="separator"><td>Subtotal</td><td id="sSubtotal">US$ 0</td></tr>
+          <tr><td>Markup (<span id="sMkPct">15</span>%)</td><td id="sMk">US$ 0</td></tr>
+          <tr class="separator total"><td>💰 Precio final</td><td id="sTotal">US$ 0</td></tr>
+          <tr class="ars-row"><td colspan="2" id="sArs" style="text-align:right">— ARS</td></tr>
+        </table>
+
+        <div class="tcambio-row">
+          <label>Cotización USD →</label>
+          <input class="input" type="number" id="tcambio" min="100" step="50" placeholder="ej: 1250" />
+          <span style="font-size:0.82rem;color:var(--text-light)">ARS</span>
+        </div>
+
+        <p class="summary-note">Precio redondeado al múltiplo de US$ 50 más cercano.</p>
+      </div>
+
+    </div>
+
+    <!-- ─── Enviar ─────────────────────────────────────────────────── -->
+    <div class="cta-row">
+      <button class="btn-wa" onclick="sendWhatsApp()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Enviar cotización por WhatsApp
+      </button>
+      <button class="btn-copy" onclick="copyText()">📋 Copiar mensaje</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ── Leer parámetros URL ───────────────────────────────────────────
+    const p = Object.fromEntries(new URLSearchParams(location.search));
+
+    const nombre     = p.nombre      || '';
+    const whatsapp   = p.whatsapp    || '';
+    const origen     = p.origen      || '';
+    const origenIATA = p.origenIATA  || '';
+    const destino    = p.destino     || '';
+    const destinoIATA= p.destinoIATA || '';
+    const fechaIda   = p.fechaIda    || '';
+    const dias       = p.dias        || '';
+    const adultos    = parseInt(p.adultos  || 1);
+    const menores    = parseInt(p.menores  || 0);
+    const equipaje   = p.equipaje    || '';
+
+    // ── Renderizar resumen del viaje ──────────────────────────────────
+    document.getElementById('subtitleCliente').textContent =
+      nombre ? `Cliente: ${nombre}${whatsapp ? ' · ' + whatsapp : ''}` : 'Sin datos de cliente';
+
+    const fechaFmt = fechaIda
+      ? new Date(fechaIda + 'T00:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' })
+      : '—';
+
+    const tripData = [
+      { label: 'Destino',          value: destino + (destinoIATA ? ` (${destinoIATA})` : ''), big: true },
+      { label: 'Sale desde',       value: origen  + (origenIATA  ? ` (${origenIATA})`  : '') },
+      { label: 'Fecha de salida',  value: fechaFmt },
+      { label: 'Duración',         value: dias ? `${dias} días` : '—' },
+      { label: 'Pasajeros',        value: `${adultos} adulto${adultos > 1 ? 's' : ''}${menores > 0 ? `, ${menores} menor${menores > 1 ? 'es' : ''}` : ''}` },
+      { label: 'Equipaje',         value: equipaje || '—' },
+    ];
+
+    document.getElementById('tripGrid').innerHTML = tripData.map(d =>
+      `<div class="trip-item">
+        <span class="trip-label">${d.label}</span>
+        <span class="trip-value${d.big ? ' highlight' : ''}">${d.value}</span>
+       </div>`
+    ).join('');
+
+    // ── Servicios opcionales ──────────────────────────────────────────
+    let servicioId = 0;
+
+    function addServicio(nombre = '', precio = '') {
+      const id = ++servicioId;
+      const row = document.createElement('div');
+      row.className = 'servicio-row';
+      row.id = `srv-${id}`;
+      row.innerHTML = `
+        <input class="input" type="text"   placeholder="Ej: traslado aeropuerto" value="${nombre}" oninput="recalc()" />
+        <div class="input-prefix" style="position:relative">
+          <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:0.8rem;color:var(--text-light)">US$</span>
+          <input class="input" type="number" min="0" step="10" placeholder="0" value="${precio}" style="padding-left:32px" oninput="recalc()" />
+        </div>
+        <button class="btn-remove" onclick="removeServicio(${id})" title="Quitar">✕</button>`;
+      document.getElementById('serviciosList').appendChild(row);
+      recalc();
+    }
+
+    function removeServicio(id) {
+      document.getElementById(`srv-${id}`)?.remove();
+      recalc();
+    }
+
+    function getExtrasTotal() {
+      let total = 0;
+      document.querySelectorAll('#serviciosList .servicio-row').forEach(row => {
+        const val = parseFloat(row.querySelector('input[type=number]').value) || 0;
+        total += val;
+      });
+      return total;
+    }
+
+    // ── Markup ────────────────────────────────────────────────────────
+    function updateMarkupLabel(v) {
+      document.getElementById('markupLabel').textContent = v + '%';
+      document.getElementById('sMkPct').textContent = v;
+      recalc();
+    }
+
+    // ── Recalcular ────────────────────────────────────────────────────
+    function recalc() {
+      const vuelo    = parseFloat(document.getElementById('costoVuelo').value) || 0;
+      const hotel    = parseFloat(document.getElementById('costoHotel').value) || 0;
+      const extras   = getExtrasTotal();
+      const mkPct    = parseFloat(document.getElementById('markupRange').value) / 100;
+      const tcambio  = parseFloat(document.getElementById('tcambio').value) || 0;
+
+      const subtotal = vuelo * adultos + hotel + extras;
+      const raw      = subtotal * (1 + mkPct);
+      const total    = Math.ceil((raw + 49) / 50) * 50;
+      const mk       = total - subtotal;
+
+      const fmt = v => `US$ ${v.toLocaleString('es-AR')}`;
+
+      document.getElementById('sVuelo').textContent    = fmt(vuelo * adultos);
+      document.getElementById('sHotel').textContent    = fmt(hotel);
+      document.getElementById('sSubtotal').textContent = fmt(subtotal);
+      document.getElementById('sMk').textContent       = fmt(mk);
+      document.getElementById('sTotal').textContent    = fmt(total);
+
+      const extrasRow = document.getElementById('sExtrasRow');
+      if (extras > 0) {
+        extrasRow.style.display = '';
+        document.getElementById('sExtras').textContent = fmt(extras);
+      } else {
+        extrasRow.style.display = 'none';
+      }
+
+      if (tcambio > 0) {
+        const ars = total * tcambio;
+        document.getElementById('sArs').textContent = `≈ ARS ${ars.toLocaleString('es-AR')}`;
+      } else {
+        document.getElementById('sArs').textContent = '(ingresá cotización USD para ver en ARS)';
+      }
+    }
+
+    document.getElementById('costoVuelo').addEventListener('input', recalc);
+    document.getElementById('costoHotel').addEventListener('input', recalc);
+    document.getElementById('tcambio').addEventListener('input', recalc);
+
+    // ── Armar mensaje de WhatsApp ─────────────────────────────────────
+    function buildMessage() {
+      const vuelo   = parseFloat(document.getElementById('costoVuelo').value) || 0;
+      const hotel   = parseFloat(document.getElementById('costoHotel').value) || 0;
+      const extras  = getExtrasTotal();
+      const mkPct   = parseFloat(document.getElementById('markupRange').value);
+      const subtotal= vuelo * adultos + hotel + extras;
+      const raw     = subtotal * (1 + mkPct / 100);
+      const total   = Math.ceil((raw + 49) / 50) * 50;
+      const tcambio = parseFloat(document.getElementById('tcambio').value) || 0;
+
+      // Servicios nombrados
+      const srvsLines = [];
+      document.querySelectorAll('#serviciosList .servicio-row').forEach(row => {
+        const nom = row.querySelector('input[type=text]').value.trim();
+        const val = parseFloat(row.querySelector('input[type=number]').value) || 0;
+        if (nom || val > 0) srvsLines.push(`   • ${nom || 'Servicio'}: US$ ${val.toLocaleString('es-AR')}`);
+      });
+
+      const lines = [
+        `✈️ *¡Hola ${nombre}! Tu cotización de Nos Fuimos CBA*`,
+        ``,
+        `📍 *Destino:* ${destino}`,
+        `📅 *Fecha de salida:* ${fechaFmt}`,
+        `⏳ *Duración:* ${dias} días`,
+        `👥 *Pasajeros:* ${adultos} adulto${adultos > 1 ? 's' : ''}${menores > 0 ? `, ${menores} menor${menores > 1 ? 'es' : ''}` : ''}`,
+        ``,
+        `💵 *Incluye:*`,
+        `   • Vuelo: US$ ${(vuelo * adultos).toLocaleString('es-AR')}`,
+        hotel > 0 ? `   • Alojamiento: US$ ${hotel.toLocaleString('es-AR')}` : '',
+        ...srvsLines,
+        ``,
+        `💰 *Precio total: US$ ${total.toLocaleString('es-AR')}* por el grupo`,
+        tcambio > 0 ? `   _(≈ ARS ${(total * tcambio).toLocaleString('es-AR')})_` : '',
+        ``,
+        `📌 Este precio incluye todos los servicios detallados arriba.`,
+        `Para confirmar, respondé este mensaje y coordinamos el pago. 🙌`,
+        ``,
+        `_Nos Fuimos CBA · Viajes personalizados desde Córdoba_`,
+      ].filter(v => v !== false && v !== '').join('\n');
+
+      return lines;
+    }
+
+    function sendWhatsApp() {
+      const num = whatsapp.replace(/\D/g, '');
+      if (!num) {
+        showToast('⚠️ No hay número de WhatsApp del cliente en los parámetros.');
+        return;
+      }
+      const text = buildMessage();
+      window.open(`https://wa.me/${num}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function copyText() {
+      navigator.clipboard.writeText(buildMessage())
+        .then(() => showToast('✅ Mensaje copiado al portapapeles'))
+        .catch(() => showToast('No se pudo copiar'));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+  </script>
+</body>
+</html>
