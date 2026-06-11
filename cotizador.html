@@ -251,6 +251,13 @@
 
   <script>
     const p = new URLSearchParams(window.location.search);
+
+    // Escapar HTML para prevenir inyección via parámetros de URL
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c =>
+        ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    }
+
     const D = {
       nombre:      p.get('nombre')      || '',
       whatsapp:    p.get('whatsapp')    || '',
@@ -288,7 +295,7 @@
         { label:'Duración',     value: D.dias     || '—' },
         { label:'Pasajeros',    value: paxStr },
         { label:'Equipaje',     value: D.equipaje || '—' },
-      ].map(c => `<div class="trip-chip"><div class="trip-chip-label">${c.label}</div><div class="trip-chip-value">${c.value}</div></div>`).join('');
+      ].map(c => `<div class="trip-chip"><div class="trip-chip-label">${c.label}</div><div class="trip-chip-value">${esc(c.value)}</div></div>`).join('');
     }
 
     // ── Markup ────────────────────────────────────────────────────────

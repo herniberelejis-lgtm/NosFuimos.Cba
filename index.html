@@ -2474,6 +2474,11 @@
       if (!dias)        { alert('Por favor seleccioná la cantidad de días.');        return; }
       if (!nombre)      { alert('Por favor ingresá tu nombre.');                     return; }
       if (!whatsapp)    { alert('Por favor ingresá tu WhatsApp.');                   return; }
+      const waDigits = whatsapp.replace(/\D/g, '');
+      if (waDigits.length < 8 || waDigits.length > 13) {
+        alert('El WhatsApp no parece válido. Ingresá código de área + número, ej: 351 123 4567');
+        return;
+      }
 
       const fechaFmt = new Date(fecha + 'T00:00:00').toLocaleDateString('es-AR', {
         day: 'numeric', month: 'long', year: 'numeric'
@@ -2528,7 +2533,7 @@
         `🌎 *Destino:* ${destinoFin}`,
         `🛫 *Sale desde:* ${aeropuerto}`,
         `📅 *Fecha de salida:* ${fechaFmt}${esFlex ? ` _(flexible ± ${flexMargen} días)_` : ''}`,
-        `📆 *Duración:* ${dias} días`,
+        `📆 *Duración:* ${dias}`,
         `🧳 *Equipaje:* ${equipaje}`,
         `👥 *Pasajeros:* ${counts.adultos} adulto${counts.adultos > 1 ? 's' : ''}${counts.menores > 0 ? `, ${counts.menores} menor${counts.menores > 1 ? 'es' : ''}` : ''}`,
       ];
