@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nosfuimoscba.github.io/NosFuimos.Cba/sitemap.xml

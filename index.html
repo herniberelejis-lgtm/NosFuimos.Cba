@@ -34,6 +34,23 @@
   }
   </script>
 
+  <!-- Meta Pixel — reemplazá XXXXXXXXXXXXXXXXXX con tu Pixel ID de Meta Business Suite -->
+  <!-- Para obtener tu Pixel ID: business.facebook.com → Administrador de eventos → Conectar fuentes → Web -->
+  <!--
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'XXXXXXXXXXXXXXXXXX');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXXXX&ev=PageView&noscript=1"/></noscript>
+  -->
+  <!-- /Meta Pixel -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -1540,20 +1557,20 @@
   <!-- ─── STATS ────────────────────────────────────────────────────── -->
   <div class="stats-bar">
     <div class="stat-item">
-      <span class="stat-number">+2000</span>
-      <span class="stat-label">Seguidores</span>
-    </div>
-    <div class="stat-item">
       <span class="stat-number">3</span>
       <span class="stat-label">Continentes</span>
     </div>
     <div class="stat-item">
-      <span class="stat-number">24h</span>
-      <span class="stat-label">Respuesta</span>
+      <span class="stat-number">&lt; 24&nbsp;h</span>
+      <span class="stat-label">Tiempo de respuesta</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">Gratis</span>
+      <span class="stat-label">Cotización sin cargo</span>
     </div>
     <div class="stat-item">
       <span class="stat-number">100%</span>
-      <span class="stat-label">Personalizado</span>
+      <span class="stat-label">Atención personalizada</span>
     </div>
   </div>
 
@@ -1943,6 +1960,11 @@
   </section>
 
   <!-- ─── TESTIMONIALS ─────────────────────────────────────────────── -->
+  <!--
+    IMPORTANTE: Reemplazá los 3 bloques testi-card con testimonios reales de Instagram.
+    Copiá el texto del cliente, su nombre (con permiso) y usá su foto de perfil real
+    en el atributo src del <img>. El avatar de iniciales es el fallback si no hay foto.
+  -->
   <section class="testimonials">
     <div class="testimonials-inner">
       <div class="testimonials-header reveal">
@@ -1951,41 +1973,59 @@
       </div>
 
       <div class="testimonials-grid">
+
+        <!-- TESTIMONIO 1: reemplazá con cliente real de Instagram -->
         <div class="testi-card reveal" style="transition-delay:0.1s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Increíble la atención. Me ayudaron a organizar mi viaje a Nueva York en tiempo récord, con un precio que no encontré en ningún lado."</p>
+          <p class="testi-text">"[Pegá aquí el testimonio real del cliente — copialo de Instagram con su permiso]"</p>
           <div class="testi-author">
-            <div class="testi-avatar">SL</div>
+            <div class="testi-avatar">?</div>
             <div class="testi-info">
-              <strong>Sofía L.</strong>
-              <span>Viajó a Nueva York</span>
+              <strong>[Nombre del cliente]</strong>
+              <span>[Destino que visitó]</span>
             </div>
           </div>
         </div>
 
+        <!-- TESTIMONIO 2: reemplazá con cliente real de Instagram -->
         <div class="testi-card reveal" style="transition-delay:0.2s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"La mejor decisión fue contactarlos por WhatsApp. En pocas horas tenía mi cotización para Cancún lista. ¡Y el viaje superó todas las expectativas!"</p>
+          <p class="testi-text">"[Pegá aquí el testimonio real del cliente — copialo de Instagram con su permiso]"</p>
           <div class="testi-author">
-            <div class="testi-avatar">MR</div>
+            <div class="testi-avatar">?</div>
             <div class="testi-info">
-              <strong>Matías R.</strong>
-              <span>Viajó a Cancún</span>
+              <strong>[Nombre del cliente]</strong>
+              <span>[Destino que visitó]</span>
             </div>
           </div>
         </div>
 
+        <!-- TESTIMONIO 3: reemplazá con cliente real de Instagram -->
         <div class="testi-card reveal" style="transition-delay:0.3s">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Viajé con mi novio a Europa y fue todo perfecto. Nos ayudaron con los vuelos, hoteles y hasta los paseos. ¡Ya estamos planificando el próximo!"</p>
+          <p class="testi-text">"[Pegá aquí el testimonio real del cliente — copialo de Instagram con su permiso]"</p>
           <div class="testi-author">
-            <div class="testi-avatar">VG</div>
+            <div class="testi-avatar">?</div>
             <div class="testi-info">
-              <strong>Valentina G.</strong>
-              <span>Viajó por Europa</span>
+              <strong>[Nombre del cliente]</strong>
+              <span>[Destino que visitó]</span>
             </div>
           </div>
         </div>
+
+      </div>
+
+      <!-- CTA a Instagram donde están los testimonios reales -->
+      <div style="text-align:center; margin-top:40px;">
+        <a href="https://www.instagram.com/nosfuimos.cba/" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#833ab4 0%,#fd1d1d 50%,#fcb045 100%);color:white;text-decoration:none;padding:14px 28px;border-radius:50px;font-weight:600;font-size:0.95rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="white" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+          </svg>
+          Ver más experiencias en Instagram
+        </a>
       </div>
     </div>
   </section>
