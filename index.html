@@ -2135,7 +2135,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© 2025 Nos Fuimos CBA · Todos los derechos reservados</p>
+      <p>© <span id="currentYear"></span> Nos Fuimos CBA · Todos los derechos reservados</p>
       <p>Hecho con ❤️ en Córdoba, Argentina</p>
     </div>
   </footer>
@@ -2596,7 +2596,10 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Fecha mínima = mañana
+    // Copyright año dinámico
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Fecha mínima = mañana (se recalcula cada vez que se carga la página)
     const fi  = document.getElementById('fechaSalida');
     const tom = new Date();
     tom.setDate(tom.getDate() + 1);
